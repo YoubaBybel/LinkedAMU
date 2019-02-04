@@ -1,4 +1,4 @@
-package controller.impl;
+package controllers.impl;
 
 public class ActivityControllerImpl {
 }

@@ -1,4 +1,4 @@
-package entity.impl;
+package entities.impl;
 
 public class UserImpl {
 }
