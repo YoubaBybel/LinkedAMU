@@ -2,12 +2,12 @@
 
 <resources>
 
-    <Resource id="data" type="javax.sql.DataSource">
-        JdbcDriver org.hsqldb.jdbcDriver
-        JdbcUrl jdbc:hsqldb:mem:inMemoryDatabase <!--file:/home/youba/master/m2/s1/architecture des applications/tp/LinkedAMU/ma-bdd-->
-        UserName sa
-        Password
-        jtaManaged true
-    </Resource>
+	<Resource id="data" type="javax.sql.DataSource">
+		JdbcDriver org.hsqldb.jdbcDriver
+		JdbcUrl jdbc:hsqldb:mem:inMemoryDatabase <!--file:/home/youba/master/m2/s1/architecture des applications/tp/LinkedAMU/ma-bdd -->
+		UserName sa
+		Password
+		jtaManaged true
+	</Resource>
 
 </resources>
