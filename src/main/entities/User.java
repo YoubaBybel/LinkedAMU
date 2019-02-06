@@ -53,8 +53,10 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(cascade = { CascadeType.MERGE,
-	    CascadeType.PERSIST }, targetEntity = Activity.class, fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(
+	    cascade = { CascadeType.MERGE, CascadeType.PERSIST },
+	    fetch = FetchType.EAGER,
+	    mappedBy = "user")
     private List<Activity> cv;
 
     public User() {
@@ -135,6 +137,7 @@ public class User implements Serializable {
 
     public void setCv(List<Activity> cv) {
 	this.cv = cv;
+	this.cv.forEach(activity -> activity.setUser(this));
     }
 
     @Override

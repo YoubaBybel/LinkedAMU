@@ -2,6 +2,7 @@ package test.entities;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import main.entities.Activity;
+import main.entities.Activity.Nature;
+import main.entities.User;
 import main.services.ActivityManager;
+import main.services.UserManager;
 
 public class TestActivityManager {
 
     @EJB
     ActivityManager am;
+
+    @EJB
+    UserManager um;
 
     private Activity master_2;
     private Activity master_1;
@@ -29,6 +36,7 @@ public class TestActivityManager {
     @Before
     public void init() throws Exception {
 	EJBContainer.createEJBContainer().getContext().bind("inject", this);
+
 	master_2 = new Activity(2019, "FORMATION", "Master Info - spé ILD");
 	master_1 = new Activity(2018, "FORMATION", "Master Info");
 	stage = new Activity(2019, "STAGE", "Sogeti");
@@ -88,23 +96,53 @@ public class TestActivityManager {
 	List<Activity> activities_2019 = new ArrayList<>();
 	activities_2019.add(activity1);
 	activities_2019.add(activity2);
-	System.err.println(activities_2019.toString());
-	System.err.println(am.findByYear(2019));
 	assertEquals(activities_2019.size(), am.findByYear(2019).size());
     }
 
     @Test
     public void testFindByNature() {
-
+	am.createActivity(master_2);
+	am.createActivity(master_1);
+	am.createActivity(stage);
+	am.createActivity(licence);
+	assertEquals(3, am.findByNature(Nature.FORMATION).size());
     }
 
     @Test
     public void testFindByTitle() {
-
+	am.createActivity(master_2);
+	am.createActivity(master_1);
+	am.createActivity(stage);
+	am.createActivity(licence);
+	am.findByTitle("master").forEach(activity -> assertTrue(activity.getTitle().toLowerCase().contains("master")));
+	assertEquals(2, am.findByTitle("master").size());
     }
 
     @Test
     public void testFindUserActivities() {
+	User scottLang = um.createUser(new User("LANG", "Scott", "scott.lang@antman.com", "iamnotathief"));
+	User nickFury = um.createUser(new User("FURY", "Nick", "nick_fury@shield.com", "imoneeyedman"));
 
+	Activity m2 = am.createActivity(master_2);
+	Activity m1 = am.createActivity(master_1);
+	Activity st = am.createActivity(stage);
+	Activity li = am.createActivity(licence);
+
+	List<Activity> nickCv = nickFury.createCV();
+	nickCv.add(li);
+	nickCv.add(m1);
+	nickCv.add(m2);
+	nickFury.setCv(nickCv);
+	um.updateUser(nickFury);
+
+	List<Activity> scottCv = scottLang.createCV();
+	scottCv.add(st);
+	scottLang.setCv(scottCv);
+	um.updateUser(scottLang);
+
+	st.setDescription("Une description du stage");
+	am.updateActivity(st);
+	assertEquals(3, am.findUserActivities(nickFury).size());
     }
+
 }

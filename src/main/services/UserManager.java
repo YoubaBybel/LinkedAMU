@@ -5,6 +5,7 @@ import java.util.List;
 import main.entities.User;
 
 public interface UserManager {
+
     User createUser();
 
     User createUser(User user);
@@ -20,4 +21,7 @@ public interface UserManager {
     List<User> findByName(String name);
 
     List<User> findByFirstName(String firstName);
+
+    User save(User user);
+
 }

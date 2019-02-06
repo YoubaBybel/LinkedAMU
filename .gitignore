@@ -1,2 +1,14 @@
+# Repositories & files to ignore with IntelliJ
+/.idea/
+/lib/
+/out/
+/target/
+_config.yml
+LinkedAMU.iml
+
+# Repositories & files to ignore with Eclipse
+/.settings/
 /build/
 /target/
+.classpath
+.project

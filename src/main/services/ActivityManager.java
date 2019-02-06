@@ -3,6 +3,7 @@ package main.services;
 import java.util.List;
 
 import main.entities.Activity;
+import main.entities.Activity.Nature;
 import main.entities.User;
 
 public interface ActivityManager {
@@ -21,7 +22,7 @@ public interface ActivityManager {
 
     List<Activity> findByYear(int year);
 
-    List<Activity> findByNature(String nature);
+    List<Activity> findByNature(Nature nature);
 
     List<Activity> findByTitle(String title);
 

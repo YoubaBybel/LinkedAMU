@@ -38,6 +38,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public User updateUser(User user) {
+	user.getCv().forEach(activity -> dao.update(activity));
 	return dao.update(user);
     }
 
@@ -58,14 +59,26 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public List<User> findByName(String name) {
-	return this.em.createQuery("SELECT u FROM User u WHERE name LIKE :name", User.class).setParameter("name", name)
+	return em.createQuery("SELECT u FROM User u WHERE lower(name) LIKE lower(:name)", User.class)
+		.setParameter("name", "%"+name+"%")
 		.getResultList();
     }
 
     @Override
     public List<User> findByFirstName(String firstName) {
-	return this.em.createQuery("SELECT u FROM User u WHERE first_name LIKE :first_name", User.class)
-		.setParameter("first_name", firstName).getResultList();
+	return em.createQuery("SELECT u FROM User u WHERE lower(first_name) LIKE lower(:first_name)", User.class)
+		.setParameter("first_name", "%"+firstName+"%")
+		.getResultList();
+    }
+
+    @Override
+    public User save(User user) {
+	if (user.getId() == null) {
+	    em.persist(user);
+	} else {
+	    user = em.merge(user);
+	}
+	return user;
     }
 
 }

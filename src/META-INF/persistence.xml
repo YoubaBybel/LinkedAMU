@@ -8,6 +8,9 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>data</jta-data-source>
 		
+		<class>main.entities.Activity</class>
+		<class>main.entities.User</class>
+		
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

@@ -20,7 +20,7 @@ public class Activity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private enum Nature {
+    public enum Nature {
 	EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJECT, OTHER
     }
 
@@ -49,7 +49,7 @@ public class Activity implements Serializable {
     @Column(name = "web_address")
     private String webAddress;
 
-    @ManyToOne(targetEntity = User.class, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private User user;
 
     public Activity() {
@@ -59,7 +59,7 @@ public class Activity implements Serializable {
     public Activity(int year, String nature, String title) {
 	super();
 	setYear(year);
-	switch (nature) {
+	switch (nature.toLowerCase()) {
 	    case "exp_pro":
 		this.nature = Nature.EXP_PRO;
 		break;
@@ -129,6 +129,14 @@ public class Activity implements Serializable {
 	this.webAddress = StringEscapeUtils.escapeHtml(webAddress);
     }
 
+    public User getUser() {
+	return user;
+    }
+
+    public void setUser(User user) {
+	this.user = user;
+    }
+
     @Override
     public String toString() {
 	return "Activity{" +
@@ -138,7 +146,8 @@ public class Activity implements Serializable {
 		", title='" + title + '\'' +
 		", description='" + description + '\'' +
 		", webAddress='" + webAddress + '\'' +
-		", user=" + user +
+		", user_id=" + (user == null ? "null" : user.getId().toString()) +
 		'}';
     }
+
 }

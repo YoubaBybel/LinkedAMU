@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import main.dao.CRUD;
 import main.entities.Activity;
+import main.entities.Activity.Nature;
 import main.entities.User;
 import main.services.ActivityManager;
 
@@ -53,26 +54,30 @@ public class ActivityManagerImpl implements ActivityManager {
 
     @Override
     public List<Activity> findByYear(int year) {
-	return em.createQuery("SELECT a FROM Activity a WHERE year = :year", Activity.class).setParameter("year", year)
+	return em.createQuery("SELECT a FROM Activity a WHERE year = :year", Activity.class)
+		.setParameter("year", year)
 		.getResultList();
     }
 
     @Override
-    public List<Activity> findByNature(String nature) {
-	return em.createQuery("SELECT a FROM Activity a WHERE nature = :nature", Activity.class)
-		.setParameter("nature", nature).getResultList();
+    public List<Activity> findByNature(Nature nature) {
+	return em.createQuery("SELECT a FROM Activity a WHERE lower(nature) LIKE lower(:nature)", Activity.class)
+		.setParameter("nature", "%"+nature+"%")
+		.getResultList();
     }
 
     @Override
     public List<Activity> findByTitle(String title) {
-	return em.createQuery("SELECT a FROM Activity a WHERE title LIKE :title", Activity.class)
-		.setParameter("title", title).getResultList();
+	return em.createQuery("SELECT a FROM Activity a WHERE lower(title) LIKE lower(:title)", Activity.class)
+		.setParameter("title", "%"+title+"%")
+		.getResultList();
     }
 
     @Override
     public List<Activity> findUserActivities(User user) {
-	return em.createQuery("SELECT a FROM Activity a WHERE cv_id = :cv_id", Activity.class)
-		.setParameter("cv_id", user.getId())
+	return em.createQuery("SELECT a FROM Activity a WHERE user_id = :user_id", Activity.class)
+		.setParameter("user_id", user.getId())
 		.getResultList();
     }
+
 }
