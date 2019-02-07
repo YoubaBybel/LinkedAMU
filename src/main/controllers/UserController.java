@@ -3,6 +3,7 @@ package main.controllers;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,7 +22,7 @@ public class UserController {
 	@EJB
 	Authentification coUser;
 
-	private User user;
+	private User user = new User();
 	private boolean isLogged = false;
 
 	@PostConstruct
@@ -36,6 +37,14 @@ public class UserController {
 			user1.setWebSite("https://google.fr");
 			userM.createUser(user1);
 		}
+	}
+	
+	@PreDestroy
+	public void end() {
+		userM.findAll().forEach(userToRemove -> {
+			userM.removeUser(userToRemove.getId());
+			System.out.println("to remove " + userToRemove);
+		});
 	}
 
 	public List<User> getUsers() {

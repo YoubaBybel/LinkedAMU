@@ -30,4 +30,7 @@
 		<param-name>org.apache.myfaces.annotation.SCAN_PACKAGES</param-name>
 		<param-value>LinkedAMU</param-value>
 	</context-param>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
 </web-app>
