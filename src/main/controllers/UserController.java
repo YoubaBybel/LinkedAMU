@@ -82,6 +82,6 @@ public class UserController {
 	public String login() {
 		coUser.login(user);
 		isLogged = coUser.isLogged();
-		return "index.xhtml";
+		return "profile.xhtml";
 	}
 }
