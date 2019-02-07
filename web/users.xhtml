@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/layout.xhtml">
+	<ui:define name="content">
+		<f:view>
+
+			<h1>List of users (with JSTL)</h1>
+			<h:form>
+				<table class="table">
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>First_Name</th>
+						<th>Email</th>
+						<th>Web_Site</th>
+					</tr>
+					<c:forEach var="u" items="#{user.users}">
+						<tr>
+							<td>#{u.id}</td>
+							<td>#{u.name}</td>
+							<td>#{u.firstName}</td>
+							<td>#{u.email}</td>
+							<td>#{u.webSite}</td>
+							<td><h:commandLink action="#{user.findUser(u.id)}"
+									value="Show" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+
+				<h:commandButton styleClass="btn btn-success"
+					action="#{user.newUser()}" value="New User" />
+
+			</h:form>
+
+		</f:view>
+	</ui:define>
+</ui:composition>
+
+</html>

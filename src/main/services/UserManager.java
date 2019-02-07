@@ -22,6 +22,8 @@ public interface UserManager {
 
     List<User> findByFirstName(String firstName);
 
-    User save(User user);
+	User findByLogin(String email, String password);
+
+//    User save(User user);
 
 }

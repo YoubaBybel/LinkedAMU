@@ -1,0 +1,40 @@
+.white-button.ui-button.ui-state-default {
+	background-color: #ffffff;
+	color: #222222;
+	border-color: #d6d6d6;
+	/* with the exported variables from Nova and Luna Themes*/
+	border-color: var(--input-border-color, #d6d6d6);
+}
+
+.white-button.ui-button.ui-state-default:enabled:hover, 
+.white-button.ui-button.ui-state-default:focus {
+	background-color: #f2f2f2;
+	border-color: #ccc;
+	color: #373a3c;
+	/* with the exported variables from Nova and Luna Themes*/
+	border-color: var(--input-hover-border-color, #ccc);
+}
+
+.green-button.ui-button.ui-state-default {
+	background-color: #5cb85c;
+	border-color: #5cb85c;
+	color: #fff;
+}
+
+.green-button.ui-button.ui-state-default:enabled:hover, 
+.green-button.ui-button.ui-state-default:focus {
+	background-color: #4cae4c;
+	border-color: #5cb85c;
+}
+
+.red-button.ui-button.ui-state-default {
+	background-color: #d9534f;
+	border-color: #d9534f;
+	color: #fff;
+}
+
+.red-button.ui-button.ui-state-default:enabled:hover, 
+.red-button.ui-button.ui-state-default:focus {
+	background-color: #d43f3a;
+	border-color: #d9534f;
+}

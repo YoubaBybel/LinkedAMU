@@ -71,6 +71,14 @@ public class UserManagerImpl implements UserManager {
 		.getResultList();
     }
 
+	@Override
+	public User findByLogin(String email, String password) {
+		return this.em
+				.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
+				.setParameter("email", email).setParameter("password", password).getSingleResult();
+	}
+
+    /*
     @Override
     public User save(User user) {
 	if (user.getId() == null) {
@@ -80,5 +88,5 @@ public class UserManagerImpl implements UserManager {
 	}
 	return user;
     }
-
+    */
 }
