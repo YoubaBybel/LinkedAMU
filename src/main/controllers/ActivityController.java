@@ -13,7 +13,7 @@ import main.entities.Activity;
 import main.entities.Activity.Nature;
 import main.services.ActivityManager;
 
-@ManagedBean(name = "activControl")
+@ManagedBean(name = "activity")
 @SessionScoped
 public class ActivityController {
 

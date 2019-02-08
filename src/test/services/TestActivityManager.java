@@ -33,6 +33,9 @@ public class TestActivityManager {
     private Activity stage;
     private Activity licence;
 
+    private User scottLang;
+    private User nickFury;
+
     @Before
     public void init() throws Exception {
 	EJBContainer.createEJBContainer().getContext().bind("inject", this);
@@ -41,11 +44,15 @@ public class TestActivityManager {
 	master_1 = new Activity(2018, "FORMATION", "Master Info");
 	stage = new Activity(2019, "STAGE", "Sogeti");
 	licence = new Activity(2017, "FORMATION", "Licence Info");
+
+	scottLang = new User("LANG", "Scott", "scott.lang@antman.com", "iamnotathief");
+	nickFury = new User("FURY", "Nick", "nick_fury@shield.com", "imoneeyedman");
     }
 
     @After
     public void end() throws Exception {
 	am.findAll().forEach(activity -> am.removeActivity(activity.getId()));
+	um.findAll().forEach(user -> am.removeActivity(user.getId()));
 	EJBContainer.createEJBContainer().close();
     }
 
@@ -60,6 +67,7 @@ public class TestActivityManager {
 	assertNotNull(activity);
     }
 
+    @Test
     public void testUpdate() {
 	Activity activity = am.createActivity(master_1);
 	activity.setYear(2019);
@@ -120,29 +128,29 @@ public class TestActivityManager {
 
     @Test
     public void testFindUserActivities() {
-	User scottLang = um.createUser(new User("LANG", "Scott", "scott.lang@antman.com", "iamnotathief"));
-	User nickFury = um.createUser(new User("FURY", "Nick", "nick_fury@shield.com", "imoneeyedman"));
+	User antman = um.createUser(scottLang);
+	User nick = um.createUser(nickFury);
 
 	Activity m2 = am.createActivity(master_2);
 	Activity m1 = am.createActivity(master_1);
 	Activity st = am.createActivity(stage);
 	Activity li = am.createActivity(licence);
 
-	List<Activity> nickCv = nickFury.createCV();
+	List<Activity> nickCv = nick.createCV();
 	nickCv.add(li);
 	nickCv.add(m1);
 	nickCv.add(m2);
 	nickFury.setCv(nickCv);
-	um.updateUser(nickFury);
+	um.updateUser(nick);
 
-	List<Activity> scottCv = scottLang.createCV();
+	List<Activity> scottCv = antman.createCV();
 	scottCv.add(st);
-	scottLang.setCv(scottCv);
-	um.updateUser(scottLang);
+	antman.setCv(scottCv);
+	um.updateUser(antman);
 
 	st.setDescription("Une description du stage");
 	am.updateActivity(st);
-	assertEquals(3, am.findUserActivities(nickFury).size());
+	assertEquals(3, am.findUserActivities(nick).size());
     }
 
 }

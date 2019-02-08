@@ -2,13 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition>
-    <ul class="dropdown-menu">
-    <li>lien 1</li>
-    <li>lien 2</li>
-    </ul>
+	
+	<h:link outcome="index" styleClass="nav-link active">Home</h:link>
+	<h:link outcome="activities" styleClass="nav-link active">Activities</h:link>
+	<h:button onclick="#{user.isLogged}" value="Déconnexion"/>
+	<a class="nav-link" href="#">Contact</a>
+	
+	<c:if test="#{isLogged}">
+		<p><h:outputText value="Bonjour"/></p>
+	</c:if>
+	<c:if test="#{!isLogged}">
+		<p>NOT LOGGED</p>
+	</c:if>
 </ui:composition>
 
 </html>

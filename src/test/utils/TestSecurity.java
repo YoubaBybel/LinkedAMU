@@ -2,9 +2,8 @@ package test.utils;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import main.utils.Security;
@@ -14,28 +13,25 @@ public class TestSecurity {
     @Test
     public void testPasswordHash() throws NoSuchAlgorithmException, InvalidKeySpecException {
 	String password = "Mot_de_passe";
-	String hashedPassword = new Security().hashPassword(password);
-	System.out.println(hashedPassword.toString());
-	System.out.println(password.hashCode());
+	String hashedPassword = Security.hashPassword(password);
 
-	String olPasswordString = "Mot_de_passe";
-	String confirmHashedPAssword = new Security().hashPassword(password);
-	System.out.println(confirmHashedPAssword.toString());
-	System.out.println(olPasswordString.hashCode());
+	String confirmPassword = "Mot_de_passe";
+	String hashedConfirmPassword = Security.hashPassword(confirmPassword);
 
-	List<String> list = new ArrayList<>();
-	list.add(new Security().hashPassword(password));
-	list.add(new Security().hashPassword(password));
-	list.add(new Security().hashPassword(password));
-	list.add(new Security().hashPassword(password));
-	list.add(new Security().hashPassword(password));
-	list.add(new Security().hashPassword(password));
-	list.forEach(psw -> System.err.println(psw.getBytes()));
+	System.err.println("password: " + password);
+	System.err.println("password.getBytes(): " + password.getBytes());
+	System.err.println();
+	System.err.println("hashedPassword: " + hashedPassword);
+	System.err.println("hashedPassword.getBytes(): " + hashedPassword.getBytes());
+	System.err.println();
+	System.err.println("confirmPassword: " + confirmPassword);
+	System.err.println("confirmPassword.getBytes(): " + confirmPassword.getBytes());
+	System.err.println();
+	System.err.println("hashedConfirmPassword: " + hashedConfirmPassword);
+	System.err.println("hashedConfirmPassword.getBytes(): " + hashedConfirmPassword.getBytes());
+
+	Assert.assertTrue(Security.isSame(hashedConfirmPassword, hashedPassword));
+	Assert.assertTrue(Security.isSame(hashedConfirmPassword.getBytes(), hashedPassword.getBytes()));
     }
 
-    @Test
-    public void name() {
-	System.out.println(Integer.parseInt("2018"));
-	//System.out.println(Integer.parseInt("bonjour"));
-    }
 }

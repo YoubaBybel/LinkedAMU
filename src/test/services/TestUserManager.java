@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.ejb.EJB;
 import javax.ejb.embeddable.EJBContainer;
 
@@ -13,6 +15,7 @@ import org.junit.Test;
 
 import main.entities.User;
 import main.services.UserManager;
+import main.utils.Security;
 
 public class TestUserManager {
 
@@ -28,10 +31,11 @@ public class TestUserManager {
     @Before
     public void init() throws Exception {
 	EJBContainer.createEJBContainer().getContext().bind("inject", this);
+	um.findAll().forEach(user -> System.err.println(user));
 
 	tonyStark = new User("STARK", "Tony", "iron.man@starkindustry.com", "iamironman");
 	captain = new User("CAPTAIN", "America", "sergent@us-navy.com", "oldsoldier");
-	bruceBanner = new User("BANNER", "Bruce", "brucebanner@hulk.com", "Ouuuaaahhh");
+	bruceBanner = new User("BANNER", "Bruce","brucebanner@hulk.com", "Ouuuaaahhh");
 	docteurStrange = new User("DOCTOR", "Strange", "docteur@strange.com", "pierredutemps");
 	natachaRomanov = new User("ROMANOV", "Natacha", "nat_nov@blackwidow.com", "Grrrrrr");
     }
@@ -53,11 +57,12 @@ public class TestUserManager {
 	assertNotNull(user);
     }
 
+    @Test
     public void testUpdate() {
 	User user = um.createUser(bruceBanner);
 	user.setName("Willis");
 	um.updateUser(user);
-	assertEquals("Willis", user.getName());
+	assertEquals("Willis", um.findById(user.getId()).getName());
     }
 
     @Test
@@ -77,7 +82,6 @@ public class TestUserManager {
 
     @Test
     public void testFindAll() {
-
 	um.createUser(tonyStark);
 	um.createUser(bruceBanner);
 	um.createUser(docteurStrange);
@@ -109,6 +113,14 @@ public class TestUserManager {
 	um.createUser(natachaRomanov);
 	um.findByFirstName("t").forEach(user -> assertTrue(user.getFirstName().toLowerCase().contains("t")));
 	assertEquals(3, um.findByName("t").size());
+    }
+
+    @Test
+    public void testFindByLogin() throws NoSuchAlgorithmException {
+	um.createUser(bruceBanner);
+	String bruceEmail = "brucebanner@hulk.com";
+	String brucePassword = Security.hashPassword("Ouuuaaahhh");
+	assertNotNull(um.findByLogin(bruceEmail, brucePassword));
     }
 
 }
