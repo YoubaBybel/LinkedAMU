@@ -1,4 +1,4 @@
-package test;
+package test.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -62,6 +62,8 @@ public class TestUserManager {
 
     @Test
     public void testDelete() {
+	um.findAll().forEach(user -> um.removeUser(user.getId()));
+
 	User user = um.createUser(docteurStrange);
 	um.removeUser(user.getId());
 	assertEquals(0, um.findAll().size());
@@ -75,10 +77,15 @@ public class TestUserManager {
 
     @Test
     public void testFindAll() {
+
 	um.createUser(tonyStark);
 	um.createUser(bruceBanner);
 	um.createUser(docteurStrange);
 	um.createUser(natachaRomanov);
+	um.findAll().forEach(user -> {
+	    System.err.println(user);
+	    um.removeUser(user.getId());
+	});
 	assertEquals(4, um.findAll().size());
     }
 

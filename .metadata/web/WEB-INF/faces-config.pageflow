@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15495561085840" configfile="/LinkedAMU/web/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Home" x="24" y="24" id="pf15495869402036" referenceLink="//@navigationRule.3/@fromViewId|" outlinks="pf15495869402037 pf154958746655813 pf154958746655814 pf154958746655815 pf154958746655816 pf154958746655817 pf154958746655818 pf154958746655819" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="636" y="120" id="pf15495869402038" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf15495869402037" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf154958746655820" referenceLink="//@navigationRule.4/@navigationCase.1/@toViewId|" inlinks="pf154958746655813" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="users.xhtml" id="pf154958746655821" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf154958746655814" path="/users.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editUser.xhtml" id="pf154958746655822" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf154958746655815" path="/editUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="editActivity.xhtml" id="pf154958746655823" referenceLink="//@navigationRule.3/@navigationCase.1/@toViewId|" inlinks="pf154958746655816" path="/editActivity.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="showUser.xhtml" id="pf154958746655824" referenceLink="//@navigationRule.4/@navigationCase.0/@toViewId|" inlinks="pf154958746655817" path="/showUser.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="showActivity.xhtml" id="pf154958746655825" referenceLink="//@navigationRule.4/@navigationCase.1/@toViewId|" inlinks="pf154958746655818" path="/showActivity.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="activities.xhtml" id="pf154958746655826" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf154958746655819" path="/activities.xhtml"/>
+  <links id="pf15495869402037" target="pf15495869402038" source="pf15495869402036" outcome="home"/>
+  <links id="pf154958746655813" target="pf154958746655820" source="pf15495869402036" outcome="login"/>
+  <links id="pf154958746655814" target="pf154958746655821" source="pf15495869402036" outcome="users"/>
+  <links id="pf154958746655815" target="pf154958746655822" source="pf15495869402036" outcome="editUser"/>
+  <links id="pf154958746655816" target="pf154958746655823" source="pf15495869402036" outcome="editActivity"/>
+  <links id="pf154958746655817" target="pf154958746655824" source="pf15495869402036" outcome="showUser"/>
+  <links id="pf154958746655818" target="pf154958746655825" source="pf15495869402036" outcome="showActivity"/>
+  <links id="pf154958746655819" target="pf154958746655826" source="pf15495869402036" outcome="activities"/>
+</pageflow:Pageflow>

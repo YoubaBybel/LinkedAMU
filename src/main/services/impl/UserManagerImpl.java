@@ -7,12 +7,14 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import main.dao.CRUD;
 import main.entities.User;
 import main.services.UserManager;
 
 @Stateful
+@Transactional
 public class UserManagerImpl implements UserManager {
 
     @EJB
@@ -71,22 +73,11 @@ public class UserManagerImpl implements UserManager {
 		.getResultList();
     }
 
-	@Override
-	public User findByLogin(String email, String password) {
-		return this.em
-				.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
-				.setParameter("email", email).setParameter("password", password).getSingleResult();
-	}
-
-    /*
     @Override
-    public User save(User user) {
-	if (user.getId() == null) {
-	    em.persist(user);
-	} else {
-	    user = em.merge(user);
-	}
-	return user;
+    public User findByLogin(String email, String password) {
+	return this.em
+		.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
+		.setParameter("email", email).setParameter("password", password).getSingleResult();
     }
-    */
+
 }
