@@ -21,7 +21,7 @@ public class Activity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public enum Nature {
-	EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJECT, OTHER
+	EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJET, AUTRE
     }
 
     @Id
@@ -73,10 +73,10 @@ public class Activity implements Serializable {
 		this.nature = Nature.FORMATION;
 		break;
 	    case "project":
-		this.nature = Nature.PROJECT;
+		this.nature = Nature.PROJET;
 		break;
 	    default:
-		this.nature = Nature.OTHER;
+		this.nature = Nature.AUTRE;
 	}
 	setTitle(title);
     }
@@ -106,7 +106,7 @@ public class Activity implements Serializable {
     }
 
     public String getTitle() {
-	return title;
+	return StringEscapeUtils.unescapeHtml(title);
     }
 
     public void setTitle(String title) {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/template/layout.xhtml">
+    <ui:define name="title">Activity n°<h:outputText value="123"/></ui:define>
+    <ui:define name="content">
+        <f:view>
+            <c:set var="a" value="#{activity.getActivity(3)}" />
+            <div class="jumbotron">
+                <h1>Activity #{a.title}</h1>
+                <p>Id: #{a.id}</p>
+                <p>Year: #{a.year}</p>
+                <p>Nature: #{a.nature}</p>
+                <p>Description: #{a.description}</p>
+                <p>Site web: #{a.webAddress}</p>
+                <p>
+                    <h:link outcome="activities" styleClass="btn btn-info">
+                        <span>List of activities</span>
+                    </h:link>
+                </p>
+            </div>
+            <h:form>
+                <p>
+                    <h:commandLink action="editActivity" styleClass="btn btn-danger">
+                        <span>Modifier</span>
+                    </h:commandLink>
+                </p>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
+
+</html>

@@ -7,12 +7,14 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import main.dao.CRUD;
 import main.entities.User;
 import main.services.UserManager;
 
 @Stateful
+@Transactional
 public class UserManagerImpl implements UserManager {
 
     @EJB

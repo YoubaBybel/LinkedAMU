@@ -4,5 +4,67 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
       http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
+    
+    <navigation-rule>
+        <display-name>Home</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>Login</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>login</from-outcome>
+        	<to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>Users</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>users</from-outcome>
+        	<to-view-id>/users.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>Activities</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>activities</from-outcome>
+        	<to-view-id>/activities.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>Edit</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>editUser</from-outcome>
+        	<to-view-id>/editUser.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+        	<from-outcome>editActivity</from-outcome>
+        	<to-view-id>/editActivity.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>Show</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>showUser</from-outcome>
+        	<to-view-id>/showUser.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+        	<from-outcome>showActivity</from-outcome>
+        	<to-view-id>/showActivity.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
 </faces-config>
