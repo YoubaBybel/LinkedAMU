@@ -9,7 +9,14 @@
 <ui:composition template="/template/layout.xhtml">
 	<ui:define name="content">
 		<f:view>
-		
+		<c:set var="u" value="#{user.userLogged}" />
+				<tr>
+					<td>#{u.id}</td>
+					<td>#{u.name}</td>
+					<td>#{u.firstName}</td>
+					<td>#{u.email}</td>
+					<td>#{u.password}</td>
+				</tr>
 		</f:view>
 	</ui:define>
 </ui:composition>

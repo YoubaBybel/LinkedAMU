@@ -20,10 +20,11 @@ public class UserController {
 	UserManager userM;
 
 	@EJB
-	Authentification coUser;
+	Authentification auth;
 
 	private User user = new User();
 	private boolean isLogged = false;
+	private User userLogged = new User();
 
 	@PostConstruct
 	public void init() {
@@ -54,6 +55,10 @@ public class UserController {
 	public User getUser() {
 		return user;
 	}
+	
+	public User getUserLogged() {
+		return userLogged;
+	}
 
 	public boolean isLogged() {
 		return isLogged;
@@ -80,8 +85,14 @@ public class UserController {
 	}
 
 	public String login() {
-		coUser.login(user);
-		isLogged = coUser.isLogged();
-		return "profile.xhtml";
+		String page;
+		userLogged = auth.login(user);
+		isLogged = auth.isLogged();
+		if(isLogged) {
+			page = "profile?faces-redirect=true";
+		} else {
+			page = "index?faces-redirect=true";
+		}
+		return page;
 	}
 }

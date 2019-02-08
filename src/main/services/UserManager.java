@@ -22,7 +22,7 @@ public interface UserManager {
 
     List<User> findByFirstName(String firstName);
 
-	User findByLogin(String email, String password);
+	List<User> findByLogin(String email, String password);
 
 //    User save(User user);
 

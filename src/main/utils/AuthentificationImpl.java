@@ -1,5 +1,7 @@
 package main.utils;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
@@ -16,11 +18,15 @@ public class AuthentificationImpl implements Authentification {
 	UserManager userM;
 
 	@Override
-	public void login(User user) {
+	public User login(User user) {
 		isLogged = false;
-		if (userM.findByLogin(user.getEmail(), user.getPassword()) != null) {
+		List<User> userLogged;
+		userLogged = userM.findByLogin(user.getEmail(), user.getPassword());
+		if (userLogged.isEmpty()) {
+			return null;
+		} else {
 			isLogged = true;
-			System.out.printf("Login user %s on %s\n", isLogged, this);
+			return userLogged.get(0);
 		}
 	}
 

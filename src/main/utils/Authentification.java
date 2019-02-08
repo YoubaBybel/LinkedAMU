@@ -4,7 +4,7 @@ import main.entities.User;
 
 public interface Authentification {
 
-	public void login(User user);
+	public User login(User user);
 
 	public void logout();
 
