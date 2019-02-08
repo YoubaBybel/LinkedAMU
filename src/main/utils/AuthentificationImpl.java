@@ -3,7 +3,6 @@ package main.utils;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 import main.entities.User;
@@ -31,7 +30,6 @@ public class AuthentificationImpl implements Authentification {
 	}
 
 	@Override
-	@Remove
 	public void logout() {
 		isLogged = false;
 		System.out.printf("Logout on %s\n", this);

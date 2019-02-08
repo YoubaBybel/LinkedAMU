@@ -16,41 +16,41 @@ import main.utils.Authentification;
 @SessionScoped
 public class UserController {
 
-    @EJB
-    UserManager userM;
+	@EJB
+	UserManager userM;
 
 	@EJB
 	Authentification auth;
 
 	private User user = new User();
 	private boolean isLogged = false;
-	private User userLogged = new User();
+	private User userLogged;
 
-    @PostConstruct
-    public void init() {
-	System.out.println("Create " + this);
-	if (userM.findAll().isEmpty()) {
-	    User user1 = new User();
-	    user1.setName("BERTHOD");
-	    user1.setFirstName("Timothee");
-	    user1.setPassword("123");
-	    user1.setEmail("timothee@berthod.net");
-	    user1.setWebSite("https://google.fr");
-	    userM.createUser(user1);
+	@PostConstruct
+	public void init() {
+		System.out.println("Create " + this);
+		if (userM.findAll().isEmpty()) {
+			User user1 = new User();
+			user1.setName("BERTHOD");
+			user1.setFirstName("Timothee");
+			user1.setPassword("123");
+			user1.setEmail("timothee@berthod.net");
+			user1.setWebSite("https://google.fr");
+			userM.createUser(user1);
+		}
 	}
-    }
 
-    @PreDestroy
-    public void end() {
-	userM.findAll().forEach(userToRemove -> {
-	    userM.removeUser(userToRemove.getId());
-	    System.out.println("to remove " + userToRemove);
-	});
-    }
+	@PreDestroy
+	public void end() {
+		userM.findAll().forEach(userToRemove -> {
+			userM.removeUser(userToRemove.getId());
+			System.out.println("to remove " + userToRemove);
+		});
+	}
 
-    public List<User> getUsers() {
-	return userM.findAll();
-    }
+	public List<User> getUsers() {
+		return userM.findAll();
+	}
 
 	public User getUser() {
 		return user;
@@ -88,11 +88,18 @@ public class UserController {
 		String page;
 		userLogged = auth.login(user);
 		isLogged = auth.isLogged();
-		if(isLogged) {
+		if (isLogged) {
 			page = "profile?faces-redirect=true";
 		} else {
-			page = "index?faces-redirect=true";
+			page = "home";
 		}
 		return page;
+	}
+
+	public String logout() {
+		auth.logout();
+		isLogged = false;
+		userLogged = null;
+		return "home";
 	}
 }

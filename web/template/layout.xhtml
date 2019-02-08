@@ -19,13 +19,20 @@
 	<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
 		<header class="masthead mb-auto">
 			<div class="inner">
-				<h:link outcome="home"><h3 class="masthead-brand">LinkedAMU</h3></h:link>
+				<h:link outcome="home">
+					<h3 class="masthead-brand">LinkedAMU</h3>
+				</h:link>
 				<nav class="nav nav-masthead justify-content-center">
 					<c:set var="isLogged" scope="session" value="#{user.isLogged()}" />
 					<c:if test="#{isLogged}">
 						<a class="nav-link active" href="home">Home</a>
 						<a class="nav-link" href="#">Features</a>
 						<a class="nav-link" href="#">Contact</a>
+						<h:form>
+							<p>
+								<h:commandButton action="#{user.logout()}" value="Logout" />
+							</p>
+						</h:form>
 					</c:if>
 					<c:if test="#{!isLogged}">
 						<p>NOT LOGGED</p>
