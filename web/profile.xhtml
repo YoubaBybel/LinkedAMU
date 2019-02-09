@@ -9,7 +9,9 @@
 <ui:composition template="/template/layout.xhtml">
 	<ui:define name="content">
 		<f:view>
-		<c:set var="u" value="#{user.userLogged}" />
+			<c:set var="u" value="#{user.userLogged}" />
+			<h:form>
+				<p>profile page</p>
 				<tr>
 					<td>#{u.id}</td>
 					<td>#{u.name}</td>
@@ -17,6 +19,7 @@
 					<td>#{u.email}</td>
 					<td>#{u.password}</td>
 				</tr>
+			</h:form>
 		</f:view>
 	</ui:define>
 </ui:composition>

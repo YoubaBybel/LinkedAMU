@@ -8,6 +8,8 @@ LinkedAMU.iml
 
 # Repositories & files to ignore with Eclipse
 /.settings/
+/.metadata/
+/.git/
 /build/
 /target/
 .classpath

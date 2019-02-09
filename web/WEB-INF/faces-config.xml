@@ -45,8 +45,8 @@
     	<display-name>Edit</display-name>
         <from-view-id>*</from-view-id>
         <navigation-case>
-        	<from-outcome>editUser</from-outcome>
-        	<to-view-id>/editUser.xhtml</to-view-id>
+        	<from-outcome>profile</from-outcome>
+        	<to-view-id>/profile.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
         	<from-outcome>editActivity</from-outcome>

@@ -89,7 +89,7 @@ public class UserController {
 		userLogged = auth.login(user);
 		isLogged = auth.isLogged();
 		if (isLogged) {
-			page = "profile?faces-redirect=true";
+			page = "profile";
 		} else {
 			page = "home";
 		}
