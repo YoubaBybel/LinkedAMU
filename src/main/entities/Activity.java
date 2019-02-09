@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 @Entity
 public class Activity implements Serializable {
@@ -106,11 +106,11 @@ public class Activity implements Serializable {
     }
 
     public String getTitle() {
-	return StringEscapeUtils.unescapeHtml(title);
+	return StringEscapeUtils.unescapeHtml4(title);
     }
 
     public void setTitle(String title) {
-	this.title = StringEscapeUtils.escapeHtml(title);
+	this.title = StringEscapeUtils.escapeHtml4(title);
     }
 
     public String getDescription() {
@@ -118,7 +118,7 @@ public class Activity implements Serializable {
     }
 
     public void setDescription(String description) {
-	this.description = StringEscapeUtils.escapeHtml(description);
+	this.description = StringEscapeUtils.escapeHtml4(description);
     }
 
     public String getWebAddress() {
@@ -126,7 +126,7 @@ public class Activity implements Serializable {
     }
 
     public void setWebAddress(String webAddress) {
-	this.webAddress = StringEscapeUtils.escapeHtml(webAddress);
+	this.webAddress = StringEscapeUtils.escapeHtml4(webAddress);
     }
 
     public User getUser() {

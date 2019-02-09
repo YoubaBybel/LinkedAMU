@@ -19,10 +19,10 @@ import main.services.ActivityManager;
 public class ActivityManagerImpl implements ActivityManager {
 
     @EJB
-    CRUD dao;
+    private CRUD dao;
 
     @PersistenceContext(unitName = "myData")
-    EntityManager em;
+    private EntityManager em;
 
     @Override
     public Activity createActivity() {
