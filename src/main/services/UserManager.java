@@ -1,6 +1,5 @@
 package main.services;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import main.entities.User;
@@ -23,7 +22,7 @@ public interface UserManager {
 
     List<User> findByFirstName(String firstName);
 
-    List<User> findByLogin(String email, String password) throws NoSuchAlgorithmException;
+    List<User> findByLogin(String email, String password);
 
     //User save(User user);
 

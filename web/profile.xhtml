@@ -7,18 +7,47 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/template/layout.xhtml">
+	<ui:define name="title">Profile</ui:define>
 	<ui:define name="content">
 		<f:view>
 			<c:set var="u" value="#{user.userLogged}" />
+
+			<h:form id="firstName" style="text-align:left">
+				<div class="form-group">
+					<label for="email">First name:</label>
+					<h:inputText id="firstName" value="#{u.firstName}" required="true"
+						style="margin:5px" />
+					<h:commandButton action="#{user.updateUser()}"
+						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
+					<h:message styleClass="label label-danger" for="firstName" />
+				</div>
+			</h:form>
+
+			<h:form id="name" style="text-align:left">
+				<div class="form-group">
+					<label for="email">Name:</label>
+					<h:inputText id="name" value="#{u.name}" required="true"
+						style="margin:5px" />
+					<h:commandButton action="#{user.updateUser()}"
+						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
+					<h:message styleClass="label label-danger" for="name" />
+				</div>
+			</h:form>
+
+			<h:form id="password" style="text-align:left">
+				<div class="form-group">
+					<label for="password">Password:</label>
+					<h:inputSecret id="password" value="#{u.password}"
+						styleClass="form-control" required="true" />
+					<h:commandButton action="#{user.updateUser()}"
+						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
+					<h:message styleClass="label label-danger" for="password" />
+				</div>
+			</h:form>
+
 			<h:form>
-				<p>profile page</p>
-				<tr>
-					<td>#{u.id}</td>
-					<td>#{u.name}</td>
-					<td>#{u.firstName}</td>
-					<td>#{u.email}</td>
-					<td>#{u.password}</td>
-				</tr>
+				<h:commandButton action="#{user.removeUser()}"
+					styleClass="btn btn-primary" value="DELETE ACCOUNT" />
 			</h:form>
 		</f:view>
 	</ui:define>

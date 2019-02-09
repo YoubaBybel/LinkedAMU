@@ -7,7 +7,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>LinkedAMU | <ui:insert name="title">Test</ui:insert></title>
+	<title>LinkedAMU | <ui:insert name="title"></ui:insert></title>
 	<!-- Bootstrap core CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.css" />
 	<!-- Custom styles for this template -->
@@ -29,13 +29,13 @@
 						<a class="nav-link" href="#">Features</a>
 						<a class="nav-link" href="#">Contact</a>
 						<h:form>
-							<p>
-								<h:commandButton action="#{user.logout()}" value="Logout" />
-							</p>
+							<h:commandButton action="#{user.logout()}" value="Logout" />
 						</h:form>
 					</c:if>
 					<c:if test="#{!isLogged}">
-						<p>NOT LOGGED</p>
+						<h:link class="btn" outcome="inscription">
+							<p>Inscription</p>
+						</h:link>
 					</c:if>
 				</nav>
 			</div>

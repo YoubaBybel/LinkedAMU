@@ -6,8 +6,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewAction action="#{user.newUser()}" />
+</f:metadata>
+
 <ui:composition template="/template/layout.xhtml">
-	<ui:define name="title">Index</ui:define>
+	<ui:define name="title">Home</ui:define>
 	<ui:define name="content">
 		<f:view>
 
@@ -33,8 +37,7 @@
 
 				<div class="form-group">
 					<label for="password">Password:</label>
-					<h:inputText id="password" value="#{u.password}"
-						styleClass="form-control" required="true" />
+					<h:inputSecret id="password" value="#{u.password}" styleClass="form-control" required="true" />
 					<h:message styleClass="label label-danger" for="password" />
 				</div>
 

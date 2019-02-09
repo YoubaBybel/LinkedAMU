@@ -23,8 +23,8 @@ public class UserController {
 	Authentification auth;
 
 	private User user = new User();
-	private boolean isLogged = false;
 	private User userLogged;
+	private boolean isLogged = false;
 
 	@PostConstruct
 	public void init() {
@@ -71,12 +71,17 @@ public class UserController {
 
 	public String addUser() {
 		userM.createUser(user);
-		return "userPage";
+		return "profile";
 	}
 
 	public String updateUser() {
-		userM.updateUser(user);
-		return "userPage";
+		userM.updateUser(userLogged);
+		return "profile";
+	}
+	
+	public String removeUser() {
+		userM.removeUser(user.getId());
+		return "index";
 	}
 
 	public String newUser() {
@@ -100,6 +105,7 @@ public class UserController {
 		auth.logout();
 		isLogged = false;
 		userLogged = null;
+		user = new User();
 		return "home";
 	}
 }

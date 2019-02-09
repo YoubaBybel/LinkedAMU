@@ -1,6 +1,5 @@
 package main.services.impl;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +12,6 @@ import javax.transaction.Transactional;
 import main.dao.CRUD;
 import main.entities.User;
 import main.services.UserManager;
-import main.utils.Security;
 
 @Stateful
 @Transactional
@@ -78,10 +76,9 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public List<User> findByLogin(String email, String password) throws NoSuchAlgorithmException {
-	String hashedPassword = Security.hashPassword(password);
+    public List<User> findByLogin(String email, String password) {
 	return this.em.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
-		.setParameter("email", email).setParameter("password", hashedPassword)
+		.setParameter("email", email).setParameter("password", password)
 		.getResultList();
     }
 

@@ -66,5 +66,14 @@
         	<to-view-id>/showActivity.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+    	<display-name>Inscription</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>inscription</from-outcome>
+        	<to-view-id>/inscription.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
 </faces-config>

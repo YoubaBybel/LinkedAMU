@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-      
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
 <f:metadata>
     <f:viewAction action="#{user.newUser()}" />
 </f:metadata>
 
-<ui:composition template="template/layout.xhtml">
-	<ui:define name="title">Login</ui:define>
+<ui:composition template="/template/layout.xhtml">
+	<ui:define name="title">Inscription</ui:define>
 	<ui:define name="content">
 		<f:view>
+			<p>Inscription</p>
 
-			<c:forEach var="u" items="#{user.users}">
-				<table>
-					<tr><th>#{u.id}</th></tr>
-					<tr><th>#{u.name}</th></tr>
-					<tr><th>#{u.firstName}</th></tr>
-					<tr><th>#{u.email}</th></tr>
-					<tr><th>#{u.password}</th></tr>
-				</table>
-			</c:forEach>
-
-			<h:form id="login">
+			<h:form id="incription">
 				<c:set var="u" value="#{user.user}" />
+
+				<div class="form-group">
+					<label for="email">First name:</label>
+					<h:inputText id="firstName" value="#{u.firstName}"
+						styleClass="form-control" required="true" />
+					<h:message styleClass="label label-danger" for="firstName" />
+				</div>
+
+				<div class="form-group">
+					<label for="email">Name:</label>
+					<h:inputText id="name" value="#{u.name}" styleClass="form-control"
+						required="true" />
+					<h:message styleClass="label label-danger" for="name" />
+				</div>
 
 				<div class="form-group">
 					<label for="email">Email:</label>
@@ -41,13 +47,12 @@
 				</div>
 
 				<div class="form-group">
-					<h:commandButton action="#{user.login()}"
+					<h:commandButton action="#{user.addUser()}"
 						styleClass="btn btn-primary" value="Login" display="tooltip" />
 				</div>
 			</h:form>
-
 		</f:view>
 	</ui:define>
 </ui:composition>
-      
+
 </html>
