@@ -18,137 +18,137 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import main.utils.Security;
 
 @Entity
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	@Basic(optional = false)
-	@Column(name = "name", nullable = false)
-	private String name;
+    @Basic(optional = false)
+    @Column(name = "name", nullable = false)
+    private String name;
 
-	@Basic(optional = false)
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
+    @Basic(optional = false)
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-	@Basic(optional = false)
-	@Column(name = "email", nullable = false, unique = true)
-	private String email;
+    @Basic(optional = false)
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-	@Basic
-	@Column(name = "web_site", unique = true)
-	private String webSite;
+    @Basic
+    @Column(name = "web_site", unique = true)
+    private String webSite;
 
-	@Basic
-	@Temporal(TemporalType.DATE)
-	@Column(name = "birth_date")
-	private Date birthDate;
+    @Basic
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date")
+    private Date birthDate;
 
-	@Basic(optional = false)
-	@Column(name = "password", nullable = false)
-	private String password;
+    @Basic(optional = false)
+    @Column(name = "password", nullable = false)
+    private String password;
 
-	@OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER, mappedBy = "user")
-	private List<Activity> cv;
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Activity> cv;
 
-	public User() {
-		super();
+    public User() {
+	super();
+    }
+
+    public User(String name, String firstName, String email, String password) {
+	super();
+	setName(name);
+	setFirstName(firstName);
+	setEmail(email);
+	setPassword(password);
+    }
+
+    public Integer getId() {
+	return id;
+    }
+
+    public void setId(Integer id) {
+	this.id = id;
+    }
+
+    public String getName() {
+	return name;
+    }
+
+    public void setName(String name) {
+	this.name = StringEscapeUtils.escapeHtml4(name);
+    }
+
+    public String getFirstName() {
+	return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+	this.firstName = StringEscapeUtils.escapeHtml4(firstName);
+    }
+
+    public String getEmail() {
+	return email;
+    }
+
+    public void setEmail(String email) {
+	this.email = StringEscapeUtils.escapeHtml4(email);
+    }
+
+    public String getWebSite() {
+	return webSite;
+    }
+
+    public void setWebSite(String webSite) {
+	this.webSite = StringEscapeUtils.escapeHtml4(webSite);
+    }
+
+    public Date getBirthDate() {
+	return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+	this.birthDate = birthDate;
+    }
+
+    public String getPassword() {
+	return password;
+    }
+
+    public void setPassword(String password) {
+	try {
+	    this.password = Security.hashPassword(password);
+	} catch (NoSuchAlgorithmException e) {
+	    e.printStackTrace();
 	}
+    }
 
-	public User(String name, String firstName, String email, String password) {
-		super();
-		setName(name);
-		setFirstName(firstName);
-		setEmail(email);
-		setPassword(password);
-	}
+    public List<Activity> createCV() {
+	return new Vector<>();
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public List<Activity> getCv() {
+	return cv;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setCv(List<Activity> cv) {
+	this.cv = cv;
+	this.cv.forEach(activity -> activity.setUser(this));
+    }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = StringEscapeUtils.escapeHtml(name);
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = StringEscapeUtils.escapeHtml(firstName);
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = StringEscapeUtils.escapeHtml(email);
-	}
-
-	public String getWebSite() {
-		return webSite;
-	}
-
-	public void setWebSite(String webSite) {
-		this.webSite = StringEscapeUtils.escapeHtml(webSite);
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		try {
-			this.password = Security.hashPassword(password);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public List<Activity> createCV() {
-		return new Vector<>();
-	}
-
-	public List<Activity> getCv() {
-		return cv;
-	}
-
-	public void setCv(List<Activity> cv) {
-		this.cv = cv;
-		this.cv.forEach(activity -> activity.setUser(this));
-	}
-
-	@Override
-	public String toString() {
-		return "User{" + "id=" + id + ", name='" + name + '\'' + ", firstName='" + firstName + '\'' + ", email='"
-				+ email + '\'' + ", webSite='" + webSite + '\'' + ", birthDate=" + birthDate + ", password='" + password
-				+ '\'' + ", cv=" + cv + '}';
-	}
+    @Override
+    public String toString() {
+	return "User{" + "id=" + id + ", name='" + name + '\'' + ", firstName='" + firstName + '\'' + ", email='"
+		+ email + '\'' + ", webSite='" + webSite + '\'' + ", birthDate=" + birthDate + ", password='" + password
+		+ '\'' + ", cv=" + cv + '}';
+    }
 
 }
