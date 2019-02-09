@@ -1,6 +1,7 @@
 package main.entities;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -18,6 +19,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.apache.commons.lang.StringEscapeUtils;
+
+import main.utils.Security;
 
 @Entity
 public class User implements Serializable {
@@ -124,7 +127,11 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-	this.password = StringEscapeUtils.escapeHtml(password);
+	try {
+	    this.password = Security.hashPassword(password);
+	} catch (NoSuchAlgorithmException e) {
+	    e.printStackTrace();
+	}
     }
 
     public List<Activity> createCV() {

@@ -1,5 +1,6 @@
 package main.services.impl;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 import main.dao.CRUD;
 import main.entities.User;
 import main.services.UserManager;
+import main.utils.Security;
 
 @Stateful
 @Transactional
@@ -40,7 +42,9 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public User updateUser(User user) {
-	user.getCv().forEach(activity -> dao.update(activity));
+	if(user.getCv().size() != 0) {
+	    user.getCv().forEach(activity -> dao.update(activity));
+	}
 	return dao.update(user);
     }
 
@@ -73,12 +77,13 @@ public class UserManagerImpl implements UserManager {
 		.getResultList();
     }
 
-	@Override
-	public List<User> findByLogin(String email, String password) {
-		return this.em
-				.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
-				.setParameter("email", email).setParameter("password", password).getResultList();
-	}
+    @Override
+    public List<User> findByLogin(String email, String password) throws NoSuchAlgorithmException {
+	String hashedPassword = Security.hashPassword(password);
+	return this.em.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
+		.setParameter("email", email).setParameter("password", hashedPassword)
+		.getResultList();
+    }
 
     /*
     @Override
@@ -90,5 +95,5 @@ public class UserManagerImpl implements UserManager {
 	}
 	return user;
     }
-    */
+     */
 }

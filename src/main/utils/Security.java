@@ -1,33 +1,33 @@
 package main.utils;
 
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
+public interface Security {
 
-public class Security {
+    static String hashPassword(String password) throws NoSuchAlgorithmException {
+	MessageDigest messageDigest;
+	StringBuffer stringBuffer = new StringBuffer();
 
-    public Security() {
+	messageDigest = MessageDigest.getInstance("SHA-256");
+	messageDigest.update(password.getBytes());
+	byte[] hashedPassword = messageDigest.digest();
+	for (byte bytes : hashedPassword) {
+	    stringBuffer.append(String.format("%02x", bytes & 0xff));
+
+
+	    System.out.println("password: " + password);
+	    System.out.println("digestedPassword (hex): " + stringBuffer.toString());
+	}
+	return stringBuffer.toString();
     }
 
-    public String hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-	SecureRandom random = new SecureRandom();
-	byte[] salt = new byte[16];
-	random.nextBytes(salt);
-	KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 256);
-	SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-	byte[] hash = factory.generateSecret(spec).getEncoded();
-	return hash.toString();
+    static boolean isSame(String password1, String password2) throws NoSuchAlgorithmException {
+	return password1.equals(password2);
     }
 
-    public boolean isSame(String password1, String password2) throws NoSuchAlgorithmException, InvalidKeySpecException {
-	String pass1 = hashPassword(password1);
-	String pass2 = hashPassword(password2);
-	return pass1.equals(pass2);
+    static boolean isSame(byte[] password1, byte[] password2) throws NoSuchAlgorithmException {
+	return MessageDigest.isEqual(password1, password2);
     }
-
 
 }

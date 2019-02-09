@@ -7,6 +7,7 @@ _config.yml
 LinkedAMU.iml
 
 # Repositories & files to ignore with Eclipse
+/.metadata/
 /.settings/
 /.metadata/
 /.git/
@@ -14,3 +15,4 @@ LinkedAMU.iml
 /target/
 .classpath
 .project
+.tern-project
