@@ -14,32 +14,43 @@
 
 			<h:form id="profile" style="text-align:left">
 				<div class="form-group">
-					<label for="firstName">First name:</label>
+					<label for="firstName">First name:</label> <span>#{u.firstName}</span>
 					<h:inputText id="firstName" value="#{u.firstName}" required="true"
 						style="margin:5px" />
 					<h:message styleClass="label label-danger" for="firstName" />
 				</div>
 				<div class="form-group">
-					<label for="name">Name:</label>
+					<label for="name">Name:</label> <span>#{u.name}</span>
 					<h:inputText id="name" value="#{u.name}" required="true"
 						style="margin:5px" />
 					<h:message styleClass="label label-danger" for="name" />
 				</div>
 				<div class="form-group">
-					<label for="webSite">Web site:</label>
+					<label for="webSite">Web site:</label> <span>#{u.webSite}</span>
 					<h:inputText id="webSite" value="#{u.webSite}" style="margin:5px" />
 					<h:message styleClass="label label-danger" for="webSite" />
 				</div>
 				<div class="form-group">
-					<label for="birthDate">Birth date:</label>
+					<label for="birthDate">Birth date (jj-mm-yyyy):</label> <span>#{u.birthDate}</span>
 					<h:inputText id="birthDate" value="#{u.birthDate}"
 						style="margin:5px">
 						<f:convertDateTime pattern="dd-MM-yyyy" />
 					</h:inputText>
 					<h:message styleClass="label label-danger" for="birthDate" />
 				</div>
+
+				<!-- 				<div class="form-group"> -->
+				<!-- 					<label for="password">Password:</label> -->
+				<!-- 					<h:inputSecret id="password" value="#{u.password}" required="true" -->
+				<!-- 						style="margin:5px" /> -->
+				<!-- 					<h:message styleClass="label label-danger" for="password" /> -->
+				<!-- 				</div> -->
+
+
 				<h:commandButton action="#{user.updateUser()}"
-					styleClass="btn btn-primary" value="Modifier" display="tooltip" />
+					styleClass="btn btn-primary" value="Modifier" display="tooltip">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
 			</h:form>
 
 			<h:form style="text-align:left">
@@ -49,10 +60,18 @@
 						style="margin:5px" />
 					<h:message styleClass="label label-danger" for="password" />
 					<h:commandButton action="#{user.updateUser()}"
-						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
+						styleClass="btn btn-primary" value="Modifier" display="tooltip">
+						<f:ajax execute="@form" render="@form" />
+					</h:commandButton>
 				</div>
 			</h:form>
-			
+
+
+
+			<h:button outcome="createUser" value="Create a user" />
+
+
+
 		</f:view>
 	</ui:define>
 </ui:composition>

@@ -3,6 +3,7 @@ package main.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -21,8 +22,13 @@ public class SearchController {
 
     @EJB
     ActivityManager activityManager;
+    
+    @PostConstruct
+	public void init() {
+    	System.out.println("Create " + this);
+    }
 
-    public List<User> getAllUsers() {
+    public List<User> getUsers() {
 	return userManager.findAll();
     }
 

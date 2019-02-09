@@ -17,87 +17,84 @@ import main.services.ActivityManager;
 @SessionScoped
 public class ActivityController {
 
-    @EJB
-    ActivityManager activityManager;
+	@EJB
+	ActivityManager activityManager;
 
-    Activity currentActivity;
-    Map<String, Nature> natures = new LinkedHashMap<>();
+	Activity currentActivity;
+	Map<String, Nature> natures = new LinkedHashMap<>();
 
-    @PostConstruct
-    public void init() {
-	if(activityManager.findAll().size() == 0) {
-	    Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
-	    master2.setWebAddress("http://masterinfo.univ-mrs.fr/master-2018");
-	    activityManager.createActivity(master2);
+	@PostConstruct
+	public void init() {
+		System.out.println("Create " + this);
+		activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
 
-	    Activity animateur = new Activity(2012, "EXP_PERSO", "Animateur Éclaireuses Éclaireurs de France");
-	    animateur.setDescription("J'ai été animateur pendant 4 ans avant de me concentrer sur mes études");
-	    activityManager.createActivity(animateur);
+		Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
+		master2.setWebAddress("http://masterinfo.univ-mrs.fr/master-2018");
+		activityManager.createActivity(master2);
 
-	    Activity stage = new Activity(2019, "STAGE", "SOGETI Aix");
-	    stage.setDescription("Mon premier stage en entreprise, ça va être génial !!");
-	    activityManager.createActivity(stage);
+		Activity animateur = new Activity(2012, "EXP_PERSO", "Animateur Éclaireuses Éclaireurs de France");
+		animateur.setDescription("J'ai été animateur pendant 4 ans avant de me concentrer sur mes études");
+		activityManager.createActivity(animateur);
 
-	    Activity basket = new Activity(2015, "AUTRE", "Basket en compétition");
-	    activityManager.createActivity(basket);
+		Activity stage = new Activity(2019, "STAGE", "SOGETI Aix");
+		stage.setDescription("Mon premier stage en entreprise, ça va être génial !!");
+		activityManager.createActivity(stage);
 
-	    Activity vendeur = new Activity(2016, "EXP_PRO", "Vendeur & Conseiller");
-	    vendeur.setDescription("J'ai été vendeur auprès de 3 grandes enseignes dans le monde du prêt-à-porter.\n"
-		    + "¤ Le Temps des Cerises\n"
-		    + "¤ H&M\n"
-		    + "¤ Zara");
-	    activityManager.createActivity(vendeur);
+		Activity basket = new Activity(2015, "AUTRE", "Basket en compétition");
+		activityManager.createActivity(basket);
 
-	    natures.put("", Nature.AUTRE);
-	    natures.put("FORMATION", Nature.FORMATION);
-	    natures.put("EXPERIENCE PROFESSIONNELLE", Nature.EXP_PRO);
-	    natures.put("STAGE", Nature.STAGE);
-	    natures.put("EXPERIENCE PERSONNELLE", Nature.EXP_PERSO);
-	    natures.put("PROJET", Nature.PROJET);
-	    natures.put("AUTRE", Nature.AUTRE);
-	} else {
-	    activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
+		Activity vendeur = new Activity(2016, "EXP_PRO", "Vendeur & Conseiller");
+		vendeur.setDescription("J'ai été vendeur auprès de 3 grandes enseignes dans le monde du prêt-à-porter.\n"
+				+ "¤ Le Temps des Cerises\n" + "¤ H&M\n" + "¤ Zara");
+		activityManager.createActivity(vendeur);
+
+		natures.put("", Nature.AUTRE);
+		natures.put("FORMATION", Nature.FORMATION);
+		natures.put("EXPERIENCE PROFESSIONNELLE", Nature.EXP_PRO);
+		natures.put("STAGE", Nature.STAGE);
+		natures.put("EXPERIENCE PERSONNELLE", Nature.EXP_PERSO);
+		natures.put("PROJET", Nature.PROJET);
+		natures.put("AUTRE", Nature.AUTRE);
 	}
-    }
 
-    @PreDestroy
-    public void exit() {
-	activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
-    }
-
-    public Map<String, Nature> getNatures() {
-	return natures;
-    }
-
-    public Activity getCurrentActivity() {
-	return currentActivity;
-    }
-
-    public String createActivity() {
-	currentActivity = new Activity();
-	return "editActivity.xhtml?faces-redirect=true";
-    }
-
-    public String editActivity(int id) {
-	currentActivity = activityManager.findById(id);
-	return "editActivity.xhtml?faces-redirect=true";
-    }
-
-    public String updateActivity() {
-	activityManager.updateActivity(currentActivity);
-	return "activities.xhtml?faces-redirect=true";
-    }
-
-    public void save() {
-	if(currentActivity.getId() == null) {
-	    activityManager.createActivity(currentActivity);
-	} else {
-	    activityManager.updateActivity(currentActivity);
+	@PreDestroy
+	public void exit() {
+		activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
 	}
-    }
 
-    public String show(int id) {
-	currentActivity = activityManager.findById(id);
-	return "showActivity.xhtml?faces-redirect=true";
-    }
+	public Map<String, Nature> getNatures() {
+		return natures;
+	}
+
+	public Activity getCurrentActivity() {
+		return currentActivity;
+	}
+
+	public String createActivity() {
+		currentActivity = new Activity();
+		return "editActivity";
+	}
+
+	public String editActivity(int id) {
+		currentActivity = activityManager.findById(id);
+		return "editActivity";
+	}
+
+	public String updateActivity() {
+		activityManager.updateActivity(currentActivity);
+		return "activities";
+	}
+
+	public void save() {
+		if (currentActivity.getId() == null) {
+			activityManager.createActivity(currentActivity);
+		} else {
+			activityManager.updateActivity(currentActivity);
+		}
+	}
+
+	public String show(int id) {
+		currentActivity = activityManager.findById(id);
+		return "showActivity";
+	}
 }

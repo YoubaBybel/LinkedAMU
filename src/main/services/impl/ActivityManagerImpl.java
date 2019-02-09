@@ -6,7 +6,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import main.dao.CRUD;
 import main.entities.Activity;
@@ -15,7 +14,6 @@ import main.entities.User;
 import main.services.ActivityManager;
 
 @Stateless
-@Transactional
 public class ActivityManagerImpl implements ActivityManager {
 
     @EJB

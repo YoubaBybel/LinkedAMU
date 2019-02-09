@@ -74,9 +74,8 @@ public class UserController {
 		return "profile";
 	}
 
-	public String updateUser() {
+	public void updateUser() {
 		userM.updateUser(userLogged);
-		return "profile";
 	}
 	
 	public String removeUser() {

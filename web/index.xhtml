@@ -24,29 +24,30 @@
 					<td>#{u.password}</td>
 				</tr>
 			</c:forEach>
+			<c:if test="#{isLogged}">
+				<h:form id="login">
+					<c:set var="u" value="#{user.user}" />
 
-			<h:form id="login">
-				<c:set var="u" value="#{user.user}" />
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<h:inputText id="email" value="#{u.email}"
+							styleClass="form-control" required="true" />
+						<h:message styleClass="label label-danger" for="email" />
+					</div>
 
-				<div class="form-group">
-					<label for="email">Email:</label>
-					<h:inputText id="email" value="#{u.email}"
-						styleClass="form-control" required="true" />
-					<h:message styleClass="label label-danger" for="email" />
-				</div>
+					<div class="form-group">
+						<label for="password">Password:</label>
+						<h:inputSecret id="password" value="#{u.password}"
+							styleClass="form-control" required="true" />
+						<h:message styleClass="label label-danger" for="password" />
+					</div>
 
-				<div class="form-group">
-					<label for="password">Password:</label>
-					<h:inputSecret id="password" value="#{u.password}" styleClass="form-control" required="true" />
-					<h:message styleClass="label label-danger" for="password" />
-				</div>
-
-				<div class="form-group">
-					<h:commandButton action="#{user.login()}"
-						styleClass="btn btn-primary" value="Login" display="tooltip" />
-				</div>
-			</h:form>
-
+					<div class="form-group">
+						<h:commandButton action="#{user.login()}"
+							styleClass="btn btn-primary" value="Login" display="tooltip" />
+					</div>
+				</h:form>
+			</c:if>
 		</f:view>
 	</ui:define>
 </ui:composition>

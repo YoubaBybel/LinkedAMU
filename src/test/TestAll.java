@@ -8,6 +8,6 @@ import test.services.TestUserManager;
 import test.utils.TestSecurity;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TestSecurity.class, TestUserManager.class, TestActivityManager.class})
+@Suite.SuiteClasses({TestActivityManager.class, TestUserManager.class, TestSecurity.class})
 public class TestAll {
 }
