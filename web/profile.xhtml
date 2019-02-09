@@ -12,43 +12,47 @@
 		<f:view>
 			<c:set var="u" value="#{user.userLogged}" />
 
-			<h:form id="firstName" style="text-align:left">
+			<h:form id="profile" style="text-align:left">
 				<div class="form-group">
-					<label for="email">First name:</label>
+					<label for="firstName">First name:</label>
 					<h:inputText id="firstName" value="#{u.firstName}" required="true"
 						style="margin:5px" />
-					<h:commandButton action="#{user.updateUser()}"
-						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
 					<h:message styleClass="label label-danger" for="firstName" />
 				</div>
-			</h:form>
-
-			<h:form id="name" style="text-align:left">
 				<div class="form-group">
-					<label for="email">Name:</label>
+					<label for="name">Name:</label>
 					<h:inputText id="name" value="#{u.name}" required="true"
 						style="margin:5px" />
-					<h:commandButton action="#{user.updateUser()}"
-						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
 					<h:message styleClass="label label-danger" for="name" />
 				</div>
+				<div class="form-group">
+					<label for="webSite">Web site:</label>
+					<h:inputText id="webSite" value="#{u.webSite}" style="margin:5px" />
+					<h:message styleClass="label label-danger" for="webSite" />
+				</div>
+				<div class="form-group">
+					<label for="birthDate">Birth date:</label>
+					<h:inputText id="birthDate" value="#{u.birthDate}"
+						style="margin:5px">
+						<f:convertDateTime pattern="dd-MM-yyyy" />
+					</h:inputText>
+					<h:message styleClass="label label-danger" for="birthDate" />
+				</div>
+				<h:commandButton action="#{user.updateUser()}"
+					styleClass="btn btn-primary" value="Modifier" display="tooltip" />
 			</h:form>
 
-			<h:form id="password" style="text-align:left">
+			<h:form style="text-align:left">
 				<div class="form-group">
 					<label for="password">Password:</label>
-					<h:inputSecret id="password" value="#{u.password}"
-						styleClass="form-control" required="true" />
+					<h:inputSecret id="password" value="#{u.password}" required="true"
+						style="margin:5px" />
+					<h:message styleClass="label label-danger" for="password" />
 					<h:commandButton action="#{user.updateUser()}"
 						styleClass="btn btn-primary" value="Modifier" display="tooltip" />
-					<h:message styleClass="label label-danger" for="password" />
 				</div>
 			</h:form>
-
-			<h:form>
-				<h:commandButton action="#{user.removeUser()}"
-					styleClass="btn btn-primary" value="DELETE ACCOUNT" />
-			</h:form>
+			
 		</f:view>
 	</ui:define>
 </ui:composition>

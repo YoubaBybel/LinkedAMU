@@ -96,7 +96,7 @@ public class UserController {
 		if (isLogged) {
 			page = "profile";
 		} else {
-			page = "home";
+			page = null;
 		}
 		return page;
 	}

@@ -13,17 +13,6 @@
 	<ui:define name="title">Login</ui:define>
 	<ui:define name="content">
 		<f:view>
-
-			<c:forEach var="u" items="#{user.users}">
-				<table>
-					<tr><th>#{u.id}</th></tr>
-					<tr><th>#{u.name}</th></tr>
-					<tr><th>#{u.firstName}</th></tr>
-					<tr><th>#{u.email}</th></tr>
-					<tr><th>#{u.password}</th></tr>
-				</table>
-			</c:forEach>
-
 			<h:form id="login">
 				<c:set var="u" value="#{user.user}" />
 
