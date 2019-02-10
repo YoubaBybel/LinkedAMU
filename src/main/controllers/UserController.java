@@ -103,8 +103,9 @@ public class UserController {
 		return "profile";
 	}
 
-	public void updateUser() {
-		userM.updateUser(userLogged);
+	public String updateUser() {
+		userLogged = userM.updateUser(userLogged);
+		return "profile";
 	}
 
 	public String removeUser() {

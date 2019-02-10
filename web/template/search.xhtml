@@ -8,7 +8,29 @@
       xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<p>coucou</p>
+    <h:form>
+        <div class="form-group">
+            <h:inputText id="activity" value="#{activity.currentActivity}"
+                         styleClass="form-control">
+                <f:validateLength minimum="3" maximum="20" />
+            </h:inputText>
+            <h:message id="messageCity" for="activity"
+                       styleClass="label label-danger" />
+        </div>
+        <h:commandButton value="Add" action="#{activity.createActivity}"
+                         styleClass="btn btn-primary">
+            <f:ajax execute="@this activity" render="@form" />
+        </h:commandButton>
+    </h:form>
 
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel value="Group:" for="group" />
+            <p:autoComplete id="group" value="#{search.userFaces}" completeMethod="#{search.autocCompletionUsers}"
+                            var="u" itemLabel="#{u.name} #{u.firstName}" itemValue="#{u}" converter="userConverter" forceSelection="true"
+                            groupBy="#{search.getUserGroup(u)}" scrollHeight="250"/>
+            <h:outputText value="#{user.user}" />
+        </h:panelGrid>
+    </h:form>
 </ui:composition>
 </html>

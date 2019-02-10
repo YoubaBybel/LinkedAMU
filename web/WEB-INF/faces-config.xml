@@ -86,6 +86,17 @@
     </navigation-rule>
     
     <navigation-rule>
+    	<display-name>Consult_profile</display-name>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+        	<from-outcome>createUser</from-outcome>
+        	<to-view-id>/createUser.xhtml</to-view-id>
+        	<redirect />
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
     	<display-name>Create_User</display-name>
         <from-view-id>/profile.xhtml</from-view-id>
         <navigation-case>
