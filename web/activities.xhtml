@@ -44,12 +44,10 @@
 					<h:column>
 						<f:facet name="header">Action</f:facet>
 						<div class="btn-group btn-group-xs">
-							<h:commandLink value="show" styleClass="btn btn-outline-secondary"
-										   action="#{activity.show(a.id)}" >
-							</h:commandLink>
-							<h:link value="edit" styleClass="btn btn-outline-primary"
-									action="#{activity.edit(a.id)}" >
-							</h:link>
+							<h:commandButton value="show" styleClass="btn btn-outline-secondary"
+										   	 action="#{activity.show(a.id)}" />
+							<h:commandButton value="edit" styleClass="btn btn-outline-primary"
+										   	 action="#{activity.edit(a.id)}" />
 							<h:commandButton value="remove" styleClass="btn btn-outline-danger"
 											 action="#{activity.remove(a.id)}" />
 						</div>

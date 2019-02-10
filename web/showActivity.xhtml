@@ -6,7 +6,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/template/layout.xhtml">
-    <ui:define name="title">Activity n°<h:outputText value="123"/></ui:define>
+    <ui:define name="title"><h:outputText value="Activity n°#{activity.currentActivity.id}"/></ui:define>
     <ui:define name="content">
         <f:view>
             <c:set var="a" value="#{activity.currentActivity}" />

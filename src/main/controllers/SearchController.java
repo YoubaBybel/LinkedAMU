@@ -38,8 +38,8 @@ public class SearchController {
 
     public List<User> getUser(String nameOrFirstName) {
 	List<User> listUsers = new ArrayList<>();
-	userManager.findByName(nameOrFirstName).forEach(user -> listUsers.add(user));
-	userManager.findByFirstName(nameOrFirstName).forEach(user -> listUsers.add(user));
+        listUsers.addAll(userManager.findByName(nameOrFirstName));
+        listUsers.addAll(userManager.findByFirstName(nameOrFirstName));
 	return listUsers;
     }
 
@@ -66,74 +66,74 @@ public class SearchController {
     /*public List<Activity> getActivity(Object label) {
 	List<Activity> list_activities = null;
 
-	try {
-	    int intLabel = Integer.parseInt(((String) label).trim());
-	    return getActivity(intLabel);
-	}
-	catch (NumberFormatException nfe) {
+        try {
+            int intLabel = Integer.parseInt(((String) label).trim());
+            return getActivity(intLabel);
+        }
+        catch (NumberFormatException nfe) {
 
-	    String stringLabel = ((String) label).toLowerCase();
-	    switch (stringLabel) {
-		case "a":
-		    activityList.addAll(getActivity(Nature.FORMATION));
-		    activityList.addAll(getActivity(Nature.STAGE));
-		    activityList.addAll(getActivity(Nature.AUTRE));
-		    break;
-		case "e":
-		    activityList.addAll(getActivity(Nature.EXP_PRO));
-		    activityList.addAll(getActivity(Nature.EXP_PERSO));
-		    activityList.addAll(getActivity(Nature.STAGE));
-		    activityList.addAll(getActivity(Nature.AUTRE));
-		    break;
-		case "f":
-		case "i":
-		case "m":
-		case "n":
-		    activityList.addAll(getActivity(Nature.FORMATION));
-		    break;
-		case "g":
-		    activityList.addAll(getActivity(Nature.STAGE));
-		    break;
-		case "j":
-		    activityList.addAll(getActivity(Nature.PROJET));
-		    break;
-		case "o":
-		    activityList.addAll(getActivity(Nature.FORMATION));
-		    activityList.addAll(getActivity(Nature.EXP_PERSO));
-		    activityList.addAll(getActivity(Nature.EXP_PRO));
-		    activityList.addAll(getActivity(Nature.PROJET));
-		    break;
-		case "p":
-		    activityList.addAll(getActivity(Nature.EXP_PERSO));
-		    activityList.addAll(getActivity(Nature.EXP_PRO));
-		    activityList.addAll(getActivity(Nature.PROJET));
-		    break;
-		case "r":
-		    activityList.addAll(getActivity(Nature.EXP_PERSO));
-		    activityList.addAll(getActivity(Nature.EXP_PRO));
-		    activityList.addAll(getActivity(Nature.PROJET));
-		    activityList.addAll(getActivity(Nature.AUTRE));
-		    break;
-		case "s":
-		    activityList.addAll(getActivity(Nature.EXP_PERSO));
-		    activityList.addAll(getActivity(Nature.STAGE));
-		    break;
-		case "t":
-		    activityList.addAll(getActivity(Nature.FORMATION));
-		    activityList.addAll(getActivity(Nature.STAGE));
-		    activityList.addAll(getActivity(Nature.PROJET));
-		    activityList.addAll(getActivity(Nature.AUTRE));
-		    break;
-		case "x":
-		    activityList.addAll(getActivity(Nature.EXP_PERSO));
-		    activityList.addAll(getActivity(Nature.EXP_PRO));
-		default:
-		    return getAllActivities();
-		    break;
-	    }
-	} finally {
-	    return activityList;
-	}
+            String stringLabel = ((String) label).toLowerCase();
+            switch (stringLabel) {
+            case "a":
+                activityList.addAll(getActivity(Nature.FORMATION));
+                activityList.addAll(getActivity(Nature.STAGE));
+                activityList.addAll(getActivity(Nature.AUTRE));
+                break;
+            case "e":
+                activityList.addAll(getActivity(Nature.EXP_PRO));
+                activityList.addAll(getActivity(Nature.EXP_PERSO));
+                activityList.addAll(getActivity(Nature.STAGE));
+                activityList.addAll(getActivity(Nature.AUTRE));
+                break;
+            case "f":
+            case "i":
+            case "m":
+            case "n":
+                activityList.addAll(getActivity(Nature.FORMATION));
+                break;
+            case "g":
+                activityList.addAll(getActivity(Nature.STAGE));
+                break;
+            case "j":
+                activityList.addAll(getActivity(Nature.PROJET));
+                break;
+            case "o":
+                activityList.addAll(getActivity(Nature.FORMATION));
+                activityList.addAll(getActivity(Nature.EXP_PERSO));
+                activityList.addAll(getActivity(Nature.EXP_PRO));
+                activityList.addAll(getActivity(Nature.PROJET));
+                break;
+            case "p":
+                activityList.addAll(getActivity(Nature.EXP_PERSO));
+                activityList.addAll(getActivity(Nature.EXP_PRO));
+                activityList.addAll(getActivity(Nature.PROJET));
+                break;
+            case "r":
+                activityList.addAll(getActivity(Nature.EXP_PERSO));
+                activityList.addAll(getActivity(Nature.EXP_PRO));
+                activityList.addAll(getActivity(Nature.PROJET));
+                activityList.addAll(getActivity(Nature.AUTRE));
+                break;
+            case "s":
+                activityList.addAll(getActivity(Nature.EXP_PERSO));
+                activityList.addAll(getActivity(Nature.STAGE));
+                break;
+            case "t":
+                activityList.addAll(getActivity(Nature.FORMATION));
+                activityList.addAll(getActivity(Nature.STAGE));
+                activityList.addAll(getActivity(Nature.PROJET));
+                activityList.addAll(getActivity(Nature.AUTRE));
+                break;
+            case "x":
+                activityList.addAll(getActivity(Nature.EXP_PERSO));
+                activityList.addAll(getActivity(Nature.EXP_PRO));
+            default:
+                return getAllActivities();
+                break;
+            }
+        } finally {
+            return activityList;
+        }
     }*/
 }
 
