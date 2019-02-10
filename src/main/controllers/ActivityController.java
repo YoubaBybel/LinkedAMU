@@ -1,6 +1,7 @@
 package main.controllers;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -68,6 +69,18 @@ public class ActivityController {
 
 	public Activity getCurrentActivity() {
 		return currentActivity;
+	}
+
+	public List<Activity> getActivities() {
+		return activityManager.findAll();
+	}
+
+	public Activity getActivity(int id) {
+		return activityManager.findById(id);
+	}
+
+	public List<Activity> getActivity(String title) {
+		return activityManager.findByTitle(title);
 	}
 
 	public String createActivity() {
