@@ -96,8 +96,8 @@ public class UserController {
 
 	public List<User> findUsers(String nameOrFirstName) {
 		List<User> listUsers = new ArrayList<>();
-		userM.findByName(nameOrFirstName).forEach(user -> listUsers.add(user));
-		userM.findByFirstName(nameOrFirstName).forEach(user -> listUsers.add(user));
+		listUsers.addAll(userM.findByName(nameOrFirstName));
+		listUsers.addAll(userM.findByFirstName(nameOrFirstName));
 		return listUsers;
 	}
 
@@ -145,8 +145,8 @@ public class UserController {
 		return "cv";
 	}
 
-	public String showCv(int id) {
-		user = userM.findById(id);
-		return "cv";
-	}
+    public String showCv(int id) {
+	    user = userM.findById(id);
+	    return "cv";
+    }
 }

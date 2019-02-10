@@ -12,13 +12,10 @@
 			<h1>
 				<h:form>
 					List of activities
-					<h:commandLink value="Add" styleClass="btn btn-outline-light"
-						action="#{activity.createActivity()}" style="float: right;" />
+					<h:commandLink value="Add" styleClass="btn btn-outline-light inp"
+								   action="#{activity.createActivity}" style="float: right;"/>
 				</h:form>
 			</h1>
-
-			<p>Revoir les params des fonctions</p>
-
 
 			<h:form>
 				<h:dataTable value="#{search.getAllActivities()}" var="a"

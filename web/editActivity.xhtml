@@ -14,7 +14,7 @@
 
             <c:if test="#{isLogged and user.userLogged.id == activity.currentActivity.user.id}">
                 <h1>Course form</h1>
-                <h:form id="editActivityForm">
+                <h:form id="editActivityForm" styleClass="input-reduce">
                     <c:set var="a" value="#{activity.currentActivity}"/>
 
                     <div class="form-group">

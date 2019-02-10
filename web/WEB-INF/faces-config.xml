@@ -95,4 +95,19 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+    	<display-name>CV</display-name>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+        	<from-outcome>showCv</from-outcome>
+        	<to-view-id>/cv.xhtml</to-view-id>
+        	<redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editCv</from-outcome>
+            <to-view-id>/cv.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>
