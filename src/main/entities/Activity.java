@@ -13,141 +13,135 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 @Entity
 public class Activity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public enum Nature {
-	    EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJET, AUTRE
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
-    @Basic(optional = false)
-    @Column(name = "year", nullable = false)
-    private int year;
-
-    @Basic(optional = false)
-    @Enumerated(EnumType.STRING)
-    @Column(name = "nature", nullable = false)
-    private Nature nature;
-
-    @Basic(optional = false)
-    @Column(name = "title", nullable = false)
-    private String title;
-
-    @Basic
-    @Column(name = "desciption")
-    private String description;
-
-    @Basic
-    @Column(name = "web_address")
-    private String webAddress;
-
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private User user;
-
-    public Activity() {
-	super();
-    }
-
-    public Activity(int year, String nature, String title) {
-	super();
-	setYear(year);
-	switch (nature.toLowerCase()) {
-	    case "exp_pro":
-		this.nature = Nature.EXP_PRO;
-		break;
-	    case "exp_perso":
-		this.nature = Nature.EXP_PERSO;
-		break;
-	    case "stage":
-		this.nature = Nature.STAGE;
-		break;
-	    case "formation":
-		this.nature = Nature.FORMATION;
-		break;
-	    case "project":
-		this.nature = Nature.PROJET;
-		break;
-	    default:
-		this.nature = Nature.AUTRE;
+	public enum Nature {
+		EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJET, AUTRE
 	}
-	setTitle(title);
-    }
 
-    public Integer getId() {
-	return id;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    public void setId(Integer id) {
-	this.id = id;
-    }
+	@Basic(optional = false)
+	@Column(name = "year", nullable = false)
+	private int year;
 
-    public int getYear() {
-	return year;
-    }
+	@Basic(optional = false)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "nature", nullable = false)
+	private Nature nature;
 
-    public void setYear(int year) {
-	this.year = year;
-    }
+	@Basic(optional = false)
+	@Column(name = "title", nullable = false)
+	private String title;
 
-    public Nature getNature() {
-	return nature;
-    }
+	@Basic
+	@Column(name = "desciption")
+	private String description;
 
-    public void setNature(Nature nature) {
-	this.nature = nature;
-    }
+	@Basic
+	@Column(name = "web_address")
+	private String webAddress;
 
-    public String getTitle() {
-	return StringEscapeUtils.unescapeHtml4(title);
-    }
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private User user;
 
-    public void setTitle(String title) {
-	this.title = StringEscapeUtils.escapeHtml4(title);
-    }
+	public Activity() {
+		super();
+	}
 
-    public String getDescription() {
-	return StringEscapeUtils.unescapeHtml4(description);
-    }
+	public Activity(int year, String nature, String title) {
+		super();
+		setYear(year);
+		switch (nature.toLowerCase()) {
+		case "exp_pro":
+			this.nature = Nature.EXP_PRO;
+			break;
+		case "exp_perso":
+			this.nature = Nature.EXP_PERSO;
+			break;
+		case "stage":
+			this.nature = Nature.STAGE;
+			break;
+		case "formation":
+			this.nature = Nature.FORMATION;
+			break;
+		case "project":
+			this.nature = Nature.PROJET;
+			break;
+		default:
+			this.nature = Nature.AUTRE;
+		}
+		setTitle(title);
+	}
 
-    public void setDescription(String description) {
-	this.description = StringEscapeUtils.escapeHtml4(description);
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getWebAddress() {
-	return StringEscapeUtils.unescapeHtml4(webAddress);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setWebAddress(String webAddress) {
-	this.webAddress = StringEscapeUtils.escapeHtml4(webAddress);
-    }
+	public int getYear() {
+		return year;
+	}
 
-    public User getUser() {
-	return user;
-    }
+	public void setYear(int year) {
+		this.year = year;
+	}
 
-    public void setUser(User user) {
-	this.user = user;
-    }
+	public Nature getNature() {
+		return nature;
+	}
 
-    @Override
-    public String toString() {
-	return "Activity{" +
-		"id=" + id +
-		", year=" + year +
-		", nature=" + nature +
-		", title='" + title + '\'' +
-		", description='" + description + '\'' +
-		", webAddress='" + webAddress + '\'' +
-		", user_id=" + (user == null ? "null" : user.getId().toString()) +
-		'}';
-    }
+	public void setNature(Nature nature) {
+		this.nature = nature;
+	}
+
+	public String getTitle() {
+		return StringEscapeUtils.unescapeHtml4(title);
+	}
+
+	public void setTitle(String title) {
+		this.title = StringEscapeUtils.escapeHtml4(title);
+	}
+
+	public String getDescription() {
+		return StringEscapeUtils.unescapeHtml4(description);
+	}
+
+	public void setDescription(String description) {
+		this.description = StringEscapeUtils.escapeHtml4(description);
+	}
+
+	public String getWebAddress() {
+		return StringEscapeUtils.unescapeHtml4(webAddress);
+	}
+
+	public void setWebAddress(String webAddress) {
+		this.webAddress = StringEscapeUtils.escapeHtml4(webAddress);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Activity{" + "id=" + id + ", year=" + year + ", nature=" + nature + ", title='" + title + '\''
+				+ ", description='" + description + '\'' + ", webAddress='" + webAddress + '\'' + ", user_id="
+				+ (user == null ? "null" : user.getId().toString()) + '}';
+	}
 
 }

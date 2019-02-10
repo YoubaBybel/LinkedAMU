@@ -2,6 +2,7 @@ package main.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -9,6 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import io.codearte.jfairy.Fairy;
 import main.entities.User;
 import main.services.UserManager;
 import main.utils.Authentification;
@@ -47,18 +49,20 @@ public class UserController {
 
 //	@PostConstruct
 //	public void init() {
+//		User user;
 //		Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
+//		if (userM.findAll().isEmpty()) {
+//			for (int i = 0; i < 100_000; i++) {
+//				io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
+//				user = new User();
 //
-//		for (int i = 0; i < 100_000; i++) {
-//			io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
-//			User user = new User();
-//
-//			user.setEmail(fPerson.getEmail());
-//			user.setFirstName(fPerson.getFirstName());
-//			user.setName(fPerson.getLastName());
-//			user.setPassword(fPerson.getPassword());
-//			if (userM.findByEmail(user.getEmail()) == null)
-//				userM.createUser(user);
+//				user.setEmail(fPerson.getEmail());
+//				user.setFirstName(fPerson.getFirstName());
+//				user.setName(fPerson.getLastName());
+//				user.setPassword(fPerson.getPassword());
+//				if (userM.findByEmail(user.getEmail()) == null)
+//					userM.createUser(user);
+//			}
 //		}
 //	}
 
@@ -143,8 +147,8 @@ public class UserController {
 		return "cv";
 	}
 
-    public String showCv(int id) {
-	    user = userM.findById(id);
-	    return "cv";
-    }
+	public String showCv(int id) {
+		user = userM.findById(id);
+		return "cv";
+	}
 }
