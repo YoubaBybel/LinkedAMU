@@ -3,7 +3,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
       
 <f:metadata>
     <f:viewAction action="#{user.newUser()}" />
@@ -13,25 +14,30 @@
 	<ui:define name="title">Login</ui:define>
 	<ui:define name="content">
 		<f:view>
+			<h1>Connexion</h1>
+
 			<h:form id="login">
 				<c:set var="u" value="#{user.user}" />
 
 				<div class="form-group">
-					<label for="email">Email:</label>
+					<!-- <label for="email">Email:</label> -->
 					<h:inputText id="email" value="#{u.email}"
-						styleClass="form-control" required="true" />
+								 styleClass="form-control" required="true"
+								 pt:placeholder="Email"/>
 					<h:message styleClass="label label-danger" for="email" />
 				</div>
 
 				<div class="form-group">
-					<label for="password">Password:</label>
-					<h:inputSecret id="password" value="#{u.password}" styleClass="form-control" required="true" />
+					<!-- <label for="password">Password:</label> -->
+					<h:inputSecret id="password" value="#{u.password}"
+								   styleClass="form-control" required="true"
+								   pt:placeholder="Password"/>
 					<h:message styleClass="label label-danger" for="password" />
 				</div>
 
 				<div class="form-group">
 					<h:commandButton action="#{user.login()}"
-						styleClass="btn btn-primary" value="Login" display="tooltip" />
+						styleClass="btn btn-primary btn-lg" value="Login" display="tooltip" />
 				</div>
 			</h:form>
 

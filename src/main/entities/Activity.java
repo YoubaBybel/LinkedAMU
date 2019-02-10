@@ -21,7 +21,7 @@ public class Activity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public enum Nature {
-	EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJET, AUTRE
+	    EXP_PRO, EXP_PERSO, STAGE, FORMATION, PROJET, AUTRE
     }
 
     @Id
@@ -114,7 +114,7 @@ public class Activity implements Serializable {
     }
 
     public String getDescription() {
-	return description;
+	return StringEscapeUtils.unescapeHtml4(description);
     }
 
     public void setDescription(String description) {
@@ -122,7 +122,7 @@ public class Activity implements Serializable {
     }
 
     public String getWebAddress() {
-	return webAddress;
+	return StringEscapeUtils.unescapeHtml4(webAddress);
     }
 
     public void setWebAddress(String webAddress) {

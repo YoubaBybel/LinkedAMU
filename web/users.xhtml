@@ -6,12 +6,46 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/template/layout.xhtml">
+	<ui:define name="title">All users</ui:define>
 	<ui:define name="content">
 		<f:view>
 
-			<h1>List of users (with JSTL)</h1>
+			<h1>List of users</h1>
 			<h:form>
-				<table class="table">
+				<h:dataTable value="#{user.users}"	var="u"
+							 styleClass="table table-hover">
+
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputText value="#{u.id}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Name</f:facet>
+						<h:outputText value="#{u.name}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">First Name</f:facet>
+						<h:outputText value="#{u.firstName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputText value="#{u.email}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Web_Site</f:facet>
+						<h:outputLink value="#{u.webSite}">
+							<h:outputText value="#{u.webSite}" />
+						</h:outputLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton value="Remove User" action="#{user.removeUser()}"
+										 styleClass="btn btn-outline-danger" />
+					</h:column>
+				</h:dataTable>
+
+
+				<!-- <table class="table">
 					<tr>
 						<th>Id</th>
 						<th>Name</th>
@@ -30,9 +64,9 @@
 									value="Show" /></td>
 						</tr>
 					</c:forEach>
-				</table>
+				</table> -->
 
-				<h:commandButton styleClass="btn btn-success"
+				<h:commandButton styleClass="btn btn-outline-light"
 					action="#{user.newUser()}" value="New User" />
 
 			</h:form>

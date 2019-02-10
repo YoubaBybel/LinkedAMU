@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="/template/layout.xhtml">
 	<ui:define name="title">Edit Activity</ui:define>
@@ -16,44 +16,42 @@
                 <c:set var="a" value="#{activity.currentActivity}"/>
 
                 <div class="form-group">
-                    <label for="title">Title:</label>
-                    <h:inputText id="title" value="#{a.title}" styleClass="form-control" placeholder="Title"
-                                 required="true" requiredMessage="Le titre est obligatoire">
+                    <h:inputText id="title" value="#{a.title}" styleClass="form-control"
+                                 required="true" requiredMessage="Le titre est obligatoire"
+                                 pt:placeholder="Title">
                         <f:validateLength minimum="3" maximum="30"/>
                     </h:inputText>
                     <h:message styleClass="label label-danger" for="title"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="year">Year:</label>
-                    <h:inputText id="hours" value="#{a.year}" placeholder="Year"
-                                 styleClass="form-control" required="true"/>
+                    <h:inputText id="year" value="#{a.year}"
+                                 styleClass="form-control" required="true"
+                                 pt:placeholder="Year">
+                    </h:inputText>
                     <h:message styleClass="label label-danger" for="year"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="nature">Nature:</label>
-                    <h:selectOneMenu id="level" value="#{a.nature}"
+                    <h:selectOneMenu id="nature" value="#{a.nature}"
                                      styleClass="form-control" required="true">
                         <f:selectItems value="#{activity.natures}" />
                     </h:selectOneMenu>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description:</label>
                     <h:inputTextarea id="description" value="#{a.description}"  placeholder="Description"
-                                     styleClass="form-control" cols="50" rows="5"/>
+                                     styleClass="form-control" cols="50" rows="5"
+                                     pt:placeholder="Description"/>
                     <h:message styleClass="label label-danger" for="description"/>
                 </div>
 
-				<c:if test="#{a.webAddress != null}">
-	                <div class="form-group">
-	                    <label for="website">Site web:</label>
-	                    <h:inputTextarea id="website" value="#{a.webAddress}"  placeholder="Site web"
-	                                     styleClass="form-control" cols="50" rows="5"/>
-	                    <h:message styleClass="label label-danger" for="website"/>
-	                </div>
-                </c:if>
+                <div class="form-group">
+                    <h:inputText id="website" value="#{a.webAddress}"  placeholder="Site web"
+                                     styleClass="form-control" cols="50" rows="5"
+                                     pt:placeholder="Web Address"/>
+                    <h:message styleClass="label label-danger" for="website"/>
+                </div>
 
                 <div class="form-group">
                     <h:commandButton action="#{activity.save()}"

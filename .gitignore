@@ -1,5 +1,6 @@
 # Repositories & files to ignore with IntelliJ
 /.idea/
+/apache-tomee-plus-7.1.0/
 /lib/
 /out/
 /target/

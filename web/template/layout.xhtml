@@ -1,41 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 	<title>LinkedAMU | <ui:insert name="title"></ui:insert></title>
 	<!-- Bootstrap core CSS -->
 	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="webjars" name="/font-awesome/4.7.0/fonts/fontawesome-webfont.svg" />
 	<!-- Custom styles for this template -->
 	<h:outputStylesheet library="css" name="cover.css" />
 	<h:outputStylesheet library="css" name="utils.css" />
 </h:head>
 <h:body class="text-center">
+	<c:set var="isLogged" scope="session" value="#{user.isLogged()}" />
+	<c:set var="currentActivity" scope="session" value="#{activity.currentActivity}"/>
 
 	<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
 		<header class="masthead mb-auto">
-			<div class="inner">
-				<h:link outcome="home">
-					<h3 class="masthead-brand">LinkedAMU</h3>
-				</h:link>
-				<nav class="nav nav-masthead justify-content-center">
-					<c:set var="isLogged" scope="session" value="#{user.isLogged()}" />
-					<c:if test="#{isLogged}">
-						<a class="nav-link active" href="home">Home</a>
-						<a class="nav-link" href="#">Features</a>
-						<a class="nav-link" href="#">Contact</a>
-						<h:form>
-							<h:commandButton action="#{user.logout()}" value="Logout" />
-						</h:form>
-					</c:if>
-					<c:if test="#{!isLogged}">
-						<h:button outcome="inscription" value="Inscription" />
-					</c:if>
-				</nav>
+			<div class="inner menu-large">
+				<ui:include src="/template/menu.xhtml" />
 			</div>
 		</header>
 
@@ -47,6 +35,7 @@
 
 		<footer class="mastfoot mt-auto">
 			<div class="inner">
+				<h:outputText value="#{currentActivity}"/>
 				<p>Created by Timothée BERTHOD and Ayoub EL YOUSFI</p>
 			</div>
 		</footer>
@@ -56,10 +45,10 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<h:outputScript library="js" name="prompt.js" />
-	<h:outputScript library="js" name="jquery-3.js"></h:outputScript>
-	<h:outputScript library="js" name="popper.js"></h:outputScript>
-	<h:outputScript library="js" name="bootstrap.js"></h:outputScript>
+	<!-- <h:outputScript library="js" name="prompt.js" /> -->
+	<h:outputScript library="js" name="jquery-3.js" />
+	<h:outputScript library="js" name="popper.js" />
+	<h:outputScript library="js" name="bootstrap.js" />
 
 
 </h:body>

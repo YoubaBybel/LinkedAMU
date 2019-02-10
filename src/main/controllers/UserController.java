@@ -37,6 +37,10 @@ public class UserController {
 			user1.setEmail("timothee@berthod.net");
 			user1.setWebSite("https://google.fr");
 			userM.createUser(user1);
+
+			User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com", "2386");
+			user2.setWebSite("ayoub.elyousfi.free.fr");
+			userM.createUser(user2);
 		}
 	}
 
@@ -66,7 +70,7 @@ public class UserController {
 
 	public String findUser(int id) {
 		user = userM.findById(id);
-		return "userPage";
+		return "showUser.xhtml?faces-redirect=true";
 	}
 
 	public String addUser() {
@@ -105,6 +109,6 @@ public class UserController {
 		isLogged = false;
 		userLogged = null;
 		user = new User();
-		return "home";
+		return "index.xhtml?faces-redirect=true";
 	}
 }
