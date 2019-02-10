@@ -72,13 +72,13 @@ public class UserController {
 
 	public String findUser(int id) {
 		user = userM.findById(id);
-		return "showUser.xhtml?faces-redirect=true";
+		return "showUser";
 	}
 	
 	public List<User> findUsers(String nameOrFirstName) {
 		List<User> listUsers = new ArrayList<>();
-		userM.findByName(nameOrFirstName).forEach(user -> listUsers.add(user));
-		userM.findByFirstName(nameOrFirstName).forEach(user -> listUsers.add(user));
+		listUsers.addAll(userM.findByName(nameOrFirstName));
+		listUsers.addAll(userM.findByFirstName(nameOrFirstName));
 		return listUsers;
 	}
 
@@ -118,16 +118,16 @@ public class UserController {
 		isLogged = false;
 		userLogged = null;
 		user = new User();
-		return "index.xhtml?faces-redirect=true";
+		return "home";
 	}
 
-	public String createCV() {
+	public String createCv() {
 	    userLogged.createCV();
-	    return "cv.xhtml?faces-redirect=true";
+	    return "cv";
     }
 
     public String showCv(int id) {
 	    user = userM.findById(id);
-	    return "cv.xhtml?faces-redirect=true";
+	    return "cv";
     }
 }

@@ -12,8 +12,8 @@
 			<h1>
 				<h:form>
 					List of activities
-					<h:commandLink value="Add" styleClass="btn btn-outline-light"
-								   action="#{activity.create}" style="float: right;"/>
+					<h:commandLink value="Add" styleClass="btn btn-outline-light inp"
+								   action="#{activity.createActivity}" style="float: right;"/>
 				</h:form>
 			</h1>
 
@@ -45,11 +45,11 @@
 						<f:facet name="header">Action</f:facet>
 						<div class="btn-group btn-group-xs">
 							<h:commandButton value="show" styleClass="btn btn-outline-secondary"
-										   	 action="#{activity.show(a.id)}" />
+										   	 action="#{activity.showActivity(a.id)}" />
 							<h:commandButton value="edit" styleClass="btn btn-outline-primary"
-										   	 action="#{activity.edit(a.id)}" />
+										   	 action="#{activity.editActivity(a.id)}" />
 							<h:commandButton value="remove" styleClass="btn btn-outline-danger"
-											 action="#{activity.remove(a.id)}" />
+											 action="#{activity.removeActivity(a.id)}" />
 						</div>
 					</h:column>
 				</h:dataTable>

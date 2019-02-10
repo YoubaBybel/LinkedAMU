@@ -14,7 +14,7 @@
 
             <c:if test="#{user.logged and (user.userLogged.id == activity.currentActivity.user)}">
                 <h1>Course form</h1>
-                <h:form id="editActivityForm">
+                <h:form id="editActivityForm" styleClass="input-reduce">
                     <c:set var="a" value="#{activity.currentActivity}"/>
 
                     <div class="form-group">
@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="form-group">
-                        <h:commandButton action="#{activity.save()}"
+                        <h:commandButton action="#{activity.saveActivity()}"
                                          styleClass="btn btn-primary" value="Save"/>
                         <span> </span>
                         <h:link styleClass="btn btn-info" outcome="activities" value="Cancel"/>
