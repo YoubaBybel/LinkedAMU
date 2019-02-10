@@ -31,6 +31,7 @@ public class ActivityController {
 
 		Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
 		master2.setWebAddress("http://masterinfo.univ-mrs.fr/master-2018");
+		master2.setDescription("J'ai bientôt fini ce master 2, bientôt...");
 		activityManager.createActivity(master2);
 
 		Activity animateur = new Activity(2012, "EXP_PERSO", "Animateur Éclaireuses Éclaireurs de France");
@@ -42,6 +43,7 @@ public class ActivityController {
 		activityManager.createActivity(stage);
 
 		Activity basket = new Activity(2015, "AUTRE", "Basket en compétition");
+		basket.setDescription("J'aimerais bien jouer mais je suis trop nul à ce sport...");
 		activityManager.createActivity(basket);
 
 		Activity vendeur = new Activity(2016, "EXP_PRO", "Vendeur & Conseiller");
@@ -49,7 +51,7 @@ public class ActivityController {
 				+ "¤ Le Temps des Cerises\n" + "¤ H&M\n" + "¤ Zara");
 		activityManager.createActivity(vendeur);
 
-		natures.put("", Nature.AUTRE);
+		natures.put("NATURE DE L'ACTIVITÉ", Nature.AUTRE);
 		natures.put("FORMATION", Nature.FORMATION);
 		natures.put("EXPERIENCE PROFESSIONNELLE", Nature.EXP_PRO);
 		natures.put("STAGE", Nature.STAGE);
@@ -98,12 +100,23 @@ public class ActivityController {
 		return "activities";
 	}
 
-	public void save() {
+	public String remove() {
+		activityManager.removeActivity(currentActivity.getId());
+		return "activities.xhtml?faces-redirect=true";
+	}
+
+	public String remove(int id) {
+		activityManager.removeActivity(id);
+		return "activities.xhtml?faces-redirect=true";
+	}
+
+	public String save() {
 		if (currentActivity.getId() == null) {
-			activityManager.createActivity(currentActivity);
+			currentActivity = activityManager.createActivity(currentActivity);
 		} else {
-			activityManager.updateActivity(currentActivity);
+			currentActivity = activityManager.updateActivity(currentActivity);
 		}
+		return show(currentActivity.getId());
 	}
 
 	public String show(int id) {

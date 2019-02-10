@@ -3,29 +3,22 @@
  */
 
 /* Links */
-a,
-a:focus,
-a:hover {
+a, a:focus, a:hover {
   color: #fff;
 }
 
 /* Custom default button */
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
+.btn-secondary, .btn-secondary:hover, .btn-secondary:focus {
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
   background-color: #fff;
   border: .05rem solid #fff;
 }
 
-
 /*
  * Base structure
  */
-
-html,
-body {
+html, body {
   height: 100%;
   background-color: #333;
 }
@@ -43,9 +36,13 @@ body {
 }
 
 .cover-container {
-  max-width: 80em;
+  max-width: 70em;
+  text-align-all: center;
 }
 
+.menu-large {
+  width: 70em;
+}
 
 /*
  * Header
@@ -58,6 +55,15 @@ body {
   margin-bottom: 0;
 }
 
+@media (min-width: 70em) {
+  h3.masthead-title {
+    padding-right: .5em;
+    margin-right: .5em;
+    border-right: 2px solid white;
+  }
+}
+
+
 .nav-masthead .nav-link {
   padding: .25rem 0;
   font-weight: 700;
@@ -66,12 +72,11 @@ body {
   border-bottom: .25rem solid transparent;
 }
 
-.nav-masthead .nav-link:hover,
-.nav-masthead .nav-link:focus {
+.nav-masthead .nav-link:hover, .nav-masthead .nav-link:focus {
   border-bottom-color: rgba(255, 255, 255, .25);
 }
 
-.nav-masthead .nav-link + .nav-link {
+.nav-masthead .nav-link+.nav-link {
   margin-left: 1rem;
 }
 
@@ -80,15 +85,17 @@ body {
   border-bottom-color: #fff;
 }
 
-@media (min-width: 48em) {
+@media (min-width: 70em) {
   .masthead-brand {
     float: left;
   }
   .nav-masthead {
+    float: left;
+  }
+  .masthead-btn {
     float: right;
   }
 }
-
 
 /*
  * Cover
@@ -96,11 +103,11 @@ body {
 .cover {
   padding: 0 1.5rem;
 }
+
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
 }
-
 
 /*
  * Footer

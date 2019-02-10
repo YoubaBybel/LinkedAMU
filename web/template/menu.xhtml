@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition>
-	
-	<h:link outcome="index" styleClass="nav-link active">Home</h:link>
-	<h:link outcome="activities" styleClass="nav-link active">Activities</h:link>
-	<h:button onclick="#{user.isLogged}" value="Déconnexion"/>
-	<a class="nav-link" href="#">Contact</a>
-	
-	<c:if test="#{isLogged}">
-		<p><h:outputText value="Bonjour"/></p>
+
+	<h:link outcome="home">
+		<h3 class="masthead-brand masthead-title">LinkedAMU</h3>
+	</h:link>
+	<nav class="nav nav-masthead justify-content-center">
+		<h:link outcome="index" styleClass="nav-link">Home</h:link>
+		<h:link outcome="users" styleClass="nav-link">Users</h:link>
+		<h:link outcome="activities" styleClass="nav-link">Activities</h:link>
+		<a class="nav-link" href="#">Contact</a>
+	</nav>
+
+	<div class="masthead-btn">
+	<c:if test="#{user.isLogged()}">
+		<h:form>
+			Connected as
+			<h:commandLink value="#{user.userLogged.firstName} #{user.userLogged.name}"
+						   action="profile"/>
+			<h:commandButton action="#{user.logout()}" value="Logout"
+							 styleClass="btn btn-secondary" style="margin-left: 1em;"/>
+		</h:form>
 	</c:if>
-	<c:if test="#{!isLogged}">
-		<p>NOT LOGGED</p>
+	<c:if test="#{!user.isLogged()}">
+		<h:button outcome="inscription" value="Inscription" styleClass="btn btn-secondary" />
+		<span style="margin-right: 1em; "> </span>
+		<h:button outcome="login" value="Connexion" styleClass="btn btn-secondary" />
 	</c:if>
+	</div>
 </ui:composition>
 
 </html>

@@ -9,21 +9,17 @@
 	<ui:define name="title">All activities</ui:define>
 	<ui:define name="content">
 		<f:view>
-
-			<h1>List of activities</h1>
-
-			<c:forEach var="a" items="#{search.allActivities}">
-				<tr>
-					<td>#{a.id}</td>
-					<td>#{a.title}</td>
-				</tr>
-			</c:forEach>
-
+			<h1>
+				<h:form>
+					List of activities
+					<h:commandLink value="Add" styleClass="btn btn-outline-light"
+								   action="#{activity.create}" style="float: right;"/>
+				</h:form>
+			</h1>
 
 			<h:form>
 				<h:dataTable value="#{search.allActivities}" var="a"
-					styleClass="table table-hover" headerClass="danger"
-					footerClass="danger" rowClasses="success,warning">
+					styleClass="table table-hover">
 
 					<h:column>
 						<f:facet name="header">Id</f:facet>
@@ -47,12 +43,19 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">Action</f:facet>
-						<h:commandLink value="Show" styleClass="btn btn-primary btn-xs"
-							action="#{activity.show(a.id)}" />
+						<div class="btn-group btn-group-xs">
+							<h:commandLink value="show" styleClass="btn btn-outline-secondary"
+										   action="#{activity.show(a.id)}" >
+							</h:commandLink>
+							<h:link value="edit" styleClass="btn btn-outline-primary"
+									action="#{activity.edit(a.id)}" >
+							</h:link>
+							<h:commandButton value="remove" styleClass="btn btn-outline-danger"
+											 action="#{activity.remove(a.id)}" />
+						</div>
 					</h:column>
 				</h:dataTable>
 			</h:form>
-
 		</f:view>
 	</ui:define>
 </ui:composition>

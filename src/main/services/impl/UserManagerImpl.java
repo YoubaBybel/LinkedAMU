@@ -23,61 +23,61 @@ public class UserManagerImpl implements UserManager {
 
     @PostConstruct
     public void init() {
-	System.out.println("init " + this + " with " + em);
+        System.out.println("init " + this + " with " + em);
     }
 
     @Override
     public User createUser() {
-	return dao.create(new User());
+        return dao.create(new User());
     }
 
     @Override
     public User createUser(User user) {
-	return dao.create(user);
+        return dao.create(user);
     }
 
     @Override
     public User updateUser(User user) {
-	if(user.getCv().size() != 0) {
-	    user.getCv().forEach(activity -> dao.update(activity));
-	}
-	return dao.update(user);
+        if(user.getCv().size() != 0) {
+            user.getCv().forEach(activity -> dao.update(activity));
+        }
+        return dao.update(user);
     }
 
     @Override
     public void removeUser(int id) {
-	dao.delete(id, User.class);
+        dao.delete(id, User.class);
     }
 
     @Override
     public User findById(int id) {
-	return dao.findById(id, User.class);
+        return dao.findById(id, User.class);
     }
 
     @Override
     public List<User> findAll() {
-	return dao.findAll(User.class);
+        return dao.findAll(User.class);
     }
 
     @Override
     public List<User> findByName(String name) {
-	return em.createQuery("SELECT u FROM User u WHERE lower(name) LIKE lower(:name)", User.class)
-		.setParameter("name", "%"+name+"%")
-		.getResultList();
+        return em.createQuery("SELECT u FROM User u WHERE lower(name) LIKE lower(:name)", User.class)
+                .setParameter("name", "%"+name+"%")
+                .getResultList();
     }
 
     @Override
     public List<User> findByFirstName(String firstName) {
-	return em.createQuery("SELECT u FROM User u WHERE lower(first_name) LIKE lower(:first_name)", User.class)
-		.setParameter("first_name", "%"+firstName+"%")
-		.getResultList();
+        return em.createQuery("SELECT u FROM User u WHERE lower(first_name) LIKE lower(:first_name)", User.class)
+                .setParameter("first_name", "%"+firstName+"%")
+                .getResultList();
     }
 
     @Override
     public List<User> findByLogin(String email, String password) {
-	return this.em.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
-		.setParameter("email", email).setParameter("password", password)
-		.getResultList();
+        return this.em.createQuery("SELECT u FROM User u WHERE email LIKE :email AND password LIKE :password", User.class)
+                .setParameter("email", email).setParameter("password", password)
+                .getResultList();
     }
 
     /*

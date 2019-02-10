@@ -9,14 +9,14 @@
     <ui:define name="title">Activity n°<h:outputText value="123"/></ui:define>
     <ui:define name="content">
         <f:view>
-            <c:set var="a" value="#{activity.getActivity(3)}" />
-            <div class="jumbotron">
-                <h1>Activity #{a.title}</h1>
-                <p>Id: #{a.id}</p>
-                <p>Year: #{a.year}</p>
-                <p>Nature: #{a.nature}</p>
-                <p>Description: #{a.description}</p>
-                <p>Site web: #{a.webAddress}</p>
+            <c:set var="a" value="#{activity.currentActivity}" />
+            <div class="jumbotron" style="color: black;">
+                <h1>#{a.title}</h1>
+                <p><strong>Id:</strong> #{a.id}</p>
+                <p><strong>Year:</strong> #{a.year}</p>
+                <p><strong>Nature:</strong> #{a.nature}</p>
+                <p><strong>Description:</strong> #{a.description}</p>
+                <p><strong>Site web: </strong>#{a.webAddress}</p>
                 <p>
                     <h:link outcome="activities" styleClass="btn btn-info">
                         <span>List of activities</span>
@@ -24,11 +24,17 @@
                 </p>
             </div>
             <h:form>
+                <c:if test="#{user.logged}">
                 <p>
-                    <h:commandLink action="editActivity" styleClass="btn btn-danger">
-                        <span>Modifier</span>
+                    <h:commandLink action="editActivity" styleClass="btn btn-outline-warning btn-lg">
+                        <span>Edit</span>
+                    </h:commandLink>
+                    <span> </span>
+                    <h:commandLink action="#{activity.remove}" styleClass="btn btn-outline-danger btn-lg">
+                        <span>Remove</span>
                     </h:commandLink>
                 </p>
+                </c:if>
             </h:form>
         </f:view>
     </ui:define>
