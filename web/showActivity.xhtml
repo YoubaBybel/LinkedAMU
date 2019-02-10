@@ -26,11 +26,11 @@
             <h:form>
                 <c:if test="#{user.logged}">
                 <p>
-                    <h:commandLink action="editActivity" styleClass="btn btn-outline-warning btn-lg">
+                    <h:commandLink action="#{activity.editActivity()}" styleClass="btn btn-outline-warning btn-lg">
                         <span>Edit</span>
                     </h:commandLink>
                     <span> </span>
-                    <h:commandLink action="#{activity.removeActivity}" styleClass="btn btn-outline-danger btn-lg">
+                    <h:commandLink action="#{activity.removeActivity()}" styleClass="btn btn-outline-danger btn-lg">
                         <span>Remove</span>
                     </h:commandLink>
                 </p>

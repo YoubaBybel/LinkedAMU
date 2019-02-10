@@ -12,9 +12,8 @@
 
 			<h1>List of users</h1>
 			<h:form>
-				<h:dataTable value="#{user.users}"	var="u"
-							 styleClass="table table-hover">
-
+				<h:dataTable value="#{user.users}" var="u"
+					styleClass="table table-hover">
 					<h:column>
 						<f:facet name="header">Id</f:facet>
 						<h:outputText value="#{u.id}" />
@@ -40,10 +39,10 @@
 					<h:column>
 						<f:facet name="header">Action</f:facet>
 						<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
-										 styleClass="btn btn-outline-light btn-xs" />
+							styleClass="btn btn-outline-light btn-xs" />
 						<span> </span>
 						<h:commandButton value="Remove User" action="#{user.removeUser()}"
-										 styleClass="btn btn-outline-danger btn-xs" />
+							styleClass="btn btn-outline-danger btn-xs" />
 					</h:column>
 				</h:dataTable>
 
