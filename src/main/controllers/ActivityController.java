@@ -1,6 +1,7 @@
 package main.controllers;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +27,7 @@ public class ActivityController {
 	@PostConstruct
 	public void init() {
 		System.out.println("Create " + this);
+		activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
 
 		Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
 		master2.setWebAddress("http://masterinfo.univ-mrs.fr/master-2018");
@@ -71,14 +73,31 @@ public class ActivityController {
 		return currentActivity;
 	}
 
-	public String create() {
-		currentActivity = new Activity();
-		return "editActivity.xhtml?faces-redirect=true";
+	public List<Activity> getActivities() {
+		return activityManager.findAll();
 	}
 
-	public String edit(int id) {
+	public Activity getActivity(int id) {
+		return activityManager.findById(id);
+	}
+
+	public List<Activity> getActivity(String title) {
+		return activityManager.findByTitle(title);
+	}
+
+	public String createActivity() {
+		currentActivity = new Activity();
+		return "editActivity";
+	}
+
+	public String editActivity(int id) {
 		currentActivity = activityManager.findById(id);
-		return "editActivity.xhtml?faces-redirect=true";
+		return "editActivity";
+	}
+
+	public String updateActivity() {
+		activityManager.updateActivity(currentActivity);
+		return "activities";
 	}
 
 	public String remove() {

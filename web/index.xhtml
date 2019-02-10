@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:c="http://java.sun.com/jsp/jstl/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
 	<f:viewAction action="#{user.newUser()}" />
@@ -15,7 +15,11 @@
 	<ui:define name="content">
 		<f:view>
 
-			<!--<c:forEach var="u" items="#{user.users}">
+			<p>TODO: findUsers pour la recherche, vérifier que l'inscription et la cooptation marchent
+			Essayer de changer le fonctionnement de la modif du mdp
+			Afficher les activités sur la page de profil</p>
+
+			<c:forEach var="u" items="#{user.users}">
 				<tr>
 					<td>#{u.id}</td>
 					<td>#{u.name}</td>
@@ -23,8 +27,8 @@
 					<td>#{u.email}</td>
 					<td>#{u.password}</td>
 				</tr>
-			</c:forEach> -->
-			<!-- <c:if test="#{isLogged}">
+			</c:forEach>
+			<c:if test="#{isLogged}">
 				<h:form id="login">
 					<c:set var="u" value="#{user.user}" />
 
@@ -47,7 +51,7 @@
 							styleClass="btn btn-primary" value="Login" display="tooltip" />
 					</div>
 				</h:form>
-			</c:if> -->
+			</c:if>
 		</f:view>
 	</ui:define>
 </ui:composition>

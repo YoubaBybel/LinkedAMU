@@ -1,5 +1,6 @@
 package main.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -74,6 +75,15 @@ public class UserController {
 		return "showUser.xhtml?faces-redirect=true";
 	}
 
+	
+	
+	public List<User> findUsers(String nameOrFirstName) {
+		List<User> listUsers = new ArrayList<>();
+		userM.findByName(nameOrFirstName).forEach(user -> listUsers.add(user));
+		userM.findByFirstName(nameOrFirstName).forEach(user -> listUsers.add(user));
+		return listUsers;
+	}
+
 	public String addUser() {
 		userM.createUser(user);
 		return "profile";
@@ -82,7 +92,7 @@ public class UserController {
 	public void updateUser() {
 		userM.updateUser(userLogged);
 	}
-	
+
 	public String removeUser() {
 		userM.removeUser(user.getId());
 		return "index";
