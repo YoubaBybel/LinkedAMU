@@ -102,12 +102,12 @@ public class ActivityController {
 
 	public String remove() {
 		activityManager.removeActivity(currentActivity.getId());
-		return "activities.xhtml?faces-redirect=true";
+		return "activities";
 	}
 
 	public String remove(int id) {
 		activityManager.removeActivity(id);
-		return "activities.xhtml?faces-redirect=true";
+		return "activities";
 	}
 
 	public String save() {

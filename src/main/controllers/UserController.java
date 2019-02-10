@@ -73,8 +73,6 @@ public class UserController {
 		user = userM.findById(id);
 		return "showUser.xhtml?faces-redirect=true";
 	}
-
-	
 	
 	public List<User> findUsers(String nameOrFirstName) {
 		List<User> listUsers = new ArrayList<>();
