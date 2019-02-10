@@ -20,7 +20,7 @@
 			<p>Essayer de changer le fonctionnement de la modif du mdp</p>
 			<p>Afficher les activités sur la page de profil</p>
 
-			<c:if test="#{isLogged}">
+			<c:if test="!#{isLogged}">
 				<h:form id="login">
 					<c:set var="u" value="#{user.user}" />
 

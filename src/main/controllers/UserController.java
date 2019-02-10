@@ -2,6 +2,7 @@ package main.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -9,7 +10,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import main.entities.Activity;
+import io.codearte.jfairy.Fairy;
+import io.codearte.jfairy.producer.person.Person;
 import main.entities.User;
 import main.services.UserManager;
 import main.utils.Authentification;
@@ -46,6 +48,23 @@ public class UserController {
 		}
 	}
 
+//	@PostConstruct
+//	public void init() {
+//		Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
+//
+//		for (int i = 0; i < 100_000; i++) {
+//			io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
+//			User user = new User();
+//
+//			user.setEmail(fPerson.getEmail());
+//			user.setFirstName(fPerson.getFirstName());
+//			user.setName(fPerson.getLastName());
+//			user.setPassword(fPerson.getPassword());
+//			if (userM.findByEmail(user.getEmail()) == null)
+//				userM.createUser(user);
+//		}
+//	}
+
 	@PreDestroy
 	public void end() {
 		userM.findAll().forEach(userToRemove -> {
@@ -72,9 +91,9 @@ public class UserController {
 
 	public String findUser(int id) {
 		user = userM.findById(id);
-		return "showUser.xhtml?faces-redirect=true";
+		return "showUser";
 	}
-	
+
 	public List<User> findUsers(String nameOrFirstName) {
 		List<User> listUsers = new ArrayList<>();
 		userM.findByName(nameOrFirstName).forEach(user -> listUsers.add(user));
@@ -93,7 +112,7 @@ public class UserController {
 
 	public String removeUser() {
 		userM.removeUser(user.getId());
-		return "index";
+		return "home";
 	}
 
 	public String newUser() {
@@ -118,16 +137,16 @@ public class UserController {
 		isLogged = false;
 		userLogged = null;
 		user = new User();
-		return "index.xhtml?faces-redirect=true";
+		return "home";
 	}
 
 	public String createCV() {
-	    userLogged.createCV();
-	    return "cv.xhtml?faces-redirect=true";
-    }
+		userLogged.createCV();
+		return "cv";
+	}
 
-    public String showCv(int id) {
-	    user = userM.findById(id);
-	    return "cv.xhtml?faces-redirect=true";
-    }
+	public String showCv(int id) {
+		user = userM.findById(id);
+		return "cv";
+	}
 }

@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 
 import main.entities.Activity;
 import main.entities.Activity.Nature;
+import main.entities.User;
 import main.services.ActivityManager;
 
 @ManagedBean(name = "activity")
@@ -85,8 +86,9 @@ public class ActivityController {
 		return activityManager.findByTitle(title);
 	}
 
-	public String createActivity() {
+	public String createActivity(User user) {
 		currentActivity = new Activity();
+		currentActivity.setUser(user);
 		return "editActivity";
 	}
 
@@ -100,26 +102,26 @@ public class ActivityController {
 		return "activities";
 	}
 
-	public String remove() {
+	public String removeActivity() {
 		activityManager.removeActivity(currentActivity.getId());
 		return "activities";
 	}
 
-	public String remove(int id) {
+	public String removeActivity(int id) {
 		activityManager.removeActivity(id);
 		return "activities";
 	}
 
-	public String save() {
+	public String saveActivity() {
 		if (currentActivity.getId() == null) {
 			currentActivity = activityManager.createActivity(currentActivity);
 		} else {
 			currentActivity = activityManager.updateActivity(currentActivity);
 		}
-		return show(currentActivity.getId());
+		return showActivity(currentActivity.getId());
 	}
 
-	public String show(int id) {
+	public String showActivity(int id) {
 		currentActivity = activityManager.findById(id);
 		return "showActivity";
 	}

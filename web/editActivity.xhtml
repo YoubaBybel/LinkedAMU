@@ -12,7 +12,7 @@
     <ui:define name="content">
         <f:view>
 
-            <c:if test="#{user.logged and (user.userLogged.id == activity.currentActivity.user)}">
+            <c:if test="#{isLogged and user.userLogged.id == activity.currentActivity.user.id}">
                 <h1>Course form</h1>
                 <h:form id="editActivityForm">
                     <c:set var="a" value="#{activity.currentActivity}"/>
@@ -56,14 +56,14 @@
                     </div>
 
                     <div class="form-group">
-                        <h:commandButton action="#{activity.save()}"
+                        <h:commandButton action="#{activity.saveActivity()}"
                                          styleClass="btn btn-primary" value="Save"/>
                         <span> </span>
                         <h:link styleClass="btn btn-info" outcome="activities" value="Cancel"/>
                     </div>
                 </h:form>
             </c:if>
-            <c:if test="#{!user.logged}">
+            <c:if test="!#{isLogged}">
                 <h1>Il faut être connecté pour pouvoir modifier une activité</h1>
             </c:if>
 
