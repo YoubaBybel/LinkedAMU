@@ -40,7 +40,9 @@
 					<!-- <label for="email">Email:</label> -->
 					<h:inputText id="email" value="#{u.email}"
 								 styleClass="form-control" required="true"
-								 pt:placeholder="Email"/>
+								 pt:placeholder="Email">
+						<f:validateRegex pattern="^[A-Za-z0-9]{3,}[._-]+[A-Za-z0-9]*@[a-z0-9.-]+\\.[a-z]{2,6}$" />
+					</h:inputText>
 					<h:message styleClass="label label-danger" for="email" />
 				</div>
 
@@ -48,7 +50,9 @@
 					<!-- <label for="password">Password:</label> -->
 					<h:inputSecret id="password" value="#{u.password}"
 								   styleClass="form-control" required="true"
-								   pt:placeholder="Password"/>
+								   pt:placeholder="Password">
+						<f:validateLength minimum="8" maximum="30"/>
+					</h:inputSecret>
 					<h:message styleClass="label label-danger" for="password" />
 				</div>
 

@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import main.entities.Activity;
 import main.entities.User;
 import main.services.UserManager;
 import main.utils.Authentification;
@@ -34,12 +35,12 @@ public class UserController {
 			User user1 = new User();
 			user1.setName("BERTHOD");
 			user1.setFirstName("Timothee");
-			user1.setPassword("123");
+			user1.setPassword("12345678");
 			user1.setEmail("timothee@berthod.net");
 			user1.setWebSite("https://google.fr");
 			userM.createUser(user1);
 
-			User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com", "2386");
+			User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com", "23862386");
 			user2.setWebSite("ayoub.elyousfi.free.fr");
 			userM.createUser(user2);
 		}
@@ -119,4 +120,14 @@ public class UserController {
 		user = new User();
 		return "index.xhtml?faces-redirect=true";
 	}
+
+	public String createCV() {
+	    userLogged.createCV();
+	    return "cv.xhtml?faces-redirect=true";
+    }
+
+    public String showCv(int id) {
+	    user = userM.findById(id);
+	    return "cv.xhtml?faces-redirect=true";
+    }
 }

@@ -39,8 +39,12 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header">Action</f:facet>
+						<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
+										 styleClass="btn btn-outline-light btn-xs" />
+						<span> </span>
+						<f:facet name="header">Action</f:facet>
 						<h:commandButton value="Remove User" action="#{user.removeUser()}"
-										 styleClass="btn btn-outline-danger" />
+										 styleClass="btn btn-outline-danger btn-xs" />
 					</h:column>
 				</h:dataTable>
 
@@ -66,8 +70,10 @@
 					</c:forEach>
 				</table> -->
 
-				<h:commandButton styleClass="btn btn-outline-light"
-					action="#{user.newUser()}" value="New User" />
+				<c:if test="#{user.logged}">
+					<h:commandButton styleClass="btn btn-outline-light"
+						action="#{user.newUser()}" value="New User" />
+				</c:if>
 
 			</h:form>
 

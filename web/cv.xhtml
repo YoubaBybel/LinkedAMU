@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/template/layout.xhtml">
+    <ui:define name="title"><h:outputText value="CV n°#{user.user.id}"/></ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h1>
+                <h:form>
+                    <h:outputText value="CV of #{user.user.firstName} #{user.user.name}"/>
+                    <div class="btn btn-group btn-group-xs">
+                        <h:commandLink value="Add activity" styleClass="btn btn-outline-light"
+                                       action="#{activity.create}" style="float: right;"/>
+                        <span> </span>
+                        <h:commandLink value="Delete CV" styleClass="btn btn-outline-danger"
+                                       action="#{activity.create}" style="float: right;"/>
+                    </div>
+                </h:form>
+            </h1>
+
+            <div class="jumbotron" style="color: black;">
+                <h:form>
+                    <h:dataTable value="#{search.allActivities}" var="a"
+                                 styleClass="table table-hover">
+
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            <h:outputText value="#{a.id}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Title</f:facet>
+                            <h:outputText value="#{a.title}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Year</f:facet>
+                            <h:outputText value="#{a.year}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Formation</f:facet>
+                            <h:outputText value="#{a.nature}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Description</f:facet>
+                            <h:outputText value="#{a.description}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+                            <div class="btn-group btn-group-xs">
+                                <h:commandButton value="show" styleClass="btn btn-outline-secondary"
+                                                 action="#{activity.show(a.id)}" />
+                                <h:commandButton value="edit" styleClass="btn btn-outline-primary"
+                                                 action="#{activity.edit(a.id)}" />
+                                <h:commandButton value="remove" styleClass="btn btn-outline-danger"
+                                                 action="#{activity.remove(a.id)}" />
+                            </div>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </f:view>
+    </ui:define>
+</ui:composition>
+
+</html>

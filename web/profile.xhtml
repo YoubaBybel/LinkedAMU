@@ -10,30 +10,31 @@
 	<ui:define name="title">Profile</ui:define>
 	<ui:define name="content">
 		<f:view>
-			<c:set var="u" value="#{user.userLogged}" />
+			<c:set var="u" value="#{user.userLogged}" scope="session"/>
 
 			<h:form id="profile" style="text-align:left">
 				<div class="form-group">
 					<label for="firstName">First name:</label> <span>#{u.firstName}</span>
 					<h:inputText id="firstName" value="#{u.firstName}" required="true"
-						style="margin:5px" />
+								 style="margin:5px" />
 					<h:message styleClass="label label-danger" for="firstName" />
 				</div>
 				<div class="form-group">
 					<label for="name">Name:</label> <span>#{u.name}</span>
 					<h:inputText id="name" value="#{u.name}" required="true"
-						style="margin:5px" />
+								 style="margin:5px" />
 					<h:message styleClass="label label-danger" for="name" />
 				</div>
 				<div class="form-group">
 					<label for="webSite">Web site:</label> <span>#{u.webSite}</span>
-					<h:inputText id="webSite" value="#{u.webSite}" style="margin:5px" />
+					<h:inputText id="webSite" value="#{u.webSite}"
+								 style="margin:5px" />
 					<h:message styleClass="label label-danger" for="webSite" />
 				</div>
 				<div class="form-group">
 					<label for="birthDate">Birth date (jj-mm-yyyy):</label> <span>#{u.birthDate}</span>
 					<h:inputText id="birthDate" value="#{u.birthDate}"
-						style="margin:5px">
+								 style="margin:5px">
 						<f:convertDateTime pattern="dd-MM-yyyy" />
 					</h:inputText>
 					<h:message styleClass="label label-danger" for="birthDate" />
@@ -66,11 +67,7 @@
 				</div>
 			</h:form>
 
-
-
 			<h:button outcome="createUser" value="Create a user" />
-
-
 
 		</f:view>
 	</ui:define>

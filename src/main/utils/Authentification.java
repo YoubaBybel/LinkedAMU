@@ -4,10 +4,10 @@ import main.entities.User;
 
 public interface Authentification {
 
-	public User login(User user);
+	User login(User user);
 
-	public void logout();
+	void logout();
 
-	public boolean isLogged();
+	boolean isLogged();
 
 }
