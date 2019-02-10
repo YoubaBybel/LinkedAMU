@@ -86,6 +86,11 @@ public class ActivityController {
 		return "activities.xhtml?faces-redirect=true";
 	}
 
+	public String remove(int id) {
+		activityManager.removeActivity(id);
+		return "activities.xhtml?faces-redirect=true";
+	}
+
 	public String save() {
 		if (currentActivity.getId() == null) {
 			currentActivity = activityManager.createActivity(currentActivity);
