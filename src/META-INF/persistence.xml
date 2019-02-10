@@ -7,9 +7,6 @@
 	<persistence-unit name="myData" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<jta-data-source>data</jta-data-source>
-		
-		<class>main.entities.Activity</class>
-		
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

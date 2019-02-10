@@ -38,7 +38,7 @@ public class UserManagerImpl implements UserManager {
 
 	@Override
 	public User updateUser(User user) {
-		if (user.getCv().size() != 0) {
+		if (!user.getCv().isEmpty()) {
 			user.getCv().forEach(activity -> dao.update(activity));
 		}
 		return dao.update(user);
