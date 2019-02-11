@@ -14,6 +14,9 @@
 		<h:link outcome="home" styleClass="nav-link">Home</h:link>
 		<h:link outcome="users" styleClass="nav-link">Users</h:link>
 		<h:link outcome="activities" styleClass="nav-link">Activities</h:link>
+		<c:if test="#{isLogged}">
+			<h:link outcome="cv" styleClass="nav-link">CV</h:link>
+		</c:if>
 	</nav>
 
 	<div class="masthead-btn">

@@ -9,14 +9,16 @@
 
 <ui:composition>
     <h:form style="margin-right:150px">
-        <div class="form-group">
+        <div class="input-group">
             <h:inputText id="search" value="#{search.input}"
                          styleClass="form-control" />
+            <div class="input-group-append">
+                <h:commandButton value="Rechercher" action="#{search.search()}"
+                                 styleClass="btn btn-primary">
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandButton>
+            </div>
         </div>
-        <h:commandButton value="Rechercher" action="#{search.search()}"
-                         styleClass="btn btn-primary">
-            <f:ajax execute="@form" render="@form" />
-        </h:commandButton>
     </h:form>
 
 </ui:composition>
