@@ -1,5 +1,6 @@
 package main.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -117,6 +118,8 @@ public class UserController {
 
 	public String showCv(int id) {
 		user = userM.findById(id);
+		user.setCv(activityManager.findUserActivities(user));
+		user = userM.updateUser(user);
 		return "cv";
 	}
 
@@ -126,5 +129,6 @@ public class UserController {
 	
 	public void removeCV() {
 		userLogged.getCv().forEach(activity -> activityManager.removeActivity(activity.getId()));
+		userLogged.setCv(new ArrayList<>());
 	}
 }

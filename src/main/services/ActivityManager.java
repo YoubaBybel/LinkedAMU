@@ -8,9 +8,9 @@ import main.entities.User;
 
 public interface ActivityManager {
 
-    Activity createActivity();
+    void createActivity();
 
-    Activity createActivity(Activity activity);
+    void createActivity(Activity activity);
 
     Activity updateActivity(Activity activity);
 

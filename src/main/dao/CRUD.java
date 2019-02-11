@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CRUD {
 
-    <T> T create(T entity);
+    <T> void create(T entity);
 
     <T> T update(T entity);
 

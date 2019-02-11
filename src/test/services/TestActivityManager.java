@@ -63,29 +63,29 @@ public class TestActivityManager {
 
     @Test
     public void testCreate() {
-	Activity activity = am.createActivity(master_2);
-	assertNotNull(activity);
+	am.createActivity(master_2);
+	assertNotNull(am.findAll());
     }
 
     @Test
     public void testUpdate() {
-	Activity activity = am.createActivity(master_1);
-	activity.setYear(2019);
-	am.updateActivity(activity);
-	assertEquals(2019, activity.getYear());
+	am.createActivity(master_1);
+	master_1.setYear(2019);
+	am.updateActivity(master_1);
+	assertEquals(2019, master_1.getYear());
     }
 
     @Test
     public void testRemove() {
-	Activity activity = am.createActivity(stage);
-	am.removeActivity(activity.getId());
+	am.createActivity(stage);
+	am.removeActivity(stage.getId());
 	assertEquals(0, am.findAll().size());
     }
 
     @Test
     public void testFindById() {
-	Activity activity = am.createActivity(licence);
-	assertEquals(activity.getTitle(), am.findById(activity.getId()).getTitle());
+	am.createActivity(licence);
+	assertEquals(licence.getTitle(), am.findById(licence.getId()).getTitle());
     }
 
     @Test
@@ -99,11 +99,11 @@ public class TestActivityManager {
 
     @Test
     public void testFindByYear() {
-	Activity activity1 = am.createActivity(master_2);
-	Activity activity2 = am.createActivity(stage);
+	am.createActivity(master_2);
+	am.createActivity(stage);
 	List<Activity> activities_2019 = new ArrayList<>();
-	activities_2019.add(activity1);
-	activities_2019.add(activity2);
+	activities_2019.add(master_2);
+	activities_2019.add(stage);
 	assertEquals(activities_2019.size(), am.findByYear(2019).size());
     }
 
@@ -128,29 +128,29 @@ public class TestActivityManager {
 
     @Test
     public void testFindUserActivities() {
-	User antman = um.createUser(scottLang);
-	User nick = um.createUser(nickFury);
+	um.createUser(scottLang);
+	um.createUser(nickFury);
 
-	Activity m2 = am.createActivity(master_2);
-	Activity m1 = am.createActivity(master_1);
-	Activity st = am.createActivity(stage);
-	Activity li = am.createActivity(licence);
+	am.createActivity(master_2);
+	am.createActivity(master_1);
+	am.createActivity(stage);
+	am.createActivity(licence);
 
-	List<Activity> nickCv = nick.getCv();
-	nickCv.add(li);
-	nickCv.add(m1);
-	nickCv.add(m2);
+	List<Activity> nickCv = nickFury.getCv();
+	nickCv.add(licence);
+	nickCv.add(master_1);
+	nickCv.add(master_2);
 	nickFury.setCv(nickCv);
-	um.updateUser(nick);
+	um.updateUser(nickFury);
 
-	List<Activity> scottCv = antman.getCv();
-	scottCv.add(st);
-	antman.setCv(scottCv);
-	um.updateUser(antman);
+	List<Activity> scottCv = scottLang.getCv();
+	scottCv.add(stage);
+	scottLang.setCv(scottCv);
+	um.updateUser(scottLang);
 
-	st.setDescription("Une description du stage");
-	am.updateActivity(st);
-	assertEquals(3, am.findUserActivities(nick).size());
+	stage.setDescription("Une description du stage");
+	am.updateActivity(stage);
+	assertEquals(3, am.findUserActivities(nickFury).size());
     }
 
 }

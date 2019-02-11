@@ -23,13 +23,13 @@ public class ActivityManagerImpl implements ActivityManager {
     private EntityManager em;
 
     @Override
-    public Activity createActivity() {
-	return dao.create(new Activity());
+    public void createActivity() {
+	dao.create(new Activity());
     }
 
     @Override
-    public Activity createActivity(Activity activity) {
-	return dao.create(activity);
+    public void createActivity(Activity activity) {
+	dao.create(activity);
     }
 
     @Override

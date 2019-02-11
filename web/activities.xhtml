@@ -14,26 +14,15 @@
 	<ui:define name="content">
 		<f:view>
 
-
-
-			<h:dataTable var="a" value="#{activity.activities}"
-				styleClass="table table-hover">
-				<h:column>
-					<f:facet name="header">Id</f:facet>
-					<h:outputText value="#{a}" />
-				</h:column>
-			</h:dataTable>
-
-
-
-			<h1>
-				<h:form>
+            <h1 class="content-head-lists">
+                <h:form>
                     List of activities
-                    <h:commandLink value="Add"
-						styleClass="btn btn-outline-light inp"
-						action="#{activity.createActivity()}" style="float: right;" />
-				</h:form>
-			</h1>
+                    <c:if test="#{isLogged}">
+                        <h:commandLink value="Add" styleClass="btn btn-outline-light inp"
+                                       action="#{activity.createActivity}" style="float: right;"/>
+                    </c:if>
+                </h:form>
+            </h1>
 
 			<h:form>
 				<h:dataTable value="#{activity.getActivities()}" var="a"

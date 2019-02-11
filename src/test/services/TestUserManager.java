@@ -53,31 +53,31 @@ public class TestUserManager {
 
     @Test
     public void testCreate() {
-	User user = um.createUser(tonyStark);
-	assertNotNull(user);
+	um.createUser(tonyStark);
+	assertNotNull(tonyStark);
     }
 
     @Test
     public void testUpdate() {
-	User user = um.createUser(bruceBanner);
-	user.setName("Willis");
-	um.updateUser(user);
-	assertEquals("Willis", um.findById(user.getId()).getName());
+	um.createUser(bruceBanner);
+	bruceBanner.setName("Willis");
+	um.updateUser(bruceBanner);
+	assertEquals("Willis", um.findById(bruceBanner.getId()).getName());
     }
 
     @Test
     public void testDelete() {
 	um.findAll().forEach(user -> um.removeUser(user.getId()));
 
-	User user = um.createUser(docteurStrange);
-	um.removeUser(user.getId());
+	um.createUser(docteurStrange);
+	um.removeUser(docteurStrange.getId());
 	assertEquals(0, um.findAll().size());
     }
 
     @Test
     public void testFindById() {
-	User user = um.createUser(natachaRomanov);
-	assertEquals(user.getEmail(), um.findById(user.getId()).getEmail());
+	um.createUser(natachaRomanov);
+	assertEquals(natachaRomanov.getEmail(), um.findById(natachaRomanov.getId()).getEmail());
     }
 
     @Test
