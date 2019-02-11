@@ -24,7 +24,7 @@
 
             <div class="jumbotron" style="color: black;">
                 <h:form>
-                    <h:dataTable value="#{search.activities}" var="a"
+                    <h:dataTable value="#{user.user.cv}" var="a"
                                  styleClass="table table-hover">
 
                         <h:column>
@@ -52,10 +52,12 @@
                             <div class="btn-group btn-group-xs">
                                 <h:commandButton value="show" styleClass="btn btn-outline-secondary"
                                                  action="#{activity.showActivity(a.id)}" />
-                                <h:commandButton value="edit" styleClass="btn btn-outline-primary"
-                                                 action="#{activity.editActivity(a.id)}" />
-                                <h:commandButton value="remove" styleClass="btn btn-outline-danger"
-                                                 action="#{activity.removeActivity(a.id)}" />
+                                <c:if test="#{user.user == user.userLogged}">
+                                    <h:commandButton value="edit" styleClass="btn btn-outline-primary"
+                                                     action="#{activity.editActivity(a.id)}" />
+                                    <h:commandButton value="remove" styleClass="btn btn-outline-danger"
+                                                     action="#{activity.removeActivity(a.id)}" />
+                                </c:if>
                             </div>
                         </h:column>
                     </h:dataTable>

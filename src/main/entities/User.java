@@ -3,6 +3,7 @@ package main.entities;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
@@ -18,7 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.apache.commons.text.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import main.utils.Security;
 
@@ -60,7 +61,8 @@ public class User implements Serializable {
     private List<Activity> cv;
 
     public User() {
-	super();
+        super();
+        cv = new LinkedList<>();
     }
 
     public User(String name, String firstName, String email, String password) {
@@ -69,6 +71,7 @@ public class User implements Serializable {
 	setFirstName(firstName);
 	setEmail(email);
 	setPassword(password);
+	cv = new LinkedList<>();
     }
 
     public Integer getId() {
@@ -124,15 +127,11 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-	try {
-	    this.password = Security.hashPassword(password);
-	} catch (NoSuchAlgorithmException e) {
-	    e.printStackTrace();
-	}
-    }
-
-    public List<Activity> createCV() {
-	return new Vector<>();
+        try {
+            this.password = Security.hashPassword(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Activity> getCv() {
@@ -140,8 +139,13 @@ public class User implements Serializable {
     }
 
     public void setCv(List<Activity> cv) {
-	this.cv = cv;
-	this.cv.forEach(activity -> activity.setUser(this));
+        this.cv = cv;
+        this.cv.forEach(activity -> activity.setUser(this));
+    }
+
+    public void addActivity(Activity activity) {
+        activity.setUser(this);
+        cv.add(activity);
     }
 
     @Override

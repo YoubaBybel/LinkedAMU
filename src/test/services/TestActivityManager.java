@@ -136,14 +136,14 @@ public class TestActivityManager {
 	Activity st = am.createActivity(stage);
 	Activity li = am.createActivity(licence);
 
-	List<Activity> nickCv = nick.createCV();
+	List<Activity> nickCv = nick.getCv();
 	nickCv.add(li);
 	nickCv.add(m1);
 	nickCv.add(m2);
 	nickFury.setCv(nickCv);
 	um.updateUser(nick);
 
-	List<Activity> scottCv = antman.createCV();
+	List<Activity> scottCv = antman.getCv();
 	scottCv.add(st);
 	antman.setCv(scottCv);
 	um.updateUser(antman);

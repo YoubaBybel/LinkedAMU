@@ -12,57 +12,56 @@
     <ui:define name="content">
         <f:view>
 
-            <c:if test="#{isLogged and user.userLogged.id == activity.currentActivity.user.id}">
-                <h1>Course form</h1>
-                <h:form id="editActivityForm" styleClass="input-reduce">
-                    <c:set var="a" value="#{activity.currentActivity}"/>
+            <h1>New Activity</h1>
+            <h:form id="editActivityForm">
+                <c:set var="a" value="#{activity.currentActivity}"/>
 
-                    <div class="form-group">
-                        <h:inputText id="title" value="#{a.title}" styleClass="form-control"
-                                     required="true" requiredMessage="Le titre est obligatoire"
-                                     pt:placeholder="Title">
-                            <f:validateLength minimum="3" maximum="60"/>
-                        </h:inputText>
-                        <h:message styleClass="label label-danger" for="title"/>
-                    </div>
+                <div class="form-group">
+                    <h:inputText id="title" value="#{a.title}" styleClass="form-control"
+                                 required="true" requiredMessage="Le titre est obligatoire"
+                                 pt:placeholder="Title">
+                        <f:validateLength minimum="3" maximum="60"/>
+                    </h:inputText>
+                    <h:message styleClass="label label-danger" for="title"/>
+                </div>
 
-                    <div class="form-group">
-                        <h:inputText id="year" value="#{a.year}"
-                                     styleClass="form-control" required="true"
-                                     pt:placeholder="Year">
-                        </h:inputText>
-                        <h:message styleClass="label label-danger" for="year"/>
-                    </div>
+                <div class="form-group">
+                    <h:inputText id="year" value="#{a.year}"
+                                 styleClass="form-control" required="true"
+                                 pt:placeholder="Year">
+                    </h:inputText>
+                    <h:message styleClass="label label-danger" for="year"/>
+                </div>
 
-                    <div class="form-group">
-                        <h:selectOneMenu id="nature" value="#{a.nature}"
-                                         styleClass="form-control" required="true">
-                            <f:selectItems value="#{activity.natures}" />
-                        </h:selectOneMenu>
-                    </div>
+                <div class="form-group">
+                    <h:selectOneMenu id="nature" value="#{a.nature}"
+                                     styleClass="form-control" required="true">
+                        <f:selectItems value="#{activity.natures}" />
+                    </h:selectOneMenu>
+                </div>
 
-                    <div class="form-group">
-                        <h:inputTextarea id="description" value="#{a.description}"  placeholder="Description"
-                                         styleClass="form-control" cols="50" rows="5"
-                                         pt:placeholder="Description"/>
-                        <h:message styleClass="label label-danger" for="description"/>
-                    </div>
-
-                    <div class="form-group">
-                        <h:inputText id="website" value="#{a.webAddress}"  placeholder="Site web"
+                <div class="form-group">
+                    <h:inputTextarea id="description" value="#{a.description}"  placeholder="Description"
                                      styleClass="form-control" cols="50" rows="5"
-                                     pt:placeholder="Web Address"/>
-                        <h:message styleClass="label label-danger" for="website"/>
-                    </div>
+                                     pt:placeholder="Description"/>
+                    <h:message styleClass="label label-danger" for="description"/>
+                </div>
 
-                    <div class="form-group">
-                        <h:commandButton action="#{activity.saveActivity()}"
-                                         styleClass="btn btn-primary" value="Save"/>
-                        <span> </span>
-                        <h:link styleClass="btn btn-info" outcome="activities" value="Cancel"/>
-                    </div>
-                </h:form>
-            </c:if>
+                <div class="form-group">
+                    <h:inputText id="website" value="#{a.webAddress}"  placeholder="Site web"
+                                 styleClass="form-control" cols="50" rows="5"
+                                 pt:placeholder="Web Address"/>
+                    <h:message styleClass="label label-danger" for="website"/>
+                </div>
+
+                <div class="form-group">
+                    <h:commandButton action="#{activity.saveActivity()}"
+                                     styleClass="btn btn-primary" value="Save"/>
+                    <span> </span>
+                    <h:link styleClass="btn btn-info" outcome="activities" value="Cancel"/>
+                </div>
+            </h:form>
+
             <c:if test="!#{isLogged}">
                 <h1>Il faut être connecté pour pouvoir modifier une activité</h1>
             </c:if>

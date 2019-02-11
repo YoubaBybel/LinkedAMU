@@ -1,58 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
 <ui:composition template="/template/layout.xhtml">
-	<ui:define name="title">All activities</ui:define>
-	<ui:define name="content">
-		<f:view>
-			<h1>
-				<h:form>
-					List of activities
-					<h:commandLink value="Add" styleClass="btn btn-outline-light inp"
-								   action="#{activity.createActivity}" style="float: right;"/>
-				</h:form>
-			</h1>
+    <ui:define name="title">All activities</ui:define>
+    <ui:define name="content">
+        <f:view>
+            <h1>
+                <h:form>
+                    List of activities
+                    <h:commandLink value="Add" styleClass="btn btn-outline-light inp"
+                                   action="#{activity.createActivity()}" style="float: right;"/>
+                </h:form>
+            </h1>
 
-			<h:form>
-				<h:dataTable value="#{search.getAllActivities()}" var="a"
-					styleClass="table table-hover">
+            <h:form>
+                <h:dataTable value="#{search.getAllActivities()}" var="a"
+                             styleClass="table table-hover">
 
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputText value="#{a.id}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Title</f:facet>
-						<h:outputText value="#{a.title}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Year</f:facet>
-						<h:outputText value="#{a.year}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Formation</f:facet>
-						<h:outputText value="#{a.nature}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Description</f:facet>
-						<h:outputText value="#{a.description}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Action</f:facet>
-						<div class="btn-group btn-group-xs">
-							<h:commandButton value="show"
-								styleClass="btn btn-outline-secondary"
-								action="#{activity.showActivity(a.id)}" />
-						</div>
-					</h:column>
-				</h:dataTable>
-			</h:form>
-		</f:view>
-	</ui:define>
+                    <h:column>
+                        <f:facet name="header">Id</f:facet>
+                        <h:outputText value="#{a.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">User</f:facet>
+                        <h:outputText value="#{a.user.firstName} #{a.user.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        <h:outputText value="#{a.title}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Year</f:facet>
+                        <h:outputText value="#{a.year}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Formation</f:facet>
+                        <h:outputText value="#{a.nature}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Description</f:facet>
+                        <h:outputText value="#{a.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+                        <div class="btn-group btn-group-xs">
+                            <h:commandButton value="show"
+                                             styleClass="btn btn-outline-secondary"
+                                             action="#{activity.showActivity(a.id)}"/>
+                            <!--<c:if test="#{user.userLogged.id == a.user.id}">
+                                <h:commandButton value="edit"
+                                                 styleClass="btn btn-outline-primary"
+                                                 action="#{activity.editActivity(a.id)}"/>
+                                <h:commandButton value="remove"
+                                                 styleClass="btn btn-outline-warning"
+                                                 action="#{activity.removeActivity(a.id)}"/>
+                            </c:if>
+                            <input type="button" value="edit"
+                                   class="btn btn-outline-primary"
+                                   data-toggle="modal" data-target="#myModal"/>-->
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+        </f:view>
+    </ui:define>
 </ui:composition>
 
 </html>

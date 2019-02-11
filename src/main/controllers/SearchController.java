@@ -1,7 +1,7 @@
 package main.controllers;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,9 +24,6 @@ public class SearchController {
     @EJB
     ActivityManager activityManager;
 
-    private User userFaces;
-    private List<Object> resultsSearch = new ArrayList<>();
-    
     @PostConstruct
 	public void init() {
     	System.out.println("Create " + this);
@@ -41,10 +38,10 @@ public class SearchController {
     }
 
     public List<User> getUser(String nameOrFirstName) {
-	List<User> listUsers = new ArrayList<>();
+	    List<User> listUsers = new ArrayList<>();
         listUsers.addAll(userManager.findByName(nameOrFirstName));
         listUsers.addAll(userManager.findByFirstName(nameOrFirstName));
-	return listUsers;
+	    return listUsers;
     }
 
     public List<Activity> getAllActivities() {
@@ -57,31 +54,6 @@ public class SearchController {
 
     public List<Activity> getActivity(String title) {
 	return activityManager.findByTitle(title);
-    }
-
-    public List<Object> autocCompletionUsers(String query) {
-        List<User> results = new LinkedList<>();
-        getUsers().forEach(user -> {
-            if(user.getName().toLowerCase().contains(query)) {
-                results.add(user);
-            }
-            if(user.getFirstName().toLowerCase().contains(query)) {
-                results.add(user);
-            }
-        });
-        return resultsSearch;
-    }
-
-    public char getUserGroup(User user) {
-        return user.getName().charAt(0);
-    }
-
-    public void setUserFaces(User user) {
-        userFaces = user;
-    }
-
-    public User getUserFaces() {
-        return userFaces;
     }
 
     /*public List<Activity> getActivity(int year) {

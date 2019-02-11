@@ -14,6 +14,7 @@ import main.entities.Activity;
 import main.entities.Activity.Nature;
 import main.entities.User;
 import main.services.ActivityManager;
+import main.services.UserManager;
 
 @ManagedBean(name = "activity")
 @SessionScoped
@@ -21,6 +22,9 @@ public class ActivityController {
 
 	@EJB
 	ActivityManager activityManager;
+
+	@EJB
+	UserManager userM;
 
 	Activity currentActivity;
 	Map<String, Nature> natures = new LinkedHashMap<>();
@@ -81,6 +85,11 @@ public class ActivityController {
 		return activityManager.findByTitle(title);
 	}
 
+	public String createActivity() {
+		currentActivity = new Activity();
+		return "editActivity";
+	}
+
 	public String createActivity(User user) {
 		currentActivity = new Activity();
 		currentActivity.setUser(user);
@@ -92,18 +101,13 @@ public class ActivityController {
 		return "editActivity";
 	}
 
-	public String updateActivity() {
-		activityManager.updateActivity(currentActivity);
-		return "activities";
-	}
-
-	public String removeActivity() {
-		activityManager.removeActivity(currentActivity.getId());
-		return "activities";
-	}
-
-	public String removeActivity(int id) {
-		activityManager.removeActivity(id);
+	public String removeActivity(Integer id) {
+	    if(id == null) {
+	        activityManager.removeActivity(currentActivity.getId());
+        }
+        else {
+            activityManager.removeActivity(id);
+        }
 		return "activities";
 	}
 
@@ -116,8 +120,13 @@ public class ActivityController {
 		return showActivity(currentActivity.getId());
 	}
 
-	public String showActivity(int id) {
-		currentActivity = activityManager.findById(id);
+	public String showActivity(Integer id) {
+	    if(id == null) {
+	        currentActivity = activityManager.findById(currentActivity.getId());
+        }
+        else {
+            currentActivity = activityManager.findById(id);
+        }
 		return "showActivity";
 	}
 }

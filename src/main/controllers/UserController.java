@@ -11,7 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import io.codearte.jfairy.Fairy;
+import main.entities.Activity;
 import main.entities.User;
+import main.services.ActivityManager;
 import main.services.UserManager;
 import main.utils.Authentification;
 
@@ -21,6 +23,9 @@ public class UserController {
 
 	@EJB
 	UserManager userM;
+
+	@EJB
+	ActivityManager activityManager;
 
 	@EJB
 	Authentification auth;
@@ -106,8 +111,12 @@ public class UserController {
 		return "profile";
 	}
 
-	public String removeUser() {
-		userM.removeUser(user.getId());
+	public String editUser() {
+		return "profile";
+	}
+
+	public String removeUser(int id) {
+		userM.removeUser(id);
 		return "home";
 	}
 
@@ -136,13 +145,12 @@ public class UserController {
 		return "home";
 	}
 
-	public String createCV() {
-		userLogged.createCV();
-		return "cv";
-	}
-
 	public String showCv(int id) {
 		user = userM.findById(id);
 		return "cv";
+	}
+
+	public void getActivities(User user) {
+		user.setCv(activityManager.findUserActivities(user));
 	}
 }
