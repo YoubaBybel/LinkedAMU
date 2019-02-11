@@ -18,7 +18,7 @@
                 <h:form>
                     List of activities
                     <c:if test="#{isLogged}">
-                        <h:commandLink value="Add" styleClass="btn btn-outline-light inp"
+                        <h:commandLink value="Add" styleClass="btn btn-outline-light button-right"
                                        action="#{activity.createActivity}" style="float: right;"/>
                     </c:if>
                 </h:form>
@@ -41,21 +41,16 @@
                         <h:outputText value="#{a.title}"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Year</f:facet>
-                        <h:outputText value="#{a.year}"/>
-                    </h:column>
-                    <h:column>
                         <f:facet name="header">Formation</f:facet>
                         <h:outputText value="#{a.nature}"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Description</f:facet>
-                        <h:outputText value="#{a.description}"/>
+                        <f:facet name="header">Year</f:facet>
+                        <h:outputText value="#{a.year}"/>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Action</f:facet>
                         <div class="btn-group btn-group-xs">
-                            <h:commandButton value="show"
+                            <h:commandButton value="details"
                                              styleClass="btn btn-outline-secondary"
                                              action="#{activity.showActivity(a.id)}"/>
                             <!--<c:if test="#{user.userLogged.id == a.user.id}">

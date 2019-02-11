@@ -30,3 +30,7 @@
 .content-head-lists {
 	margin-top: 2em;
 }
+
+.button-right {
+	float: left;
+}

@@ -66,11 +66,6 @@ public class UserController {
 		return isLogged;
 	}
 
-	public String findUser(int id) {
-		user = userM.findById(id);
-		return "showUser";
-	}
-
 	public List<User> findUsers(String nameOrFirstName) {
 		List<User> listUsers = new ArrayList<>();
 		listUsers.addAll(userM.findByName(nameOrFirstName));
@@ -124,8 +119,12 @@ public class UserController {
 		return "cv";
 	}
 
-	public void removeCV() {
-		userLogged.getCv().forEach(activity -> activityManager.removeActivity(activity.getId()));
+	public String removeCV() {
+		userLogged.getCv().forEach(activity -> {
+			activityManager.removeActivity(activity.getId());
+		});
 		userLogged.setCv(new ArrayList<>());
+		userM.updateUser(userLogged);
+		return "home";
 	}
 }
