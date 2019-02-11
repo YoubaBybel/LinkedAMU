@@ -37,12 +37,11 @@
 						</h:outputLink>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Action</f:facet>
-						<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
-							styleClass="btn btn-outline-light btn-xs" />
-						<span> </span>
-						<h:commandButton value="Remove User" action="#{user.removeUser()}"
-							styleClass="btn btn-outline-danger btn-xs" />
+						<!--<f:facet name="header">Action</f:facet>-->
+						<div class="btn-group btn-group-xs">
+							<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
+								styleClass="btn btn-outline-light btn-xs" />
+						</div>
 					</h:column>
 				</h:dataTable>
 

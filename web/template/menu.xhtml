@@ -11,13 +11,13 @@
 		<h3 class="masthead-brand masthead-title">LinkedAMU</h3>
 	</h:link>
 	<nav class="nav nav-masthead justify-content-center">
-		<h:link outcome="index" styleClass="nav-link">Home</h:link>
+		<h:link outcome="home" styleClass="nav-link">Home</h:link>
 		<h:link outcome="users" styleClass="nav-link">Users</h:link>
 		<h:link outcome="activities" styleClass="nav-link">Activities</h:link>
 	</nav>
 
 	<div class="masthead-btn">
-		<c:if test="#{isLogged}">
+		<c:if test="#{user.logged}">
 			<h:form>
 				Connected as
 				<h:commandLink value="#{user.userLogged.firstName} #{user.userLogged.name}"
@@ -26,7 +26,7 @@
 					styleClass="btn btn-secondary" style="margin-left: 1em;" />
 			</h:form>
 		</c:if>
-		<c:if test="#{!isLogged}">
+		<c:if test="#{!user.logged}">
 			<h:button outcome="inscription" value="Inscription"
 					  styleClass="btn btn-secondary" />
 			<span style="margin-right: 1em;"> </span>

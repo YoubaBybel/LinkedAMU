@@ -10,9 +10,11 @@
     <ui:define name="content">
         <f:view>
             <c:set var="a" value="#{activity.currentActivity}" />
+
             <div class="jumbotron" style="color: black;">
                 <h1>#{a.title}</h1>
                 <p><strong>Id:</strong> #{a.id}</p>
+                <p><strong>User:</strong> #{a.user.name} #{a.user.firstName}</p>
                 <p><strong>Year:</strong> #{a.year}</p>
                 <p><strong>Nature:</strong> #{a.nature}</p>
                 <p><strong>Description:</strong> #{a.description}</p>
@@ -23,19 +25,21 @@
                     </h:link>
                 </p>
             </div>
+
             <h:form>
-                <c:if test="#{user.logged}">
-                <p>
-                    <h:commandLink action="#{activity.editActivity()}" styleClass="btn btn-outline-warning btn-lg">
-                        <span>Edit</span>
-                    </h:commandLink>
-                    <span> </span>
-                    <h:commandLink action="#{activity.removeActivity()}" styleClass="btn btn-outline-danger btn-lg">
-                        <span>Remove</span>
-                    </h:commandLink>
-                </p>
+                <c:if test="#{user.userLogged.id == activity.currentActivity.user.id}">
+                    <p>
+                        <h:commandLink action="#{activity.editActivity(activity.currentActivity.id)}" styleClass="btn btn-outline-warning btn-lg">
+                            <span>Edit</span>
+                        </h:commandLink>
+                        <span> </span>
+                        <h:commandLink action="#{activity.removeActivity(activity.currentActivity.id)}" styleClass="btn btn-outline-danger btn-lg">
+                            <span>Remove</span>
+                        </h:commandLink>
+                    </p>
                 </c:if>
             </h:form>
+
         </f:view>
     </ui:define>
 </ui:composition>

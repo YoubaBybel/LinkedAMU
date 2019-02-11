@@ -45,17 +45,12 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>6.1</version>
+			<version>6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>io.codearte.jfairy</groupId>
 			<artifactId>jfairy</artifactId>
 			<version>0.5.9</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
-			<version>1.4</version>
 		</dependency>
 	</dependencies>
 </project>

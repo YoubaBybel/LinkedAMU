@@ -11,7 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import io.codearte.jfairy.Fairy;
+import main.entities.Activity;
 import main.entities.User;
+import main.services.ActivityManager;
 import main.services.UserManager;
 import main.utils.Authentification;
 
@@ -21,6 +23,9 @@ public class UserController {
 
 	@EJB
 	UserManager userM;
+
+	@EJB
+	ActivityManager activityManager;
 
 	@EJB
 	Authentification auth;
@@ -39,11 +44,43 @@ public class UserController {
 			user1.setPassword("12345678");
 			user1.setEmail("timothee@berthod.net");
 			user1.setWebSite("https://google.fr");
-			userM.createUser(user1);
+			User tim = userM.createUser(user1);
 
 			User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com", "23862386");
 			user2.setWebSite("ayoub.elyousfi.free.fr");
-			userM.createUser(user2);
+			User youba = userM.createUser(user2);
+
+			Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
+			master2.setWebAddress("http://masterinfo.univ-mrs.fr/master-2018");
+			master2.setDescription("J'ai bientôt fini ce master 2, bientôt...");
+			activityManager.createActivity(master2);
+
+			Activity animateur = new Activity(2012, "EXP_PERSO", "Animateur Éclaireuses Éclaireurs de France");
+			animateur.setDescription("J'ai été animateur pendant 4 ans avant de me concentrer sur mes études");
+			activityManager.createActivity(animateur);
+
+			Activity stage = new Activity(2019, "STAGE", "SOGETI Aix");
+			stage.setDescription("Mon premier stage en entreprise, ça va être génial !!");
+			activityManager.createActivity(stage);
+
+			Activity basket = new Activity(2015, "AUTRE", "Basket en compétition");
+			basket.setDescription("J'aimerais bien jouer mais je suis trop nul à ce sport...");
+			activityManager.createActivity(basket);
+
+			Activity vendeur = new Activity(2016, "EXP_PRO", "Vendeur & Conseiller");
+			vendeur.setDescription("J'ai été vendeur auprès de 3 grandes enseignes dans le monde du prêt-à-porter.\n"
+					+ "¤ Le Temps des Cerises\n" + "¤ H&M\n" + "¤ Zara");
+			activityManager.createActivity(vendeur);
+
+			tim.addActivity(master2);
+			tim.addActivity(stage);
+			userM.updateUser(tim);
+			youba.addActivity(basket);
+			youba.addActivity(vendeur);
+			youba.addActivity(animateur);
+			userM.updateUser(youba);
+
+			activityManager.findAll().forEach(act -> activityManager.updateActivity(act));
 		}
 	}
 
@@ -112,8 +149,12 @@ public class UserController {
 		return "profile";
 	}
 
-	public String removeUser() {
-		userM.removeUser(user.getId());
+	public String editUser() {
+		return "profile";
+	}
+
+	public String removeUser(int id) {
+		userM.removeUser(id);
 		return "home";
 	}
 
@@ -142,13 +183,12 @@ public class UserController {
 		return "home";
 	}
 
-	public String createCV() {
-		userLogged.createCV();
-		return "cv";
-	}
-
 	public String showCv(int id) {
 		user = userM.findById(id);
 		return "cv";
+	}
+
+	public void getActivities(User user) {
+		user.setCv(activityManager.findUserActivities(user));
 	}
 }

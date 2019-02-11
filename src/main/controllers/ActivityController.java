@@ -14,6 +14,7 @@ import main.entities.Activity;
 import main.entities.Activity.Nature;
 import main.entities.User;
 import main.services.ActivityManager;
+import main.services.UserManager;
 
 @ManagedBean(name = "activity")
 @SessionScoped
@@ -21,6 +22,9 @@ public class ActivityController {
 
 	@EJB
 	ActivityManager activityManager;
+
+	@EJB
+	UserManager um;
 
 	Activity currentActivity;
 	Map<String, Nature> natures = new LinkedHashMap<>();
@@ -30,7 +34,7 @@ public class ActivityController {
 		System.out.println("Create " + this);
 		activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
 
-		Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
+		/*Activity master2 = new Activity(2019, "FORMATION", "Master 2 - Ingénierie du Logiciel et des Données");
 		master2.setWebAddress("http://masterinfo.univ-mrs.fr/master-2018");
 		master2.setDescription("J'ai bientôt fini ce master 2, bientôt...");
 		activityManager.createActivity(master2);
@@ -52,6 +56,26 @@ public class ActivityController {
 				+ "¤ Le Temps des Cerises\n" + "¤ H&M\n" + "¤ Zara");
 		activityManager.createActivity(vendeur);
 
+		User tonyStark = new User("STARK", "Tony", "iron.man@starkindustry.com", "iamironman");
+		tonyStark.getCv().add(master2);
+		tonyStark.getCv().add(stage);
+		tonyStark.getCv().add(vendeur);
+
+		User captain = new User("CAPTAIN", "America", "sergent@us-navy.com", "oldsoldier");
+		captain.getCv().add(animateur);
+		captain.getCv().add(basket);
+		User bruceBanner = new User("BANNER", "Bruce","brucebanner@hulk.com", "Ouuuaaahhh");
+		bruceBanner.getCv().add(master2);
+		bruceBanner.getCv().add(stage);
+		bruceBanner.getCv().add(basket);
+		User docteurStrange = new User("DOCTOR", "Strange", "docteur@strange.com", "pierredutemps");
+		docteurStrange.getCv().add(master2);
+		docteurStrange.getCv().add(stage);
+		User natachaRomanov = new User("ROMANOV", "Natacha", "nat_nov@blackwidow.com", "Grrrrrr");
+		natachaRomanov.getCv().add(vendeur);
+		natachaRomanov.getCv().add(stage);
+		natachaRomanov.getCv().add(basket);*/
+
 		natures.put("NATURE DE L'ACTIVITÉ", Nature.AUTRE);
 		natures.put("FORMATION", Nature.FORMATION);
 		natures.put("EXPERIENCE PROFESSIONNELLE", Nature.EXP_PRO);
@@ -64,6 +88,8 @@ public class ActivityController {
 	@PreDestroy
 	public void exit() {
 		activityManager.findAll().forEach(activity -> activityManager.removeActivity(activity.getId()));
+		um.findAll().forEach(user -> um.removeUser(user.getId()));
+
 	}
 
 	public Map<String, Nature> getNatures() {
@@ -86,6 +112,11 @@ public class ActivityController {
 		return activityManager.findByTitle(title);
 	}
 
+	public String createActivity() {
+		currentActivity = new Activity();
+		return "editActivity";
+	}
+
 	public String createActivity(User user) {
 		currentActivity = new Activity();
 		currentActivity.setUser(user);
@@ -97,18 +128,13 @@ public class ActivityController {
 		return "editActivity";
 	}
 
-	public String updateActivity() {
-		activityManager.updateActivity(currentActivity);
-		return "activities";
-	}
-
-	public String removeActivity() {
-		activityManager.removeActivity(currentActivity.getId());
-		return "activities";
-	}
-
-	public String removeActivity(int id) {
-		activityManager.removeActivity(id);
+	public String removeActivity(Integer id) {
+	    if(id == null) {
+	        activityManager.removeActivity(currentActivity.getId());
+        }
+        else {
+            activityManager.removeActivity(id);
+        }
 		return "activities";
 	}
 
@@ -121,8 +147,13 @@ public class ActivityController {
 		return showActivity(currentActivity.getId());
 	}
 
-	public String showActivity(int id) {
-		currentActivity = activityManager.findById(id);
+	public String showActivity(Integer id) {
+	    if(id == null) {
+	        currentActivity = activityManager.findById(currentActivity.getId());
+        }
+        else {
+            currentActivity = activityManager.findById(id);
+        }
 		return "showActivity";
 	}
 }
