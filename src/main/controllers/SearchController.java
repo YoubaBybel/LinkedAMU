@@ -22,10 +22,11 @@ public class SearchController {
 
 	@EJB
 	ActivityManager activityManager;
-	
+
 	private List<User> searchUsers;
 	private List<Activity> searchActivities;
 	private String input = "";
+	private Boolean flag = false;
 
 	@PostConstruct
 	public void init() {
@@ -35,26 +36,35 @@ public class SearchController {
 	public List<User> getSearchUsers() {
 		return searchUsers;
 	}
-	
+
 	public List<Activity> getSearchActivities() {
 		return searchActivities;
 	}
-	
+
 	public String getInput() {
 		return input;
 	}
-	
+
 	public void setInput(String input) {
 		this.input = input;
 	}
-	
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
 	public String search() {
+		flag = true;
 		searchUsers = new ArrayList<User>();
 		searchActivities = new ArrayList<Activity>();
-		searchUsers.addAll(userManager.findByName(input));
-		searchUsers.addAll(userManager.findByFirstName(input));
-		searchActivities.addAll(activityManager.findByTitle(input));
+		if (!input.equals("")) {
+			searchUsers.addAll(userManager.findByName(input));
+			searchUsers.addAll(userManager.findByFirstName(input));
+			searchActivities.addAll(activityManager.findByTitle(input));
+		}
 		input = "";
+		if (searchUsers.isEmpty() && searchActivities.isEmpty())
+			flag = false;
 		return "home";
 	}
 }

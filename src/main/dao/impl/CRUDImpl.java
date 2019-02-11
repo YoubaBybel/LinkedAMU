@@ -47,5 +47,4 @@ public class CRUDImpl implements CRUD {
     public <T> List<T> findAll(Class<T> aClass) {
 	return em.createQuery("From " + aClass.getSimpleName(), aClass).getResultList();
     }
-
 }

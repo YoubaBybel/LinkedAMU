@@ -14,79 +14,79 @@
 	<ui:define name="title">Home</ui:define>
 	<ui:define name="content">
 		<f:view>
+			<c:if test="#{search.flag}">
+				<h:form>
+					<h:dataTable var="u" value="#{search.searchUsers}"
+						styleClass="table table-hover">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+							<h:outputText value="#{u.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{u.name}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">First Name</f:facet>
+							<h:outputText value="#{u.firstName}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Email</f:facet>
+							<h:outputText value="#{u.email}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Web_Site</f:facet>
+							<h:outputLink value="#{u.webSite}">
+								<h:outputText value="#{u.webSite}" />
+							</h:outputLink>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
+								styleClass="btn btn-outline-light btn-xs" />
+						</h:column>
+					</h:dataTable>
+				</h:form>
 
-			<h:form>
-				<h:dataTable var="u" value="#{search.searchUsers}"
-					styleClass="table table-hover">
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputText value="#{u.id}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Name</f:facet>
-						<h:outputText value="#{u.name}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">First Name</f:facet>
-						<h:outputText value="#{u.firstName}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Email</f:facet>
-						<h:outputText value="#{u.email}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Web_Site</f:facet>
-						<h:outputLink value="#{u.webSite}">
-							<h:outputText value="#{u.webSite}" />
-						</h:outputLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Action</f:facet>
-						<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
-							styleClass="btn btn-outline-light btn-xs" />
-					</h:column>
-				</h:dataTable>
-			</h:form>
 
-
-			<h:form>
-				<h:dataTable var="a" value="#{search.searchActivities}"
-					styleClass="table table-hover">
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputText value="#{a.id}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Title</f:facet>
-						<h:outputText value="#{a.title}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Year</f:facet>
-						<h:outputText value="#{a.year}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Nature</f:facet>
-						<h:outputText value="#{a.nature}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Description</f:facet>
-						<h:outputText value="#{a.description}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Web Adress</f:facet>
-						<h:outputLink value="#{a.webAddress}">
-							<h:outputText value="#{a.webAddress}" />
-						</h:outputLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Action</f:facet>
-						<h:commandButton value="See activity"
-							action="#{activity.showActivity(a.id)}"
-							styleClass="btn btn-outline-light btn-xs" />
-					</h:column>
-				</h:dataTable>
-			</h:form>
-
+				<h:form>
+					<h:dataTable var="a" value="#{search.searchActivities}"
+						styleClass="table table-hover">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+							<h:outputText value="#{a.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Title</f:facet>
+							<h:outputText value="#{a.title}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Year</f:facet>
+							<h:outputText value="#{a.year}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nature</f:facet>
+							<h:outputText value="#{a.nature}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{a.description}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Web Adress</f:facet>
+							<h:outputLink value="#{a.webAddress}">
+								<h:outputText value="#{a.webAddress}" />
+							</h:outputLink>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton value="See activity"
+								action="#{activity.showActivity(a.id)}"
+								styleClass="btn btn-outline-light btn-xs" />
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</c:if>
 
 		</f:view>
 	</ui:define>
