@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import io.codearte.jfairy.Fairy;
-import main.entities.Activity;
 import main.entities.User;
 import main.services.ActivityManager;
 import main.services.UserManager;
@@ -34,41 +32,20 @@ public class UserController {
 	private User userLogged;
 	private boolean isLogged = false;
 
-	// @PostConstruct
-	// public void init() {
-	// System.out.println("Create " + this);
-	// if (userM.findAll().isEmpty()) {
-	// User user1 = new User();
-	// user1.setName("BERTHOD");
-	// user1.setFirstName("Timothee");
-	// user1.setPassword("12345678");
-	// user1.setEmail("timothee@berthod.net");
-	// user1.setWebSite("https://google.fr");
-	// userM.createUser(user1);
-	//
-	// User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com",
-	// "23862386");
-	// user2.setWebSite("ayoub.elyousfi.free.fr");
-	// userM.createUser(user2);
-	// }
-	// }
-
 	@PostConstruct
 	public void init() {
 		System.out.println("Create " + this);
 		User user1;
 		Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
-		if (userM.findAll().isEmpty()) {
-			for (int i = 0; i < 10; i++) {
-				io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
-				user1 = new User();
-				user1.setEmail(fPerson.getEmail());
-				user1.setFirstName(fPerson.getFirstName());
-				user1.setName(fPerson.getLastName());
-				user1.setPassword(fPerson.getPassword());
-				if (userM.findByEmail(user1.getEmail()).isEmpty()) {
-					userM.createUser(user1);
-				}
+		while (userM.findAll().size() < 100) {
+			io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
+			user1 = new User();
+			user1.setEmail(fPerson.getEmail());
+			user1.setFirstName(fPerson.getFirstName());
+			user1.setName(fPerson.getLastName());
+			user1.setPassword(fPerson.getPassword());
+			if (userM.findByEmail(user1.getEmail()).isEmpty()) {
+				userM.createUser(user1);
 			}
 		}
 	}
@@ -108,7 +85,7 @@ public class UserController {
 
 	public String updateUser() {
 		userLogged = userM.updateUser(userLogged);
-		return "profile";
+		return null;
 	}
 
 	public String editUser() {
@@ -152,5 +129,9 @@ public class UserController {
 
 	public void getActivities(User user) {
 		user.setCv(activityManager.findUserActivities(user));
+	}
+	
+	public void removeCV() {
+		userLogged.getCv().forEach(activity -> activityManager.removeActivity(activity.getId()));
 	}
 }

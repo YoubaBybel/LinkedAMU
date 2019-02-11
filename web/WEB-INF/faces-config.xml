@@ -119,6 +119,11 @@
             <to-view-id>/cv.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>cv</from-outcome>
+            <to-view-id>/cv.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
 
 </faces-config>

@@ -13,69 +13,111 @@
 
 			<h1>List of users</h1>
 			<h:form>
+				<!-- 				<p:dataView var="u" value="#{user.users}" rows="5" paginator="true" -->
+				<!-- 					paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}" -->
+				<!-- 					gridIcon="pi pi-th-large" listIcon="pi pi-bars"> -->
+
+				<!-- 					<p:dataViewGridItem> -->
+				<!-- 						<p:panel header="#{u.id}" style="text-align:center"> -->
+				<!-- 							<h:panelGrid columns="1" style="width:100%"> -->
+
+				<!-- 								<h:outputText value="#{u.id}" /> -->
+
+				<!-- 								<p:commandLink update=":form:userDetail" -->
+				<!-- 									oncomplete="PF('userDialog').show()" title="View Detail"> -->
+				<!-- 									<h:outputText styleClass="ui-icon pi pi-search" -->
+				<!-- 										style="margin:0 auto;" /> -->
+				<!-- 								</p:commandLink> -->
+				<!-- 							</h:panelGrid> -->
+				<!-- 						</p:panel> -->
+				<!-- 					</p:dataViewGridItem> -->
 
 
-				<p:dataView var="u" value="#{user.users}" rows="10" paginator="true"
-					paginatorTemplate="{CurrentPageReport}  {PageLinks}"
-					gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+				<!-- 					<p:dataViewListItem> -->
+				<!-- 						<h:panelGrid columns="3" columnClasses="logo,detail"> -->
+
+				<!-- 							<p:outputPanel> -->
+				<!-- 								<h:panelGrid columns="2" cellpadding="5"> -->
+				<!-- 									<h:outputText value="Name:" /> -->
+				<!-- 									<h:outputText value="#{u.name}" /> -->
+				<!-- 									<h:outputText value="FirstName:" /> -->
+				<!-- 									<h:outputText value="#{u.firstName}" /> -->
+				<!-- 									<h:outputText value="Email:" /> -->
+				<!-- 									<h:outputText value="#{u.email}" /> -->
+				<!-- 									<h:outputText value="BirthDate:" /> -->
+				<!-- 									<h:outputText value="#{u.birthDate}" /> -->
+				<!-- 									<h:outputText value="WebSite:" /> -->
+				<!-- 									<h:outputText value="#{u.webSite}" /> -->
+				<!-- 								</h:panelGrid> -->
+				<!-- 							</p:outputPanel> -->
+
+				<!-- 							<p:commandLink title="TEST"> -->
+				<!-- 								<h:outputText styleClass="ui-icon pi pi-search" -->
+				<!-- 									style="margin:0 auto;" /> -->
+				<!-- 							</p:commandLink> -->
+
+				<!-- 						</h:panelGrid> -->
+				<!-- 					</p:dataViewListItem> -->
+				<!-- 				</p:dataView> -->
 
 
-					<p:dataViewListItem>
-						<h:panelGrid columns="3" style="width:100%"
-							columnClasses="logo,detail">
+				<!-- 				<p:dialog header="Users Info" widgetVar="userDialog" modal="true" -->
+				<!-- 					showEffect="fade" hideEffect="fade" resizable="false"> -->
+				<!-- 					<p:outputPanel id="userDetail" style="text-align:center;"> -->
+				<!-- 						<p:panelGrid columns="2" -->
+				<!-- 							rendered="#{not empty dataGridView.selectedCar}" -->
+				<!-- 							columnClasses="label,value"> -->
+				<!-- 							<f:facet name="header"> -->
+				<!-- 								<p:graphicImage -->
+				<!-- 									name="demo/images/car/#{dataGridView.selectedCar.brand}-big.gif" /> -->
+				<!-- 							</f:facet> -->
 
-							<p:outputPanel>
-								<h:panelGrid columns="2" cellpadding="5">
-									<h:outputText value="Id:" />
-									<h:outputText value="#{u.id}" style="font-weight: bold" />
+				<!-- 							<h:outputText value="Id:" /> -->
+				<!-- 							<h:outputText value="#{dataGridView.selectedCar.id}" /> -->
 
-								</h:panelGrid>
-							</p:outputPanel>
+				<!-- 							<h:outputText value="Year" /> -->
+				<!-- 							<h:outputText value="#{dataGridView.selectedCar.year}" /> -->
 
-<!-- 														<p:commandLink update=":form:carDetail" -->
-<!-- 															oncomplete="PF('carDialog').show()" title="View Detail"> -->
-<!-- 															<h:outputText styleClass="ui-icon pi pi-search" -->
-<!-- 																style="margin:0 auto;" /> -->
-<!-- 															<f:setPropertyActionListener value="#{car}" -->
-<!-- 																target="#{dataGridView.selectedCar}" /> -->
-<!-- 														</p:commandLink> -->
-						</h:panelGrid>
-					</p:dataViewListItem>
-				</p:dataView>
+				<!-- 							<h:outputText value="Color:" /> -->
+				<!-- 							<h:outputText value="#{dataGridView.selectedCar.color}" -->
+				<!-- 								style="color:#{dataGridView.selectedCar.color}" /> -->
 
-<!-- 				<h:dataTable var="u" value="#{user.users}" -->
-<!-- 					styleClass="table table-hover"> -->
-<!-- 					<h:column> -->
-<!-- 						<f:facet name="header">Id</f:facet> -->
-<!-- 						<h:outputText value="#{u.id}" /> -->
-<!-- 					</h:column> -->
-<!-- 					<h:column> -->
-<!-- 						<f:facet name="header">Name</f:facet> -->
-<!-- 						<h:outputText value="#{u.name}" /> -->
-<!-- 					</h:column> -->
-<!-- 					<h:column> -->
-<!-- 						<f:facet name="header">First Name</f:facet> -->
-<!-- 						<h:outputText value="#{u.firstName}" /> -->
-<!-- 					</h:column> -->
-<!-- 					<h:column> -->
-<!-- 						<f:facet name="header">Email</f:facet> -->
-<!-- 						<h:outputText value="#{u.email}" /> -->
-<!-- 					</h:column> -->
-<!-- 					<h:column> -->
-<!-- 						<f:facet name="header">Web_Site</f:facet> -->
-<!-- 						<h:outputLink value="#{u.webSite}"> -->
-<!-- 							<h:outputText value="#{u.webSite}" /> -->
-<!-- 						</h:outputLink> -->
-<!-- 					</h:column> -->
-<!-- 					<h:column> -->
-<!-- 						<f:facet name="header">Action</f:facet> -->
-<!-- 						<h:commandButton value="See CV" action="#{user.showCv(u.id)}" -->
-<!-- 							styleClass="btn btn-outline-light btn-xs" /> -->
-<!-- 						<span> </span> -->
-<!-- 						<h:commandButton value="Remove User" action="#{user.removeUser()}" -->
-<!-- 							styleClass="btn btn-outline-danger btn-xs" /> -->
-<!-- 					</h:column> -->
-<!-- 				</h:dataTable> -->
+				<!-- 							<h:outputText value="Price" /> -->
+				<!-- 							<h:outputText value="$#{dataGridView.selectedCar.price}" /> -->
+				<!-- 						</p:panelGrid> -->
+				<!-- 					</p:outputPanel> -->
+				<!-- 				</p:dialog> -->
+
+				<h:dataTable var="u" value="#{user.users}"
+					styleClass="table table-hover">
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						<h:outputText value="#{u.id}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Name</f:facet>
+						<h:outputText value="#{u.name}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">First Name</f:facet>
+						<h:outputText value="#{u.firstName}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputText value="#{u.email}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Web_Site</f:facet>
+						<h:outputLink value="#{u.webSite}">
+							<h:outputText value="#{u.webSite}" />
+						</h:outputLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Action</f:facet>
+						<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
+							styleClass="btn btn-outline-light btn-xs" />
+					</h:column>
+				</h:dataTable>
 
 
 
@@ -101,7 +143,7 @@
 					</c:forEach>
 				</table> -->
 
-				<c:if test="#{user.logged}">
+				<c:if test="#{isLogged}">
 					<h:commandButton styleClass="btn btn-outline-light"
 						action="#{user.newUser()}" value="New User" />
 				</c:if>

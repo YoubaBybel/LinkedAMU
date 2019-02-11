@@ -12,13 +12,15 @@
             <h1>
                 <h:form>
                     <h:outputText value="CV of #{user.user.firstName} #{user.user.name}"/>
+                    <c:if test="#{user.user.id == user.userLogged.id}">
                     <div class="btn btn-group btn-group-xs">
                         <h:commandLink value="Add activity" styleClass="btn btn-outline-light"
                                        action="#{activity.createActivity()}" style="float: right;"/>
                         <span> </span>
                         <h:commandLink value="Delete CV" styleClass="btn btn-outline-danger"
-                                       action="#{activity.createActivity()}" style="float: right;"/>
+                                       action="#{user.removeCV()}" style="float: right;"/>
                     </div>
+                    </c:if>
                 </h:form>
             </h1>
 

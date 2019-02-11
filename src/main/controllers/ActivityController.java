@@ -27,8 +27,20 @@ public class ActivityController {
 	UserManager userM;
 
 	Activity currentActivity;
+	
 	Map<String, Nature> natures = new LinkedHashMap<>();
 
+	@PostConstruct
+	public void init() {
+		natures.put("NATURE DE L'ACTIVITÉ", Nature.AUTRE);
+		natures.put("FORMATION", Nature.FORMATION);
+		natures.put("EXPERIENCE PROFESSIONNELLE", Nature.EXP_PRO);
+		natures.put("STAGE", Nature.STAGE);
+		natures.put("EXPERIENCE PERSONNELLE", Nature.EXP_PERSO);
+		natures.put("PROJET", Nature.PROJET);
+		natures.put("AUTRE", Nature.AUTRE);
+	}
+	
 //	@PostConstruct
 //	public void init() {
 //		System.out.println("Create " + this);
@@ -56,13 +68,7 @@ public class ActivityController {
 //				+ "¤ Le Temps des Cerises\n" + "¤ H&M\n" + "¤ Zara");
 //		activityManager.createActivity(vendeur);
 //
-//		natures.put("NATURE DE L'ACTIVITÉ", Nature.AUTRE);
-//		natures.put("FORMATION", Nature.FORMATION);
-//		natures.put("EXPERIENCE PROFESSIONNELLE", Nature.EXP_PRO);
-//		natures.put("STAGE", Nature.STAGE);
-//		natures.put("EXPERIENCE PERSONNELLE", Nature.EXP_PERSO);
-//		natures.put("PROJET", Nature.PROJET);
-//		natures.put("AUTRE", Nature.AUTRE);
+//		
 //	}
 
 	public Map<String, Nature> getNatures() {
