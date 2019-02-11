@@ -14,25 +14,33 @@
 		<h:link outcome="home" styleClass="nav-link">Home</h:link>
 		<h:link outcome="users" styleClass="nav-link">Users</h:link>
 		<h:link outcome="activities" styleClass="nav-link">Activities</h:link>
+		<c:if test="#{isLogged}">
+			<h:link outcome="cv" styleClass="nav-link">CV</h:link>
+		</c:if>
 	</nav>
 
-	<div class="masthead-btn">
-		<c:if test="#{isLogged}">
-			<h:form>
-				Connected as
-				<h:commandLink value="#{user.userLogged.firstName} #{user.userLogged.name}"
-							   action="profile" />
-				<h:commandButton action="#{user.logout()}" value="Logout"
-					styleClass="btn btn-secondary" style="margin-left: 1em;" />
-			</h:form>
-		</c:if>
-		<c:if test="#{!isLogged}">
-			<h:button outcome="inscription" value="Inscription"
-					  styleClass="btn btn-secondary" />
-			<span style="margin-right: 1em;"> </span>
-			<h:button outcome="login" value="Connexion"
-					  styleClass="btn btn-secondary" />
-		</c:if>
+	<div class="masthead-btn" style="float: right">
+		<div>
+			<c:if test="#{isLogged}">
+				<h:form>
+					Connected as
+					<h:commandLink value="#{user.userLogged.firstName} #{user.userLogged.name}"
+								   action="profile" />
+					<h:commandButton action="#{user.logout()}" value="Logout"
+						styleClass="btn btn-secondary" style="margin-left: 1em;" />
+				</h:form>
+			</c:if>
+			<c:if test="#{!isLogged}">
+				<h:button outcome="inscription" value="Inscription"
+						  styleClass="btn btn-secondary" />
+				<span style="margin-right: 1em;"> </span>
+				<h:button outcome="login" value="Connexion"
+						  styleClass="btn btn-secondary" />
+			</c:if>
+		</div>
+		<div>
+			<ui:include src="/template/search.xhtml"/>
+		</div>
 	</div>
 
 </ui:composition>

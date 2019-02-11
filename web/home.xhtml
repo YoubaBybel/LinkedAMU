@@ -15,7 +15,8 @@
 	<ui:define name="content">
 		<f:view>
 			<c:if test="#{search.flag}">
-				<h:form>
+                <h1> List of Users</h1>
+                <h:form>
 					<h:dataTable var="u" value="#{search.searchUsers}"
 						styleClass="table table-hover">
 						<h:column>
@@ -49,6 +50,7 @@
 				</h:form>
 
 
+                <h1>List of Activities</h1>
 				<h:form>
 					<h:dataTable var="a" value="#{search.searchActivities}"
 						styleClass="table table-hover">
