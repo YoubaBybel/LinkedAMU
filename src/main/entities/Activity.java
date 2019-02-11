@@ -2,16 +2,7 @@ package main.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -50,6 +41,7 @@ public class Activity implements Serializable {
 	private String webAddress;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public Activity() {

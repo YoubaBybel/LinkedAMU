@@ -126,9 +126,13 @@ public class UserController {
 	public void getActivities(User user) {
 		user.setCv(activityManager.findUserActivities(user));
 	}
-	
-	public void removeCV() {
-		userLogged.getCv().forEach(activity -> activityManager.removeActivity(activity.getId()));
+
+	public String removeCV() {
+		userLogged.getCv().forEach(activity -> {
+			activityManager.removeActivity(activity.getId());
+		});
 		userLogged.setCv(new ArrayList<>());
+		userM.updateUser(userLogged);
+		return "home";
 	}
 }

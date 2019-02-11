@@ -66,25 +66,23 @@ public class ActivityController {
 	}
 
 	public String editActivity(int id) {
-		currentActivity = activityManager.findById(id);
+		currentActivity = getActivity(id);
 		return "editActivity";
 	}
 
-	public String removeActivity(Integer id) {
-	    if(id == null) {
-	        activityManager.removeActivity(currentActivity.getId());
-        }
-        else {
-            activityManager.removeActivity(id);
-        }
+	public String removeActivity(int id) {
+	    Activity activity = getActivity(id);
+	    User user = activity.getUser();
+	    user.removeActivity(activity);
+	    activityManager.removeActivity(id);
+	    userM.updateUser(user);
 		return "activities";
 	}
 
 	public String saveActivity(User user) {
 		if (currentActivity.getId() == null) {
-			currentActivity.setUser(user);
-			user.addActivity(currentActivity);
-			activityManager.createActivity(currentActivity);
+            activityManager.createActivity(currentActivity);
+            user.addActivity(currentActivity);
 			userM.updateUser(user);
 		} else {
 			currentActivity = activityManager.updateActivity(currentActivity);
@@ -93,7 +91,7 @@ public class ActivityController {
 	}
 
 	public String showActivity(int id) {
-	    currentActivity = activityManager.findById(id);
+	    currentActivity = getActivity(id);
 		return "showActivity";
 	}
 }

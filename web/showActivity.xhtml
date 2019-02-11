@@ -11,6 +11,8 @@
         <f:view>
             <c:set var="a" value="#{activity.currentActivity}" />
 
+            <h:outputText value="#{activity.currentActivity}" />
+
             <div class="jumbotron" style="color: black;">
                 <h1>#{a.title}</h1>
                 <p><strong>Id:</strong> #{a.id}</p>
@@ -28,7 +30,7 @@
 
             <h:form>
                 <c:if test="#{user.userLogged.id == activity.currentActivity.user.id}">
-                    <p style="float: right;">
+                    <p>
                         <h:commandLink action="#{activity.editActivity(activity.currentActivity.id)}" styleClass="btn btn-outline-warning btn-lg">
                             <span>Edit</span>
                         </h:commandLink>

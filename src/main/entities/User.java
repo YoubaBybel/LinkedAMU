@@ -148,6 +148,10 @@ public class User implements Serializable {
         cv.add(activity);
     }
 
+    public void removeActivity(Activity activity) {
+        cv.remove(activity);
+    }
+
     @Override
     public String toString() {
 	return "User{" + "id=" + id + ", name='" + name + '\'' + ", firstName='" + firstName + '\'' + ", email='"
