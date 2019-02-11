@@ -8,18 +8,14 @@
       xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-    <h:form>
+    <h:form style="margin-right:150px">
         <div class="form-group">
-            <h:inputText id="activity" value="#{activity.currentActivity}"
-                         styleClass="form-control">
-                <f:validateLength minimum="3" maximum="20" />
-            </h:inputText>
-            <h:message id="messageCity" for="activity"
-                       styleClass="label label-danger" />
+            <h:inputText id="search" value="#{search.input}"
+                         styleClass="form-control" />
         </div>
-        <h:commandButton value="Add" action="#{activity.createActivity()}"
+        <h:commandButton value="Rechercher" action="#{search.search()}"
                          styleClass="btn btn-primary">
-            <f:ajax execute="@this activity" render="@form" />
+            <f:ajax execute="@form" render="@form" />
         </h:commandButton>
     </h:form>
 

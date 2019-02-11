@@ -66,16 +66,20 @@ public class UserController {
 		return isLogged;
 	}
 
-	public List<User> findUsers(String nameOrFirstName) {
-		List<User> listUsers = new ArrayList<>();
-		listUsers.addAll(userM.findByName(nameOrFirstName));
-		listUsers.addAll(userM.findByFirstName(nameOrFirstName));
-		return listUsers;
+	public String findUser(int id) {
+		user = userM.findById(id);
+		return "showUser";
 	}
 
 	public String addUser() {
+		String page;
 		userM.createUser(user);
-		return "login";
+		if(isLogged) {
+			page = "home";
+		} else {
+			page = "login";
+		}
+		return page;
 	}
 
 	public void updateUser() {
@@ -117,6 +121,10 @@ public class UserController {
 		user.setCv(activityManager.findUserActivities(user));
 		user = userM.updateUser(user);
 		return "cv";
+	}
+
+	public void getActivities(User user) {
+		user.setCv(activityManager.findUserActivities(user));
 	}
 
 	public String removeCV() {
