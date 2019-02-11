@@ -1,6 +1,5 @@
 package main.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,25 +70,19 @@ public class UserController {
 		return "showUser";
 	}
 
-	public List<User> findUsers(String nameOrFirstName) {
-		List<User> listUsers = new ArrayList<>();
-		listUsers.addAll(userM.findByName(nameOrFirstName));
-		listUsers.addAll(userM.findByFirstName(nameOrFirstName));
-		return listUsers;
-	}
-
 	public String addUser() {
+		String page;
 		userM.createUser(user);
-		return "home";
+		if(isLogged) {
+			page = "home";
+		} else {
+			page = "login";
+		}
+		return page;
 	}
 
-	public String updateUser() {
+	public void updateUser() {
 		userLogged = userM.updateUser(userLogged);
-		return null;
-	}
-
-	public String editUser() {
-		return "profile";
 	}
 
 	public String removeUser(int id) {
@@ -107,7 +100,7 @@ public class UserController {
 		userLogged = auth.login(user);
 		isLogged = auth.isLogged();
 		if (isLogged) {
-			page = "profile";
+			page = "home";
 		} else {
 			page = null;
 		}
