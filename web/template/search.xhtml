@@ -8,15 +8,15 @@
       xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-    <h:form style="margin-right:150px">
+    <h:form style="margin-right:150px;margin-top:15px">
         <div class="form-group">
             <h:inputText id="search" value="#{search.input}"
                          styleClass="form-control" />
-        </div>
         <h:commandButton value="Rechercher" action="#{search.search()}"
-                         styleClass="btn btn-primary">
+                         styleClass="btn btn-primary" >
             <f:ajax execute="@form" render="@form" />
         </h:commandButton>
+        </div>
     </h:form>
 
 </ui:composition>
