@@ -14,11 +14,13 @@
     <ui:define name="content">
         <f:view>
 
-            <h1>
+            <h1 class="content-head-lists">
                 <h:form>
                     List of activities
-                    <h:commandLink value="Add" styleClass="btn btn-outline-light inp"
-                                   action="#{activity.createActivity()}" style="float: right;"/>
+                    <c:if test="#{isLogged}">
+                        <h:commandLink value="Add" styleClass="btn btn-outline-light inp"
+                                       action="#{activity.createActivity}" style="float: right;"/>
+                    </c:if>
                 </h:form>
             </h1>
 

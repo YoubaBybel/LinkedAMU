@@ -96,12 +96,6 @@ public class ActivityController {
 		return "editActivity";
 	}
 
-	public String createActivity(User user) {
-		currentActivity = new Activity();
-		currentActivity.setUser(user);
-		return "editActivity";
-	}
-
 	public String editActivity(int id) {
 		currentActivity = activityManager.findById(id);
 		return "editActivity";
@@ -117,22 +111,20 @@ public class ActivityController {
 		return "activities";
 	}
 
-	public String saveActivity() {
+	public String saveActivity(User user) {
 		if (currentActivity.getId() == null) {
-			currentActivity = activityManager.createActivity(currentActivity);
+			currentActivity.setUser(user);
+			user.addActivity(currentActivity);
+			activityManager.createActivity(currentActivity);
+			userM.updateUser(user);
 		} else {
 			currentActivity = activityManager.updateActivity(currentActivity);
 		}
 		return showActivity(currentActivity.getId());
 	}
 
-	public String showActivity(Integer id) {
-	    if(id == null) {
-	        currentActivity = activityManager.findById(currentActivity.getId());
-        }
-        else {
-            currentActivity = activityManager.findById(id);
-        }
+	public String showActivity(int id) {
+	    currentActivity = activityManager.findById(id);
 		return "showActivity";
 	}
 }

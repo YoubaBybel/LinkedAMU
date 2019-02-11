@@ -21,9 +21,8 @@ public class CRUDImpl implements CRUD {
     }
 
     @Override
-    public <T> T create(T entity) {
+    public <T> void create(T entity) {
 	em.persist(entity);
-	return entity;
     }
 
     @Override

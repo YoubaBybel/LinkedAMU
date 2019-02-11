@@ -27,13 +27,13 @@ public class UserManagerImpl implements UserManager {
 	}
 
 	@Override
-	public User createUser() {
-		return dao.create(new User());
+	public void createUser() {
+		dao.create(new User());
 	}
 
 	@Override
-	public User createUser(User user) {
-		return dao.create(user);
+	public void createUser(User user) {
+		dao.create(user);
 	}
 
 	@Override

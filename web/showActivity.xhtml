@@ -28,7 +28,7 @@
 
             <h:form>
                 <c:if test="#{user.userLogged.id == activity.currentActivity.user.id}">
-                    <p>
+                    <p style="float: right;">
                         <h:commandLink action="#{activity.editActivity(activity.currentActivity.id)}" styleClass="btn btn-outline-warning btn-lg">
                             <span>Edit</span>
                         </h:commandLink>

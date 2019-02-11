@@ -6,9 +6,9 @@ import main.entities.User;
 
 public interface UserManager {
 
-    User createUser();
+    void createUser();
 
-    User createUser(User user);
+    void createUser(User user);
 
     User updateUser(User user);
 

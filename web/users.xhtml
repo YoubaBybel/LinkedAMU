@@ -11,7 +11,17 @@
 	<ui:define name="content">
 		<f:view>
 
-			<h1>List of users</h1>
+			<h1 class="content-head-lists">
+                <h:form>
+                    List of users
+                    <c:if test="#{isLogged}">
+                        <h:commandButton styleClass="btn btn-outline-light" style="float: right;"
+                                         action="#{user.newUser()}" value="New User" />
+                    </c:if>
+                </h:form>
+            </h1>
+
+
 			<h:form>
 				<!-- 				<p:dataView var="u" value="#{user.users}" rows="5" paginator="true" -->
 				<!-- 					paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}" -->
@@ -142,11 +152,6 @@
 						</tr>
 					</c:forEach>
 				</table> -->
-
-				<c:if test="#{isLogged}">
-					<h:commandButton styleClass="btn btn-outline-light"
-						action="#{user.newUser()}" value="New User" />
-				</c:if>
 
 			</h:form>
 

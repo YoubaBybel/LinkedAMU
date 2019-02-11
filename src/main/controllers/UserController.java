@@ -80,16 +80,11 @@ public class UserController {
 
 	public String addUser() {
 		userM.createUser(user);
-		return "home";
+		return "login";
 	}
 
-	public String updateUser() {
+	public void updateUser() {
 		userLogged = userM.updateUser(userLogged);
-		return null;
-	}
-
-	public String editUser() {
-		return "profile";
 	}
 
 	public String removeUser(int id) {
@@ -107,7 +102,7 @@ public class UserController {
 		userLogged = auth.login(user);
 		isLogged = auth.isLogged();
 		if (isLogged) {
-			page = "profile";
+			page = "home";
 		} else {
 			page = null;
 		}
@@ -124,14 +119,13 @@ public class UserController {
 
 	public String showCv(int id) {
 		user = userM.findById(id);
+		user.setCv(activityManager.findUserActivities(user));
+		user = userM.updateUser(user);
 		return "cv";
 	}
 
-	public void getActivities(User user) {
-		user.setCv(activityManager.findUserActivities(user));
-	}
-	
 	public void removeCV() {
 		userLogged.getCv().forEach(activity -> activityManager.removeActivity(activity.getId()));
+		userLogged.setCv(new ArrayList<>());
 	}
 }
