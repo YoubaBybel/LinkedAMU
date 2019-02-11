@@ -3,7 +3,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/template/layout.xhtml">
 	<ui:define name="title">All users</ui:define>
@@ -12,39 +13,71 @@
 
 			<h1>List of users</h1>
 			<h:form>
-				<h:dataTable value="#{user.users}" var="u"
-					styleClass="table table-hover">
-					<h:column>
-						<f:facet name="header">Id</f:facet>
-						<h:outputText value="#{u.id}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Name</f:facet>
-						<h:outputText value="#{u.name}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">First Name</f:facet>
-						<h:outputText value="#{u.firstName}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Email</f:facet>
-						<h:outputText value="#{u.email}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Web_Site</f:facet>
-						<h:outputLink value="#{u.webSite}">
-							<h:outputText value="#{u.webSite}" />
-						</h:outputLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header">Action</f:facet>
-						<h:commandButton value="See CV" action="#{user.showCv(u.id)}"
-							styleClass="btn btn-outline-light btn-xs" />
-						<span> </span>
-						<h:commandButton value="Remove User" action="#{user.removeUser()}"
-							styleClass="btn btn-outline-danger btn-xs" />
-					</h:column>
-				</h:dataTable>
+
+
+				<p:dataView var="u" value="#{user.users}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {PageLinks}"
+					gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+
+					<p:dataViewListItem>
+						<h:panelGrid columns="3" style="width:100%"
+							columnClasses="logo,detail">
+
+							<p:outputPanel>
+								<h:panelGrid columns="2" cellpadding="5">
+									<h:outputText value="Id:" />
+									<h:outputText value="#{u.id}" style="font-weight: bold" />
+
+								</h:panelGrid>
+							</p:outputPanel>
+
+<!-- 														<p:commandLink update=":form:carDetail" -->
+<!-- 															oncomplete="PF('carDialog').show()" title="View Detail"> -->
+<!-- 															<h:outputText styleClass="ui-icon pi pi-search" -->
+<!-- 																style="margin:0 auto;" /> -->
+<!-- 															<f:setPropertyActionListener value="#{car}" -->
+<!-- 																target="#{dataGridView.selectedCar}" /> -->
+<!-- 														</p:commandLink> -->
+						</h:panelGrid>
+					</p:dataViewListItem>
+				</p:dataView>
+
+<!-- 				<h:dataTable var="u" value="#{user.users}" -->
+<!-- 					styleClass="table table-hover"> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header">Id</f:facet> -->
+<!-- 						<h:outputText value="#{u.id}" /> -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header">Name</f:facet> -->
+<!-- 						<h:outputText value="#{u.name}" /> -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header">First Name</f:facet> -->
+<!-- 						<h:outputText value="#{u.firstName}" /> -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header">Email</f:facet> -->
+<!-- 						<h:outputText value="#{u.email}" /> -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header">Web_Site</f:facet> -->
+<!-- 						<h:outputLink value="#{u.webSite}"> -->
+<!-- 							<h:outputText value="#{u.webSite}" /> -->
+<!-- 						</h:outputLink> -->
+<!-- 					</h:column> -->
+<!-- 					<h:column> -->
+<!-- 						<f:facet name="header">Action</f:facet> -->
+<!-- 						<h:commandButton value="See CV" action="#{user.showCv(u.id)}" -->
+<!-- 							styleClass="btn btn-outline-light btn-xs" /> -->
+<!-- 						<span> </span> -->
+<!-- 						<h:commandButton value="Remove User" action="#{user.removeUser()}" -->
+<!-- 							styleClass="btn btn-outline-danger btn-xs" /> -->
+<!-- 					</h:column> -->
+<!-- 				</h:dataTable> -->
+
+
 
 
 				<!-- <table class="table">

@@ -19,12 +19,12 @@
 			<h:form id="login">
 				<c:set var="u" value="#{user.user}" />
 
-				<div class="form-group input-reduce">
+				<div class="form-group">
 					<!-- <label for="email">Email:</label> -->
 					<h:inputText id="email" value="#{u.email}"
 								 styleClass="form-control" required="true"
 								 pt:placeholder="Email">
-						<f:validateRegex pattern="^[A-Za-z0-9]{3,}([._-]+[A-Za-z0-9])*@[a-z0-9.-]+\.[a-z]{2,6}$" />
+<!-- 						<f:validateRegex pattern="^[A-Za-z0-9]{3,}([._-]+[A-Za-z0-9])*@[a-z0-9.-]+\.[a-z]{2,6}$" /> -->
 					</h:inputText>
 					<h:message styleClass="label label-danger" for="email" />
 				</div>

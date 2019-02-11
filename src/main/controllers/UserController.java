@@ -29,49 +29,43 @@ public class UserController {
 	private User userLogged;
 	private boolean isLogged = false;
 
+	// @PostConstruct
+	// public void init() {
+	// System.out.println("Create " + this);
+	// if (userM.findAll().isEmpty()) {
+	// User user1 = new User();
+	// user1.setName("BERTHOD");
+	// user1.setFirstName("Timothee");
+	// user1.setPassword("12345678");
+	// user1.setEmail("timothee@berthod.net");
+	// user1.setWebSite("https://google.fr");
+	// userM.createUser(user1);
+	//
+	// User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com",
+	// "23862386");
+	// user2.setWebSite("ayoub.elyousfi.free.fr");
+	// userM.createUser(user2);
+	// }
+	// }
+
 	@PostConstruct
 	public void init() {
 		System.out.println("Create " + this);
+		User user1;
+		Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
 		if (userM.findAll().isEmpty()) {
-			User user1 = new User();
-			user1.setName("BERTHOD");
-			user1.setFirstName("Timothee");
-			user1.setPassword("12345678");
-			user1.setEmail("timothee@berthod.net");
-			user1.setWebSite("https://google.fr");
-			userM.createUser(user1);
-
-			User user2 = new User("EL YOUSFI", "Ayoub", "youba@darkness.com", "23862386");
-			user2.setWebSite("ayoub.elyousfi.free.fr");
-			userM.createUser(user2);
+			for (int i = 0; i < 10; i++) {
+				io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
+				user1 = new User();
+				user1.setEmail(fPerson.getEmail());
+				user1.setFirstName(fPerson.getFirstName());
+				user1.setName(fPerson.getLastName());
+				user1.setPassword(fPerson.getPassword());
+				if (userM.findByEmail(user1.getEmail()).isEmpty()) {
+					userM.createUser(user1);
+				}
+			}
 		}
-	}
-
-//	@PostConstruct
-//	public void init() {
-//		User user;
-//		Fairy fairy = Fairy.create(Locale.forLanguageTag("fr"));
-//		if (userM.findAll().isEmpty()) {
-//			for (int i = 0; i < 100_000; i++) {
-//				io.codearte.jfairy.producer.person.Person fPerson = fairy.person();
-//				user = new User();
-//
-//				user.setEmail(fPerson.getEmail());
-//				user.setFirstName(fPerson.getFirstName());
-//				user.setName(fPerson.getLastName());
-//				user.setPassword(fPerson.getPassword());
-//				if (userM.findByEmail(user.getEmail()) == null)
-//					userM.createUser(user);
-//			}
-//		}
-//	}
-
-	@PreDestroy
-	public void end() {
-		userM.findAll().forEach(userToRemove -> {
-			userM.removeUser(userToRemove.getId());
-			System.out.println("to remove " + userToRemove);
-		});
 	}
 
 	public List<User> getUsers() {
@@ -104,7 +98,7 @@ public class UserController {
 
 	public String addUser() {
 		userM.createUser(user);
-		return "profile";
+		return "home";
 	}
 
 	public String updateUser() {

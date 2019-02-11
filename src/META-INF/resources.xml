@@ -4,7 +4,7 @@
 
 	<Resource id="data" type="javax.sql.DataSource">
 		JdbcDriver org.hsqldb.jdbcDriver
-		JdbcUrl jdbc:hsqldb:mem:inMemoryDatabase <!--file:/home/youba/master/m2/s1/architecture des applications/tp/LinkedAMU/ma-bdd -->
+		JdbcUrl jdbc:hsqldb:file:/tmp/ma-bd  <!-- jdbc:hsqldb:mem:inMemoryDatabase --> 
 		UserName sa
 		Password
 		jtaManaged true

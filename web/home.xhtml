@@ -14,12 +14,6 @@
 	<ui:define name="title">Home</ui:define>
 	<ui:define name="content">
 		<f:view>
-
-			<p>TODO: findUsers pour la recherche</p>
-			<p>vérifier que l'inscription et la cooptation marchent</p>
-			<p>Essayer de changer le fonctionnement de la modif du mdp</p>
-			<p>Afficher les activités sur la page de profil</p>
-
 			<c:if test="!#{isLogged}">
 				<h:form id="login">
 					<c:set var="u" value="#{user.user}" />

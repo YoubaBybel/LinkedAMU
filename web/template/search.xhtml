@@ -29,7 +29,7 @@
             <p:autoComplete id="group" value="#{search.userFaces}" completeMethod="#{search.autocCompletionUsers}"
                             var="u" itemLabel="#{u.name} #{u.firstName}" itemValue="#{u}" converter="userConverter" forceSelection="true"
                             groupBy="#{search.getUserGroup(u)}" scrollHeight="250"/>
-            <h:outputText value="#{user.user}" />
+<!--             <h:outputText value="#{user.user}" /> -->
         </h:panelGrid>
     </h:form>
 </ui:composition>
